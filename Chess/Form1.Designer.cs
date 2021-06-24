@@ -1,7 +1,7 @@
 ﻿
 namespace Chess
 {
-    partial class Form2
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
