@@ -8,6 +8,10 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Data.SqlClient;
+using System.IO;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Chess
 {
@@ -17,11 +21,22 @@ namespace Chess
         {
             InitializeComponent();
         }
-
+        public static IPAddress GetDefaultGateway()//Odczytanie adresu IP bramy sieciowej
+        {
+            return NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(n => n.OperationalStatus == OperationalStatus.Up)
+                .Where(n => n.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                .SelectMany(n => n.GetIPProperties()?.GatewayAddresses)
+                .Select(g => g?.Address)
+                .Where(a => a != null)
+                .FirstOrDefault();
+        }
         private void AddButton_Click(object sender, EventArgs e)
         {
             string roomName;
             string myIP = string.Empty;
+            string myMAC = string.Empty;
             roomName = AddRoomTextbox.Text;
 
             //Odczytanie wireless adres IPv4
@@ -29,7 +44,9 @@ namespace Chess
             {
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                 {
-                    Console.WriteLine(ni.Name);
+
+                    myMAC =  ni.GetPhysicalAddress().ToString();
+                    
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
                     {
                         if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
@@ -41,21 +58,19 @@ namespace Chess
                 }
             }
 
-            var cs1 = @"Server=tcp:elplcserver.database.windows.net,1433;Initial Catalog=CHESS;Persist Security Info=False;User ID=admindatabase;Password=Verystrongpassword1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            string stm = "INSERT INTO Sessions VALUES(" + "'"+ roomName + "'" + "," + "'" + myIP + "'" + ");";
+            System.Diagnostics.Debug.WriteLine(myIP);
+            System.Diagnostics.Debug.WriteLine(myMAC);
+            System.Diagnostics.Debug.WriteLine(GetDefaultGateway());
 
-            using var con = new SqlConnection(cs1);
-            con.Open();
+            //10.10.10.240 - IP
+            //A4C494E777F0 - MAC
+            //10.10.10.1 -  Gateway
 
-            using var cmd = new SqlCommand(stm, con);
-            cmd.ExecuteScalar();
-
-            con.Close();
-
-            Form1 form1 = new Form1();
-            form1.Show();
-
-            this.Hide();
+            //Sprawdzenie poprawności regexem
+            //string pattern = @"[A-Z0-9]"; 
+            //Regex rg = new Regex(pattern);
+            //MatchCollection matches = rg.Matches(myMAC);
+            //System.Diagnostics.Debug.WriteLine("{0} matches found in:  {1}",matches.Count,myMAC);
         }
     }
 }
