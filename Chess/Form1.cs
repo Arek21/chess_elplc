@@ -25,5 +25,14 @@ namespace Chess
             this.Hide();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Przełączie się pomiędzu formularzami
+            Form3 form22 = new Form3();
+            form22.Show();
+            this.Hide();
+            
+        }
     }
 }
