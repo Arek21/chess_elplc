@@ -22,7 +22,7 @@ namespace Chess
         private void button1_Click(object sender, EventArgs e)
         {
             //Przełączie się pomiędzu formularzami
-            Form2 form22 = new Form2();
+            Form3 form22 = new Form3();
             form22.Show();
             this.Hide();
             

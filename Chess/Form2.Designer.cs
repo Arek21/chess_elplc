@@ -1,7 +1,7 @@
 ﻿
 namespace Chess
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,11 @@ namespace Chess
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.waitingLabel = new System.Windows.Forms.Label();
             this.leaveButton = new System.Windows.Forms.Button();
             this.periodTimeLabel = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.eventLabel = new System.Windows.Forms.Label();
+            this.bgw1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // waitingLabel
@@ -69,10 +68,6 @@ namespace Chess
             this.periodTimeLabel.Size = new System.Drawing.Size(0, 20);
             this.periodTimeLabel.TabIndex = 2;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // eventLabel
             // 
             this.eventLabel.AutoSize = true;
@@ -81,7 +76,12 @@ namespace Chess
             this.eventLabel.Size = new System.Drawing.Size(0, 20);
             this.eventLabel.TabIndex = 3;
             // 
-            // Form2
+            // bgw1
+            // 
+            this.bgw1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgw1_DoWork);
+            this.bgw1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw1_ProgressChanged);
+            // 
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,7 +91,7 @@ namespace Chess
             this.Controls.Add(this.periodTimeLabel);
             this.Controls.Add(this.leaveButton);
             this.Controls.Add(this.waitingLabel);
-            this.Name = "Form2";
+            this.Name = "Form3";
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,7 +103,7 @@ namespace Chess
         private System.Windows.Forms.Label waitingLabel;
         private System.Windows.Forms.Button leaveButton;
         private System.Windows.Forms.Label periodTimeLabel;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label eventLabel;
+        private System.ComponentModel.BackgroundWorker bgw1;
     }
 }
