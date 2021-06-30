@@ -102,10 +102,10 @@ namespace Chess
             this.oppoentScoreLabel = new System.Windows.Forms.Label();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.userScoreLabel = new System.Windows.Forms.Label();
-            this.chatLabel = new System.Windows.Forms.Label();
             this.sendChatTextbox = new System.Windows.Forms.TextBox();
             this.sendChatButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.chatListBox = new System.Windows.Forms.ListBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -996,14 +996,6 @@ namespace Chess
             this.userScoreLabel.Size = new System.Drawing.Size(0, 20);
             this.userScoreLabel.TabIndex = 5;
             // 
-            // chatLabel
-            // 
-            this.chatLabel.BackColor = System.Drawing.Color.Lavender;
-            this.chatLabel.Location = new System.Drawing.Point(603, 323);
-            this.chatLabel.Name = "chatLabel";
-            this.chatLabel.Size = new System.Drawing.Size(362, 161);
-            this.chatLabel.TabIndex = 6;
-            // 
             // sendChatTextbox
             // 
             this.sendChatTextbox.Location = new System.Drawing.Point(603, 498);
@@ -1020,6 +1012,7 @@ namespace Chess
             this.sendChatButton.TabIndex = 8;
             this.sendChatButton.Text = "Send";
             this.sendChatButton.UseVisualStyleBackColor = false;
+            this.sendChatButton.Click += new System.EventHandler(this.sendChatButton_Click);
             // 
             // label1
             // 
@@ -1030,15 +1023,25 @@ namespace Chess
             this.label1.TabIndex = 10;
             this.label1.Text = "label1";
             // 
+            // chatListBox
+            // 
+            this.chatListBox.BackColor = System.Drawing.Color.Lavender;
+            this.chatListBox.FormattingEnabled = true;
+            this.chatListBox.ItemHeight = 20;
+            this.chatListBox.Location = new System.Drawing.Point(603, 285);
+            this.chatListBox.Name = "chatListBox";
+            this.chatListBox.Size = new System.Drawing.Size(362, 184);
+            this.chatListBox.TabIndex = 11;
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 580);
+            this.ClientSize = new System.Drawing.Size(1011, 701);
+            this.Controls.Add(this.chatListBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sendChatButton);
             this.Controls.Add(this.sendChatTextbox);
-            this.Controls.Add(this.chatLabel);
             this.Controls.Add(this.userScoreLabel);
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.oppoentScoreLabel);
@@ -1203,10 +1206,11 @@ namespace Chess
         private System.Windows.Forms.Label oppoentScoreLabel;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label userScoreLabel;
-        private System.Windows.Forms.Label chatLabel;
         private System.Windows.Forms.TextBox sendChatTextbox;
         private System.Windows.Forms.Button sendChatButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox chatListBox;
     }
 }
 

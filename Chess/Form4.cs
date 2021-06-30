@@ -14,16 +14,21 @@ namespace Chess
     {
 
         MqttClient mqttClient = null;
+        private string mqqtConnectString;
         private int? firstButtonId = null;
         private int? secondButtonId = null;
 
         private string opponentScore = "0"; //Póżniej uzywac lokalnie
         private string userScore = "0";     //Póżniej uzywac lokalnie
 
-        public Form4()
+        private string roomName;
+        private string playerName;
+
+        public Form4(string roomName, string playerName)
         {
             InitializeComponent();
-            
+            this.roomName = roomName;
+            this.playerName = playerName;
         }
         private void boxSelected(object sender, EventArgs e)
         {
@@ -84,7 +89,7 @@ namespace Chess
 
         private void Form4_Load(object sender, EventArgs e)
         {
-            string numOfSesions = string.Empty; //Odczytać z chmury dane do wyświetlenia
+            string numOfSesions = string.Empty; 
             string opponentName = string.Empty;
             string userName = string.Empty;
 
@@ -97,23 +102,32 @@ namespace Chess
 
             // <MQTT>
 
+            mqqtConnectString = "ELPLC/" + roomName;
             Task.Run(() =>
             {
                 mqttClient = new MqttClient("broker.hivemq.com");
                 mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
-                mqttClient.Subscribe(new string[] { "Application2/Message" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-                mqttClient.Connect("Application1");
+                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Chat" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Connect(mqqtConnectString);
             });
-
-
-
             // </MQTT>
-
         }
 
         private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
+            var message = Encoding.UTF8.GetString(e.Message);
+            chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
+        }
 
+        private void sendChatButton_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (mqttClient != null && mqttClient.IsConnected)
+                {
+                    mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName+": "+sendChatTextbox.Text));
+                }
+            });
         }
     }
 }
