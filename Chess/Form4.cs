@@ -117,7 +117,7 @@ namespace Chess
 
         private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
-            if(sender.Equals(mqqtConnectString + "/Chat"))
+            if(e.Equals(mqqtConnectString + "/Chat"))
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
