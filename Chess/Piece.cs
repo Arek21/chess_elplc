@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Chess
-{
+{ 
     enum cols
     {
         cA,
@@ -26,55 +26,77 @@ namespace Chess
         r7,
         r8
     }
+    enum pieces
+    {
+        Pawn = 1,
+        Knight,
+        Bishop,
+        Rook,
+        Queen,
+        King
+    }
+    enum colors
+    {
+        White,
+        Black
+    }
+
     public class Position
     {
         public int row;
         public int col;
-
         public Position(int row, int col)
         {
             this.row = row;
-            this.col = col;
+            this.col = col;     
+        }
+        public static Position GetPositionFromIndex(int index)
+        {
+            if (index >= 0 && index < 64)
+            {
+                int row = (int)Math.Floor(Convert.ToDouble(index) / 8);
+                int col = index - (8 * row);
+                return new Position(row - 1, col - 1);
+            }
+            else throw new ArgumentException("Index out of bounds");          
+        }
+        public static int GetIndexFromPosition(Position position)
+        {
+            int index = ((position.row) * 8 + position.col);
+            if (index >= 0 && index < 64) return index;
+            else throw new ArgumentException("Position out of bounds");
         }
     }
-    public class Piece
-    {
-        public Position position;
-        public bool colour;
 
     }
     interface IPiece
     {
         public void Move();
-        public void ActualPosition();
+        public void Capture();
         public List<int> PossibleMoves();
 
     }
+    public class Piece
+    {   
+        public Position position;
+        public int color;
+        public string icon;
+    }
+
+
     public class King : Piece, IPiece
     {
         public King()
         {
-            this.position = new Position(0, 0);
-            this.colour = false;
+          
         }
-        public void IsCheck()
-        {
 
-        }
-        public void IsMat()
-        {
-
-        }
-        public void IsPat()
-        {
-
-        }
-        public void Move()
+        public void Capture()
         {
             throw new NotImplementedException();
         }
 
-        public void ActualPosition()
+        public void Move()
         {
             throw new NotImplementedException();
         }
@@ -88,12 +110,12 @@ namespace Chess
             {
                 field = 8 * (position.row + 1) + (position.col + 1);
                 posMoveList.Add(field);
-            }
+        }
             if (position.row + 1 <= 7 && position.col >= 0) //lewa górna diagonala
             {
                 field = 8 * (position.row + 1) + (position.col - 1);
                 posMoveList.Add(field);
-            }
+    }
             if (position.row + 1 >= 0 && position.col >= 0) //lewa dolna diagonala
             {
                 field = 8 * (position.row - 1) + (position.col - 1);
@@ -119,18 +141,19 @@ namespace Chess
     }
     public class Queen : Piece, IPiece
     {
+        public void Capture()
         public void Move()
         {
             throw new NotImplementedException();
         }
 
-        public void ActualPosition()
         {
             throw new NotImplementedException();
         }
 
         public List<int> PossibleMoves()
         {
+            throw new NotImplementedException();
             int field;
 
             List<int> posMoveList = new List<int>();
@@ -209,11 +232,12 @@ namespace Chess
     }
     public class Bishop : Piece, IPiece
     {
-        public void Move()
+        public void Capture()
         {
             throw new NotImplementedException();
         }
-        public void ActualPosition()
+
+        public void Move()
         {
             throw new NotImplementedException();
         }
@@ -222,6 +246,7 @@ namespace Chess
             int field;
             List<int> posMoveList = new List<int>();
 
+        public List<int> PossibleMoves()
             for(int i = 0; i < 8; i++)
             {
                 if(position.row + i <= 7 && position.col <= 7) //prawa górna diagonala
@@ -266,7 +291,8 @@ namespace Chess
                     posMoveList.Add(field);
                 }
                 else
-                {
+        {
+            throw new NotImplementedException();
                     break;
                 }
             }
@@ -276,18 +302,19 @@ namespace Chess
     }
     public class Knight : Piece, IPiece
     {
-        public void Move()
+        public void Capture()
         {
             throw new NotImplementedException();
         }
 
-        public void ActualPosition()
+        public void Move()
         {
             throw new NotImplementedException();
         }
 
         public List<int> PossibleMoves()
         {
+            throw new NotImplementedException();
             int field;
             List<int> posMoveList = new List<int>();
 
@@ -340,7 +367,7 @@ namespace Chess
     }
     public class Rook : Piece, IPiece
     {
-        public void ActualPosition()
+        public void Capture()
         {
             throw new NotImplementedException();
         }
@@ -352,6 +379,7 @@ namespace Chess
 
         public List<int> PossibleMoves()
         {
+            throw new NotImplementedException();
             int field;
             List<int> posMoveList = new List<int>();
 
@@ -363,27 +391,38 @@ namespace Chess
                 if (field == 8 * position.row + position.col)
                 {
                     posMoveList.Remove(field);
-                }
-            }
+        }
+    }
 
+    public class Pawn : Piece, IPiece
+    {
+        public Pawn(int positionIndex, int color)
             for (int i = 0; i < 8; i++)//dostepne rzedy
-            {
+        {
+           
+            this.position = Position.GetPositionFromIndex(positionIndex);        
+            this.color = color;
                 field = 8 * i + position.col;
                 posMoveList.Add(field);
 
+            if(this.color == (int) colors.White)
                 if (field == 8 * position.row + position.col)
-                {
+            {
+                this.icon = "\u2659";
                     posMoveList.Remove(field);
                 }
             }
 
             return posMoveList;
         }
-    }
+            }
+            else if(this.color == (int)colors.Black)
     public class Pawn : Piece, IPiece
     {
         public Pawn()
-        {
+            {
+                this.icon = "\u265f";
+            }
             this.position = new Position(0, 0);
             this.colour = false;
         }
@@ -391,14 +430,14 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
-        public void ActualPosition()
+        public void Capture()
         {
             throw new NotImplementedException();
         }
 
         public List<int> PossibleMoves()
         {
+            throw new NotImplementedException();
             int field;
             List<int> posMoveList = new List<int>();
 

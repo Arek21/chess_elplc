@@ -121,7 +121,11 @@ namespace Chess
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
-            }         
+            }
+            else if(e.Topic.Equals(mqqtConnectString + "/Game"))
+            {
+
+            }
         }
 
         private void sendChatButton_Click(object sender, EventArgs e)
