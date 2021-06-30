@@ -108,7 +108,7 @@ namespace Chess
                 mqttClient = new MqttClient("broker.hivemq.com");
                 mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
                 mqttClient.Subscribe(new string[] { mqqtConnectString + "/Chat" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-                mqttClient.Connect(mqqtConnectString);
+                mqttClient.Connect(playerName);
             });
             // </MQTT>
         }
