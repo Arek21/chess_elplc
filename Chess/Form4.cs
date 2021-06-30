@@ -98,9 +98,9 @@ namespace Chess
 
             if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0))
             {
-                return Color.SaddleBrown;
+                return Color.SandyBrown;
             }
-            else return Color.SandyBrown;
+            else return Color.SaddleBrown;
         }
         private void clearBoard()
         {
@@ -117,12 +117,12 @@ namespace Chess
 
         private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
-            if(e.Topic.Equals(mqqtConnectString + "/Chat"))
+            if (e.Topic.Equals(mqqtConnectString + "/Chat"))
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
             }
-            else if(e.Topic.Equals(mqqtConnectString + "/Game"))
+            else if (e.Topic.Equals(mqqtConnectString + "/Game"))
             {
 
             }
@@ -130,7 +130,7 @@ namespace Chess
 
         private void sendChatButton_Click(object sender, EventArgs e)
         {
-            if(sendChatTextbox.Text.Length != 0)
+            if (sendChatTextbox.Text.Length != 0)
             {
                 Task.Run(() =>
                 {
@@ -140,7 +140,7 @@ namespace Chess
                     }
                 });
             }
-   
+
         }
     }
 }

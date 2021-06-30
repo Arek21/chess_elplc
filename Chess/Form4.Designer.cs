@@ -248,7 +248,7 @@ namespace Chess
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox1.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
@@ -259,7 +259,7 @@ namespace Chess
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox2.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox2.Location = new System.Drawing.Point(65, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
@@ -270,7 +270,7 @@ namespace Chess
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox3.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox3.Location = new System.Drawing.Point(130, 0);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox3.Name = "pictureBox3";
@@ -281,7 +281,7 @@ namespace Chess
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox4.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox4.Location = new System.Drawing.Point(195, 0);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox4.Name = "pictureBox4";
@@ -292,7 +292,7 @@ namespace Chess
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox5.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox5.Location = new System.Drawing.Point(260, 0);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox5.Name = "pictureBox5";
@@ -303,7 +303,7 @@ namespace Chess
             // 
             // pictureBox6
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox6.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox6.Location = new System.Drawing.Point(325, 0);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox6.Name = "pictureBox6";
@@ -314,7 +314,7 @@ namespace Chess
             // 
             // pictureBox7
             // 
-            this.pictureBox7.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox7.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox7.Location = new System.Drawing.Point(390, 0);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox7.Name = "pictureBox7";
@@ -325,7 +325,7 @@ namespace Chess
             // 
             // pictureBox8
             // 
-            this.pictureBox8.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox8.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox8.Location = new System.Drawing.Point(455, 0);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox8.Name = "pictureBox8";
@@ -336,7 +336,7 @@ namespace Chess
             // 
             // pictureBox9
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox9.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox9.Location = new System.Drawing.Point(0, 65);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox9.Name = "pictureBox9";
@@ -347,7 +347,7 @@ namespace Chess
             // 
             // pictureBox10
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox10.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox10.Location = new System.Drawing.Point(65, 65);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox10.Name = "pictureBox10";
@@ -358,7 +358,7 @@ namespace Chess
             // 
             // pictureBox11
             // 
-            this.pictureBox11.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox11.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox11.Location = new System.Drawing.Point(130, 65);
             this.pictureBox11.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox11.Name = "pictureBox11";
@@ -369,7 +369,7 @@ namespace Chess
             // 
             // pictureBox12
             // 
-            this.pictureBox12.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox12.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox12.Location = new System.Drawing.Point(195, 65);
             this.pictureBox12.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox12.Name = "pictureBox12";
@@ -380,7 +380,7 @@ namespace Chess
             // 
             // pictureBox13
             // 
-            this.pictureBox13.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox13.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox13.Location = new System.Drawing.Point(260, 65);
             this.pictureBox13.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox13.Name = "pictureBox13";
@@ -391,7 +391,7 @@ namespace Chess
             // 
             // pictureBox14
             // 
-            this.pictureBox14.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox14.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox14.Location = new System.Drawing.Point(325, 65);
             this.pictureBox14.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox14.Name = "pictureBox14";
@@ -402,7 +402,7 @@ namespace Chess
             // 
             // pictureBox15
             // 
-            this.pictureBox15.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox15.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox15.Location = new System.Drawing.Point(390, 65);
             this.pictureBox15.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox15.Name = "pictureBox15";
@@ -413,7 +413,7 @@ namespace Chess
             // 
             // pictureBox16
             // 
-            this.pictureBox16.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox16.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox16.Location = new System.Drawing.Point(455, 65);
             this.pictureBox16.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox16.Name = "pictureBox16";
@@ -424,7 +424,7 @@ namespace Chess
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox17.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox17.Location = new System.Drawing.Point(0, 130);
             this.pictureBox17.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox17.Name = "pictureBox17";
@@ -435,7 +435,7 @@ namespace Chess
             // 
             // pictureBox18
             // 
-            this.pictureBox18.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox18.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox18.Location = new System.Drawing.Point(65, 130);
             this.pictureBox18.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox18.Name = "pictureBox18";
@@ -446,7 +446,7 @@ namespace Chess
             // 
             // pictureBox19
             // 
-            this.pictureBox19.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox19.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox19.Location = new System.Drawing.Point(130, 130);
             this.pictureBox19.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox19.Name = "pictureBox19";
@@ -457,7 +457,7 @@ namespace Chess
             // 
             // pictureBox20
             // 
-            this.pictureBox20.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox20.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox20.Location = new System.Drawing.Point(195, 130);
             this.pictureBox20.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox20.Name = "pictureBox20";
@@ -468,7 +468,7 @@ namespace Chess
             // 
             // pictureBox21
             // 
-            this.pictureBox21.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox21.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox21.Location = new System.Drawing.Point(260, 130);
             this.pictureBox21.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox21.Name = "pictureBox21";
@@ -479,7 +479,7 @@ namespace Chess
             // 
             // pictureBox22
             // 
-            this.pictureBox22.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox22.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox22.Location = new System.Drawing.Point(325, 130);
             this.pictureBox22.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox22.Name = "pictureBox22";
@@ -490,7 +490,7 @@ namespace Chess
             // 
             // pictureBox23
             // 
-            this.pictureBox23.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox23.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox23.Location = new System.Drawing.Point(390, 130);
             this.pictureBox23.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox23.Name = "pictureBox23";
@@ -501,7 +501,7 @@ namespace Chess
             // 
             // pictureBox24
             // 
-            this.pictureBox24.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox24.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox24.Location = new System.Drawing.Point(455, 130);
             this.pictureBox24.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox24.Name = "pictureBox24";
@@ -512,7 +512,7 @@ namespace Chess
             // 
             // pictureBox25
             // 
-            this.pictureBox25.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox25.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox25.Location = new System.Drawing.Point(0, 195);
             this.pictureBox25.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox25.Name = "pictureBox25";
@@ -523,7 +523,7 @@ namespace Chess
             // 
             // pictureBox26
             // 
-            this.pictureBox26.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox26.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox26.Location = new System.Drawing.Point(65, 195);
             this.pictureBox26.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox26.Name = "pictureBox26";
@@ -534,7 +534,7 @@ namespace Chess
             // 
             // pictureBox27
             // 
-            this.pictureBox27.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox27.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox27.Location = new System.Drawing.Point(130, 195);
             this.pictureBox27.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox27.Name = "pictureBox27";
@@ -545,7 +545,7 @@ namespace Chess
             // 
             // pictureBox28
             // 
-            this.pictureBox28.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox28.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox28.Location = new System.Drawing.Point(195, 195);
             this.pictureBox28.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox28.Name = "pictureBox28";
@@ -556,7 +556,7 @@ namespace Chess
             // 
             // pictureBox29
             // 
-            this.pictureBox29.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox29.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox29.Location = new System.Drawing.Point(260, 195);
             this.pictureBox29.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox29.Name = "pictureBox29";
@@ -567,7 +567,7 @@ namespace Chess
             // 
             // pictureBox30
             // 
-            this.pictureBox30.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox30.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox30.Location = new System.Drawing.Point(325, 195);
             this.pictureBox30.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox30.Name = "pictureBox30";
@@ -578,7 +578,7 @@ namespace Chess
             // 
             // pictureBox31
             // 
-            this.pictureBox31.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox31.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox31.Location = new System.Drawing.Point(390, 195);
             this.pictureBox31.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox31.Name = "pictureBox31";
@@ -589,7 +589,7 @@ namespace Chess
             // 
             // pictureBox32
             // 
-            this.pictureBox32.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox32.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox32.Location = new System.Drawing.Point(455, 195);
             this.pictureBox32.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox32.Name = "pictureBox32";
@@ -600,7 +600,7 @@ namespace Chess
             // 
             // pictureBox33
             // 
-            this.pictureBox33.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox33.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox33.Location = new System.Drawing.Point(0, 260);
             this.pictureBox33.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox33.Name = "pictureBox33";
@@ -611,7 +611,7 @@ namespace Chess
             // 
             // pictureBox34
             // 
-            this.pictureBox34.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox34.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox34.Location = new System.Drawing.Point(65, 260);
             this.pictureBox34.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox34.Name = "pictureBox34";
@@ -622,7 +622,7 @@ namespace Chess
             // 
             // pictureBox35
             // 
-            this.pictureBox35.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox35.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox35.Location = new System.Drawing.Point(130, 260);
             this.pictureBox35.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox35.Name = "pictureBox35";
@@ -633,7 +633,7 @@ namespace Chess
             // 
             // pictureBox36
             // 
-            this.pictureBox36.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox36.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox36.Location = new System.Drawing.Point(195, 260);
             this.pictureBox36.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox36.Name = "pictureBox36";
@@ -644,7 +644,7 @@ namespace Chess
             // 
             // pictureBox37
             // 
-            this.pictureBox37.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox37.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox37.Location = new System.Drawing.Point(260, 260);
             this.pictureBox37.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox37.Name = "pictureBox37";
@@ -655,7 +655,7 @@ namespace Chess
             // 
             // pictureBox38
             // 
-            this.pictureBox38.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox38.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox38.Location = new System.Drawing.Point(325, 260);
             this.pictureBox38.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox38.Name = "pictureBox38";
@@ -666,7 +666,7 @@ namespace Chess
             // 
             // pictureBox39
             // 
-            this.pictureBox39.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox39.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox39.Location = new System.Drawing.Point(390, 260);
             this.pictureBox39.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox39.Name = "pictureBox39";
@@ -677,7 +677,7 @@ namespace Chess
             // 
             // pictureBox40
             // 
-            this.pictureBox40.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox40.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox40.Location = new System.Drawing.Point(455, 260);
             this.pictureBox40.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox40.Name = "pictureBox40";
@@ -688,7 +688,7 @@ namespace Chess
             // 
             // pictureBox41
             // 
-            this.pictureBox41.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox41.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox41.Location = new System.Drawing.Point(0, 325);
             this.pictureBox41.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox41.Name = "pictureBox41";
@@ -699,7 +699,7 @@ namespace Chess
             // 
             // pictureBox42
             // 
-            this.pictureBox42.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox42.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox42.Location = new System.Drawing.Point(65, 325);
             this.pictureBox42.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox42.Name = "pictureBox42";
@@ -710,7 +710,7 @@ namespace Chess
             // 
             // pictureBox43
             // 
-            this.pictureBox43.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox43.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox43.Location = new System.Drawing.Point(130, 325);
             this.pictureBox43.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox43.Name = "pictureBox43";
@@ -721,7 +721,7 @@ namespace Chess
             // 
             // pictureBox44
             // 
-            this.pictureBox44.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox44.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox44.Location = new System.Drawing.Point(195, 325);
             this.pictureBox44.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox44.Name = "pictureBox44";
@@ -732,7 +732,7 @@ namespace Chess
             // 
             // pictureBox45
             // 
-            this.pictureBox45.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox45.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox45.Location = new System.Drawing.Point(260, 325);
             this.pictureBox45.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox45.Name = "pictureBox45";
@@ -743,7 +743,7 @@ namespace Chess
             // 
             // pictureBox46
             // 
-            this.pictureBox46.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox46.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox46.Location = new System.Drawing.Point(325, 325);
             this.pictureBox46.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox46.Name = "pictureBox46";
@@ -754,7 +754,7 @@ namespace Chess
             // 
             // pictureBox47
             // 
-            this.pictureBox47.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox47.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox47.Location = new System.Drawing.Point(390, 325);
             this.pictureBox47.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox47.Name = "pictureBox47";
@@ -765,7 +765,7 @@ namespace Chess
             // 
             // pictureBox48
             // 
-            this.pictureBox48.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox48.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox48.Location = new System.Drawing.Point(455, 325);
             this.pictureBox48.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox48.Name = "pictureBox48";
@@ -776,7 +776,7 @@ namespace Chess
             // 
             // pictureBox49
             // 
-            this.pictureBox49.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox49.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox49.Location = new System.Drawing.Point(0, 390);
             this.pictureBox49.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox49.Name = "pictureBox49";
@@ -787,7 +787,7 @@ namespace Chess
             // 
             // pictureBox50
             // 
-            this.pictureBox50.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox50.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox50.Location = new System.Drawing.Point(65, 390);
             this.pictureBox50.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox50.Name = "pictureBox50";
@@ -798,7 +798,7 @@ namespace Chess
             // 
             // pictureBox51
             // 
-            this.pictureBox51.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox51.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox51.Location = new System.Drawing.Point(130, 390);
             this.pictureBox51.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox51.Name = "pictureBox51";
@@ -809,7 +809,7 @@ namespace Chess
             // 
             // pictureBox52
             // 
-            this.pictureBox52.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox52.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox52.Location = new System.Drawing.Point(195, 390);
             this.pictureBox52.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox52.Name = "pictureBox52";
@@ -820,7 +820,7 @@ namespace Chess
             // 
             // pictureBox53
             // 
-            this.pictureBox53.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox53.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox53.Location = new System.Drawing.Point(260, 390);
             this.pictureBox53.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox53.Name = "pictureBox53";
@@ -831,7 +831,7 @@ namespace Chess
             // 
             // pictureBox54
             // 
-            this.pictureBox54.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox54.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox54.Location = new System.Drawing.Point(325, 390);
             this.pictureBox54.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox54.Name = "pictureBox54";
@@ -842,7 +842,7 @@ namespace Chess
             // 
             // pictureBox55
             // 
-            this.pictureBox55.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox55.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox55.Location = new System.Drawing.Point(390, 390);
             this.pictureBox55.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox55.Name = "pictureBox55";
@@ -853,7 +853,7 @@ namespace Chess
             // 
             // pictureBox56
             // 
-            this.pictureBox56.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox56.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox56.Location = new System.Drawing.Point(455, 390);
             this.pictureBox56.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox56.Name = "pictureBox56";
@@ -864,7 +864,7 @@ namespace Chess
             // 
             // pictureBox57
             // 
-            this.pictureBox57.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox57.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox57.Location = new System.Drawing.Point(0, 455);
             this.pictureBox57.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox57.Name = "pictureBox57";
@@ -875,7 +875,7 @@ namespace Chess
             // 
             // pictureBox58
             // 
-            this.pictureBox58.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox58.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox58.Location = new System.Drawing.Point(65, 455);
             this.pictureBox58.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox58.Name = "pictureBox58";
@@ -886,7 +886,7 @@ namespace Chess
             // 
             // pictureBox59
             // 
-            this.pictureBox59.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox59.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox59.Location = new System.Drawing.Point(130, 455);
             this.pictureBox59.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox59.Name = "pictureBox59";
@@ -897,7 +897,7 @@ namespace Chess
             // 
             // pictureBox60
             // 
-            this.pictureBox60.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox60.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox60.Location = new System.Drawing.Point(195, 455);
             this.pictureBox60.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox60.Name = "pictureBox60";
@@ -908,7 +908,7 @@ namespace Chess
             // 
             // pictureBox61
             // 
-            this.pictureBox61.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox61.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox61.Location = new System.Drawing.Point(260, 455);
             this.pictureBox61.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox61.Name = "pictureBox61";
@@ -919,7 +919,7 @@ namespace Chess
             // 
             // pictureBox62
             // 
-            this.pictureBox62.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox62.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox62.Location = new System.Drawing.Point(325, 455);
             this.pictureBox62.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox62.Name = "pictureBox62";
@@ -930,7 +930,7 @@ namespace Chess
             // 
             // pictureBox63
             // 
-            this.pictureBox63.BackColor = System.Drawing.Color.SandyBrown;
+            this.pictureBox63.BackColor = System.Drawing.Color.SaddleBrown;
             this.pictureBox63.Location = new System.Drawing.Point(390, 455);
             this.pictureBox63.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox63.Name = "pictureBox63";
@@ -941,7 +941,7 @@ namespace Chess
             // 
             // pictureBox64
             // 
-            this.pictureBox64.BackColor = System.Drawing.Color.SaddleBrown;
+            this.pictureBox64.BackColor = System.Drawing.Color.SandyBrown;
             this.pictureBox64.Location = new System.Drawing.Point(455, 455);
             this.pictureBox64.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox64.Name = "pictureBox64";
