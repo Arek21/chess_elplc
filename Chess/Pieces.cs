@@ -141,8 +141,9 @@ namespace Chess
     }
     public class Knight : IPiece
     {
-        private bool colour;
+        //private bool colour;
         private bool isCaptured;
+        private int field;
         public void Move()
         {
             throw new NotImplementedException();
@@ -177,21 +178,38 @@ namespace Chess
             throw new NotImplementedException();
         }
 
-        public void PossibleMove()
+        public List<int> PossibleMove()
         {
-            throw new NotImplementedException();
+            List<int> posMoveList = new List<int>();
+
+            for (int i = 0; i < 8; i++)//dostepne kolumny
+            {
+                field = 8 * position.row + i;
+                posMoveList.Add(field);
+
+                if (field == 8 * position.row + position.col)
+                {
+                    posMoveList.Remove(field);
+                }
+            }
+
+            for (int i = 0; i < 8; i++)//dostepne rzedy
+            {
+                field = 8 * i + position.col;
+                posMoveList.Add(field);
+
+                if (field == 8 * position.row + position.col)
+                {
+                    posMoveList.Remove(field);
+                }
+            }
+
+            return posMoveList;
         }
 
         List<int> IPiece.PossibleMove()
         {
-            List<int> posMoveList = new List<int>();
-
-            for (int i = 0; i < 8; i++)
-            {
-                field = 8 * position.row + (position.col + i);
-            }
-
-            return posMoveList;
+            
         }
     }
     public class Pawn : Pieces, IPiece
