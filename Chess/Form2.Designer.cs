@@ -100,7 +100,6 @@ namespace Chess
 
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.TextBox roomNameTextBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox player1TextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

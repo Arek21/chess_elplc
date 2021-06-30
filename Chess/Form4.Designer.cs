@@ -1209,7 +1209,6 @@ namespace Chess
         private System.Windows.Forms.TextBox sendChatTextbox;
         private System.Windows.Forms.Button sendChatButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox chatListBox;
     }
 }
