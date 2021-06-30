@@ -202,7 +202,21 @@ namespace Chess
         }
         public List<int> PossibleMoves()
         {
-            throw new NotImplementedException();
+            List<int> posMoveList = new List<int>();
+
+            if (position.row > 0 && position.row < 7)
+            {
+                field = 8 * position.row + (position.col + 1);
+                posMoveList.Add(field);
+            }
+            if(position.row == 1)
+            {
+                field = 8 * position.row + (position.col + 2);
+                posMoveList.Add(field);
+            }
+            //Dodać jeszcze bicie
+            return posMoveList;
+
         }
     }
 }
