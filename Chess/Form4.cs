@@ -30,6 +30,33 @@ namespace Chess
             this.roomName = roomName;
             this.playerName = playerName;
         }
+        private void Form4_Load(object sender, EventArgs e)
+        {
+            string numOfSesions = string.Empty;
+            string opponentName = string.Empty;
+            string userName = string.Empty;
+
+            sessionIdLabel.Text = "Room nr: " + numOfSesions;
+            opponentNameLabel.Text = "Opponent name: " + opponentName;
+            oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
+            userNameLabel.Text = "Your name: " + userName;
+            userScoreLabel.Text = "Your score: " + userScore;
+
+            // <MQTT>
+
+            mqqtConnectString = "ELPLC/" + roomName;
+            Task.Run(() =>
+            {
+                mqttClient = new MqttClient("broker.hivemq.com");
+                mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
+                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Chat" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Game" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Connect(playerName);
+            });
+            // </MQTT>
+        }
+
+
         private void boxSelected(object sender, EventArgs e)
         {
             PictureBox button = sender as PictureBox;
@@ -87,47 +114,29 @@ namespace Chess
             secondButtonId = null;
         }
 
-        private void Form4_Load(object sender, EventArgs e)
-        {
-            string numOfSesions = string.Empty; 
-            string opponentName = string.Empty;
-            string userName = string.Empty;
-
-            sessionIdLabel.Text = "Room nr: " + numOfSesions;
-            opponentNameLabel.Text = "Opponent name: " + opponentName;
-            oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
-            userNameLabel.Text = "Your name: " + userName;
-            userScoreLabel.Text = "Your score: " + userScore;
-
-
-            // <MQTT>
-
-            mqqtConnectString = "ELPLC/" + roomName;
-            Task.Run(() =>
-            {
-                mqttClient = new MqttClient("broker.hivemq.com");
-                mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
-                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Chat" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-                mqttClient.Connect(playerName);
-            });
-            // </MQTT>
-        }
 
         private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
-            var message = Encoding.UTF8.GetString(e.Message);
-            chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
+            if(sender.Equals(mqqtConnectString + "/Chat"))
+            {
+                var message = Encoding.UTF8.GetString(e.Message);
+                chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
+            }         
         }
 
         private void sendChatButton_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
+            if(sendChatTextbox.Text.Length != 0)
             {
-                if (mqttClient != null && mqttClient.IsConnected)
+                Task.Run(() =>
                 {
-                    mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName+": "+sendChatTextbox.Text));
-                }
-            });
+                    if (mqttClient != null && mqttClient.IsConnected)
+                    {
+                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + sendChatTextbox.Text));
+                    }
+                });
+            }
+   
         }
     }
 }
