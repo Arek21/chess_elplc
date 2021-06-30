@@ -4,12 +4,16 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 namespace Chess
 {
     public partial class Form4 : Form
     {
+
+        MqttClient mqttClient = null;
         private int? firstButtonId = null;
         private int? secondButtonId = null;
 
@@ -19,15 +23,7 @@ namespace Chess
         public Form4()
         {
             InitializeComponent();
-            string numOfSesions = string.Empty; //Odczytać z chmury dane do wyświetlenia
-            string opponentName = string.Empty;
-            string userName = string.Empty;
-
-            sessionIdLabel.Text = "Room nr: " + numOfSesions;
-            opponentNameLabel.Text = "Opponent name: " + opponentName;
-            oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
-            userNameLabel.Text = "Your name: " + userName;
-            userScoreLabel.Text = "Your score: " + userScore;
+            
         }
         private void boxSelected(object sender, EventArgs e)
         {
@@ -84,6 +80,40 @@ namespace Chess
 
             firstButtonId = null;
             secondButtonId = null;
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+            string numOfSesions = string.Empty; //Odczytać z chmury dane do wyświetlenia
+            string opponentName = string.Empty;
+            string userName = string.Empty;
+
+            sessionIdLabel.Text = "Room nr: " + numOfSesions;
+            opponentNameLabel.Text = "Opponent name: " + opponentName;
+            oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
+            userNameLabel.Text = "Your name: " + userName;
+            userScoreLabel.Text = "Your score: " + userScore;
+
+
+            // <MQTT>
+
+            Task.Run(() =>
+            {
+                mqttClient = new MqttClient("broker.hivemq.com");
+                mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
+                mqttClient.Subscribe(new string[] { "Application2/Message" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                mqttClient.Connect("Application1");
+            });
+
+
+
+            // </MQTT>
+
+        }
+
+        private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
+        {
+
         }
     }
 }

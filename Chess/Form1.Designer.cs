@@ -37,12 +37,15 @@ namespace Chess
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.AntiqueWhite;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(24, 68);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(392, 240);
+            this.dataGridView1.Size = new System.Drawing.Size(581, 240);
             this.dataGridView1.TabIndex = 0;
             // 
             // AddSessionLabel
@@ -57,7 +60,7 @@ namespace Chess
             // 
             // AddSessionButton
             // 
-            this.AddSessionButton.Location = new System.Drawing.Point(236, 314);
+            this.AddSessionButton.Location = new System.Drawing.Point(425, 325);
             this.AddSessionButton.Name = "AddSessionButton";
             this.AddSessionButton.Size = new System.Drawing.Size(180, 33);
             this.AddSessionButton.TabIndex = 2;
@@ -69,12 +72,13 @@ namespace Chess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 374);
+            this.ClientSize = new System.Drawing.Size(630, 380);
             this.Controls.Add(this.AddSessionButton);
             this.Controls.Add(this.AddSessionLabel);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Chess";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

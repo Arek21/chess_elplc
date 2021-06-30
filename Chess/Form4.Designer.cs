@@ -105,6 +105,7 @@ namespace Chess
             this.chatLabel = new System.Windows.Forms.Label();
             this.sendChatTextbox = new System.Windows.Forms.TextBox();
             this.sendChatButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -998,7 +999,7 @@ namespace Chess
             // chatLabel
             // 
             this.chatLabel.BackColor = System.Drawing.Color.Lavender;
-            this.chatLabel.Location = new System.Drawing.Point(603, 333);
+            this.chatLabel.Location = new System.Drawing.Point(603, 323);
             this.chatLabel.Name = "chatLabel";
             this.chatLabel.Size = new System.Drawing.Size(362, 161);
             this.chatLabel.TabIndex = 6;
@@ -1020,11 +1021,21 @@ namespace Chess
             this.sendChatButton.Text = "Send";
             this.sendChatButton.UseVisualStyleBackColor = false;
             // 
-            // Form2
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1258, 474);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "label1";
+            // 
+            // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 580);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.sendChatButton);
             this.Controls.Add(this.sendChatTextbox);
             this.Controls.Add(this.chatLabel);
@@ -1036,8 +1047,9 @@ namespace Chess
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form2";
+            this.Name = "Form4";
             this.Text = "Szachownica";
+            this.Load += new System.EventHandler(this.Form4_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -1194,6 +1206,7 @@ namespace Chess
         private System.Windows.Forms.Label chatLabel;
         private System.Windows.Forms.TextBox sendChatTextbox;
         private System.Windows.Forms.Button sendChatButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 
