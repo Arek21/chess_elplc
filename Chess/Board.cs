@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Chess
 {
-    static class Board
+   class Board
     {
+        private static List<Piece> pieces = new List<Piece>();
+
     }
 }
