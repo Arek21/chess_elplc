@@ -36,5 +36,14 @@ namespace Chess
             bindingSource.DataSource = sessionList;
             dataGridView1.DataSource = bindingSource;
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            Form3 form3 = new Form3(row.Cells[0].Value.ToString());
+            form3.Show();
+            this.Hide();
+        }
     }
 }
