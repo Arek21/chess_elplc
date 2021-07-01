@@ -94,6 +94,58 @@ namespace ServiceReference1
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BoardDto", Namespace="http://tempuri.org/")]
+    public partial class BoardDto : object
+    {
+        
+        private int IdField;
+        
+        private System.Nullable<int> PieceIdField;
+        
+        private System.Nullable<int> ColorIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Id
+        {
+            get
+            {
+                return this.IdField;
+            }
+            set
+            {
+                this.IdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<int> PieceId
+        {
+            get
+            {
+                return this.PieceIdField;
+            }
+            set
+            {
+                this.PieceIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Nullable<int> ColorId
+        {
+            get
+            {
+                return this.ColorIdField;
+            }
+            set
+            {
+                this.ColorIdField = value;
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.WebServiceSoap")]
     public interface WebServiceSoap
@@ -125,6 +177,13 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteSession", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> DeleteSessionAsync(int sessionId);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu GetBoardResult z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBoard", ReplyAction="*")]
+        ServiceReference1.GetBoardResponse GetBoard(ServiceReference1.GetBoardRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBoard", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> GetBoardAsync(ServiceReference1.GetBoardRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -278,12 +337,20 @@ namespace ServiceReference1
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class PostSessionResponseBody
     {
         
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool PostSessionResult;
+        
         public PostSessionResponseBody()
         {
+        }
+        
+        public PostSessionResponseBody(bool PostSessionResult)
+        {
+            this.PostSessionResult = PostSessionResult;
         }
     }
     
@@ -379,6 +446,78 @@ namespace ServiceReference1
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetBoardRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBoard", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetBoardRequestBody Body;
+        
+        public GetBoardRequest()
+        {
+        }
+        
+        public GetBoardRequest(ServiceReference1.GetBoardRequestBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetBoardRequestBody
+    {
+        
+        public GetBoardRequestBody()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetBoardResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBoardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetBoardResponseBody Body;
+        
+        public GetBoardResponse()
+        {
+        }
+        
+        public GetBoardResponse(ServiceReference1.GetBoardResponseBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetBoardResponseBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.BoardDto[] GetBoardResult;
+        
+        public GetBoardResponseBody()
+        {
+        }
+        
+        public GetBoardResponseBody(ServiceReference1.BoardDto[] GetBoardResult)
+        {
+            this.GetBoardResult = GetBoardResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface WebServiceSoapChannel : ServiceReference1.WebServiceSoap, System.ServiceModel.IClientChannel
     {
@@ -455,7 +594,7 @@ namespace ServiceReference1
             return base.Channel.PostSession(request);
         }
         
-        public void PostSession(string roomName, string routerIp, string player1, string ip1, string macAddress1)
+        public bool PostSession(string roomName, string routerIp, string player1, string ip1, string macAddress1)
         {
             ServiceReference1.PostSessionRequest inValue = new ServiceReference1.PostSessionRequest();
             inValue.Body = new ServiceReference1.PostSessionRequestBody();
@@ -465,6 +604,7 @@ namespace ServiceReference1
             inValue.Body.ip1 = ip1;
             inValue.Body.macAddress1 = macAddress1;
             ServiceReference1.PostSessionResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).PostSession(inValue);
+            return retVal.Body.PostSessionResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -528,6 +668,33 @@ namespace ServiceReference1
         public System.Threading.Tasks.Task<bool> DeleteSessionAsync(int sessionId)
         {
             return base.Channel.DeleteSessionAsync(sessionId);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.GetBoardResponse ServiceReference1.WebServiceSoap.GetBoard(ServiceReference1.GetBoardRequest request)
+        {
+            return base.Channel.GetBoard(request);
+        }
+        
+        public ServiceReference1.BoardDto[] GetBoard()
+        {
+            ServiceReference1.GetBoardRequest inValue = new ServiceReference1.GetBoardRequest();
+            inValue.Body = new ServiceReference1.GetBoardRequestBody();
+            ServiceReference1.GetBoardResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).GetBoard(inValue);
+            return retVal.Body.GetBoardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> ServiceReference1.WebServiceSoap.GetBoardAsync(ServiceReference1.GetBoardRequest request)
+        {
+            return base.Channel.GetBoardAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> GetBoardAsync()
+        {
+            ServiceReference1.GetBoardRequest inValue = new ServiceReference1.GetBoardRequest();
+            inValue.Body = new ServiceReference1.GetBoardRequestBody();
+            return ((ServiceReference1.WebServiceSoap)(this)).GetBoardAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

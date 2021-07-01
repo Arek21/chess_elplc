@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Chess
 {
-    enum cols
+    enum Cols
     {
         cA,
         cB,
@@ -15,7 +15,7 @@ namespace Chess
         cG,
         cH
     }
-    enum rows
+    enum Rows
     {
         r1,
         r2,
@@ -26,7 +26,7 @@ namespace Chess
         r7,
         r8
     }
-    enum pieces
+    enum Pieces
     {
         Pawn = 1,
         Knight,
@@ -35,7 +35,7 @@ namespace Chess
         Queen,
         King
     }
-    enum colors
+    enum Colors
     {
         White,
         Black
@@ -56,7 +56,7 @@ namespace Chess
             {
                 int row = (int)Math.Floor(Convert.ToDouble(index) / 8);
                 int col = index - (8 * row);
-                return new Position(row - 1, col - 1);
+                return new Position(row, col);
             }
             else throw new ArgumentException("Index out of bounds");
         }
@@ -80,14 +80,18 @@ namespace Chess
     {
         public Position position;
         public int color;
-        public string icon;
+        public char icon;
     }
-
 
     public class King : Piece, IPiece
     {
-        public King()
+        public King(int positionIndex, int color)
         {
+            this.position = Position.GetPositionFromIndex(positionIndex);
+            this.color = color;
+
+            if (this.color == (int)Colors.White) this.icon = '\u2654';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265a';
 
         }
 
@@ -141,6 +145,15 @@ namespace Chess
     }
     public class Queen : Piece, IPiece
     {
+        public Queen(int positionIndex, int color)
+        {
+            this.position = Position.GetPositionFromIndex(positionIndex);
+            this.color = color;
+
+            if (this.color == (int)Colors.White) this.icon = '\u2655';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265b';
+
+        }
         public void Capture()
         {
             throw new NotImplementedException();
@@ -232,6 +245,15 @@ namespace Chess
     }
     public class Bishop : Piece, IPiece
     {
+        public Bishop(int positionIndex, int color)
+        {
+            this.position = Position.GetPositionFromIndex(positionIndex);
+            this.color = color;
+
+            if (this.color == (int)Colors.White) this.icon = '\u2657';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265d';
+
+        }
         public void Capture()
         {
             throw new NotImplementedException();
@@ -301,6 +323,15 @@ namespace Chess
     }
     public class Knight : Piece, IPiece
     {
+        public Knight(int positionIndex, int color)
+        {
+            this.position = Position.GetPositionFromIndex(positionIndex);
+            this.color = color;
+
+            if (this.color == (int)Colors.White) this.icon = '\u2658';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265e';
+
+        }
         public void Capture()
         {
             throw new NotImplementedException();
@@ -365,6 +396,15 @@ namespace Chess
     }
     public class Rook : Piece, IPiece
     {
+        public Rook(int positionIndex, int color)
+        {
+            this.position = Position.GetPositionFromIndex(positionIndex);
+            this.color = color;
+
+            if (this.color == (int)Colors.White) this.icon = '\u2656';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265c';
+
+        }
         public void Capture()
         {
             throw new NotImplementedException();
@@ -401,9 +441,8 @@ namespace Chess
             this.position = Position.GetPositionFromIndex(positionIndex);
             this.color = color;
 
-
-            if (this.color == (int)colors.White) this.icon = "\u2659";
-            else if (this.color == (int)colors.Black) this.icon = "\u265f";
+            if (this.color == (int)Colors.White) this.icon = '\u2659';
+            else if (this.color == (int)Colors.Black) this.icon = '\u265f';
 
         }
 

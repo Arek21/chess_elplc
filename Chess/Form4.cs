@@ -14,6 +14,8 @@ namespace Chess
     {
 
         MqttClient mqttClient = null;
+        Game game = null;
+
         private string mqqtConnectString;
         private int? firstButtonId = null;
         private int? secondButtonId = null;
@@ -53,6 +55,11 @@ namespace Chess
                 mqttClient.Subscribe(new string[] { mqqtConnectString + "/Game" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
                 mqttClient.Connect(playerName);
             });
+
+
+            game = new Game();
+            createCanvasOnPictureBoxes();
+            refreshBoard();
             // </MQTT>
         }
 
@@ -75,7 +82,7 @@ namespace Chess
 
                 if (secondButtonId == firstButtonId)
                 {
-                    clearBoard();
+                    clearBoardBackground();
                 }
             }
             else if (buttonId != firstButtonId && buttonId != secondButtonId)
@@ -88,7 +95,7 @@ namespace Chess
             }
             else
             {
-                clearBoard();
+                clearBoardBackground();
             }
         }
         private Color getDefaultBackColor(int index)
@@ -102,7 +109,7 @@ namespace Chess
             }
             else return Color.SandyBrown;
         }
-        private void clearBoard()
+        private void clearBoardBackground()
         {
             PictureBox firstButton = (PictureBox)flowLayoutPanel1.Controls[(int)firstButtonId];
             PictureBox secondButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
@@ -115,14 +122,40 @@ namespace Chess
         }
 
 
+        private void createCanvasOnPictureBoxes()
+        {
+            foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
+            {
+                Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
+                pictureBox.Image = bmp;
+            }
+        }
+
+        private void refreshBoard()
+        {
+            foreach (Piece piece in Board.Pieces)
+            {
+                PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.position)];
+
+                Font font = new Font("FreeSerif", 24f);
+                using (Graphics G = Graphics.FromImage(pictureBox.Image))
+                {
+                    G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                    G.DrawString(piece.icon.ToString(), font, Brushes.Black, 5f,10f);
+                }
+
+                pictureBox.Invalidate();
+            }
+        }
+
         private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
-            if(e.Topic.Equals(mqqtConnectString + "/Chat"))
+            if (e.Topic.Equals(mqqtConnectString + "/Chat"))
             {
                 var message = Encoding.UTF8.GetString(e.Message);
                 chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
             }
-            else if(e.Topic.Equals(mqqtConnectString + "/Game"))
+            else if (e.Topic.Equals(mqqtConnectString + "/Game"))
             {
 
             }
@@ -130,7 +163,7 @@ namespace Chess
 
         private void sendChatButton_Click(object sender, EventArgs e)
         {
-            if(sendChatTextbox.Text.Length != 0)
+            if (sendChatTextbox.Text.Length != 0)
             {
                 Task.Run(() =>
                 {
@@ -140,7 +173,7 @@ namespace Chess
                     }
                 });
             }
-   
+
         }
     }
 }
