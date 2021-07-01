@@ -71,6 +71,10 @@ namespace Chess
             if ((this.row >= 0 && this.row <= 7) && (this.col >= 0 && this.col <= 7)) return true;
             return false;
         }
+        public bool IsEnemyOnBoard()//potrzebny identyfikator
+        {
+            return false;
+        }
     }
     interface IPiece
     {
@@ -281,15 +285,27 @@ namespace Chess
         public List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
+            List<Position> tempPositionCapture = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
             tempPositions.Add(new Position(position.row + 1, position.col));
 
             if(position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
 
+            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
+            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
+
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
+            }
+
+            foreach (Position tempPosition in tempPositionCapture)
+            {
+                if (tempPosition.IsPositionOnBoard() && tempPosition.IsEnemyOnBoard())
                 {
                     availablePositions.Add(tempPosition);
                 }
