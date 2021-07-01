@@ -10,7 +10,7 @@ namespace Chess
     {
         private WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
         private bool onTurn;
-        private Colors playerColor;
+        private ColorsEnum playerColor;
         public Game(bool onStartTurn)
         {
             List<BoardDto> boardList = client.GetBoard().ToList();
@@ -18,33 +18,46 @@ namespace Chess
 
             foreach (BoardDto element in boardList)
             {
-                switch (element.PieceId)
+                switch ((PiecesEnum?) element.PieceId)
                 {
-                    case 1:
-                        pieces.Add(new Pawn(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.Pawn:
+                        pieces.Add(new Pawn(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
-                    case 2:
-                        pieces.Add(new Knight(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.Knight:
+                        pieces.Add(new Knight(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
-                    case 3:
-                        pieces.Add(new Bishop(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.Bishop:
+                        pieces.Add(new Bishop(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
-                    case 4:
-                        pieces.Add(new Rook(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.Rook:
+                        pieces.Add(new Rook(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
-                    case 5:
-                        pieces.Add(new Queen(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.Queen:
+                        pieces.Add(new Queen(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
-                    case 6:
-                        pieces.Add(new King(element.Id - 1, (Colors) element.ColorId - 1));
+                    case PiecesEnum.King:
+                        pieces.Add(new King(element.Id - 1, (ColorsEnum) element.ColorId - 1));
                         break;
                 }
             }
 
             Board.Pieces = pieces;
+            this.onTurn = onStartTurn;
 
-            if (this.onTurn = onStartTurn) this.playerColor = Colors.White;
-            else this.playerColor = Colors.Black;
+            if (this.onTurn) this.playerColor = ColorsEnum.White;
+            else this.playerColor = ColorsEnum.Black;
+        }
+
+        public bool OnTurn
+        {
+            get { return this.onTurn; }
+            set { this.onTurn = value; }
+        }
+
+        public ColorsEnum PlayerColor
+        {
+            get { return this.playerColor; }
+            set { this.playerColor = value; }
         }
 
         public void MakeTurn()

@@ -9,8 +9,8 @@ namespace Chess
         private static List<Piece> pieces = new List<Piece>();
         public static List<Piece> Pieces
         {
-            get;
-            set;
+            get { return pieces; }
+            set { pieces = value; }
         }
 
     }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+
 namespace Chess
 {
     public partial class Form4 : Form
@@ -17,8 +18,7 @@ namespace Chess
         Game game = null;
 
         private string mqqtConnectString;
-        private int? firstButtonId = null;
-        private int? secondButtonId = null;
+        private int? selectedButtonId = null;
 
         //private string opponentScore = "0"; //Póżniej uzywac lokalnie
         //private string userScore = "0";     //Póżniej uzywac lokalnie
@@ -63,51 +63,81 @@ namespace Chess
         }
         private void BoxSelected(object sender, EventArgs e)
         {
-            PictureBox button = sender as PictureBox;
-            int buttonId = flowLayoutPanel1.Controls.GetChildIndex(button);
 
-            // <start>
-
-            if (!Position.GetPositionFromIndex(buttonId).IsFieldEmpty())
+            if (game.OnTurn.Equals(true))
             {
+                PictureBox button = sender as PictureBox;
+                int buttonId = flowLayoutPanel1.Controls.GetChildIndex(button);
+                Position position = Position.GetPositionFromIndex(buttonId);
+                List<Piece> pieces = Board.Pieces;
 
-
-
-
-            }
-
-
-            // </koniee>
-
-
-            if (firstButtonId == null)
-            {
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                firstButtonId = buttonId;
-
-            }
-            else if (secondButtonId == null)
-            {
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                secondButtonId = buttonId;
-
-                if (secondButtonId == firstButtonId)
+                if (selectedButtonId == null &&
+                    !position.IsFieldEmpty() &&
+                    pieces.Find(p => p.Position.Equals(position)).Color.Equals(game.PlayerColor))
                 {
-                    ClearBoardBackground();
-                }
-            }
-            else if (buttonId != firstButtonId && buttonId != secondButtonId)
-            {
-                PictureBox prevButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
-                prevButton.BackColor = GetDefaultBackColor((int)secondButtonId);
+                    button.BackColor = System.Drawing.Color.MediumVioletRed;
+                    selectedButtonId = buttonId;
 
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                secondButtonId = buttonId;
+                    Piece piece = pieces.Find(p => p.Position.Equals(position));
+                    List<Position> possibleMoves = piece.PossibleMoves();
+
+                    foreach (Position possibleMove in possibleMoves)
+                    {
+                        PictureBox btn = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(possibleMove)];
+                        btn.BackColor = Color.PaleVioletRed;
+                    }
+                }
+                else if (selectedButtonId != null)
+                {
+                    if (position.IsFieldEmpty())
+                    {
+                        Piece piece = pieces.Find(p => p.Position.Equals(Position.GetPositionFromIndex((int)selectedButtonId)));
+                        piece.Position = position;
+                        ClearBoardBackground();
+                        selectedButtonId = null;
+                        
+                        // porusz sie
+                    }
+                    else if (pieces.Find(p => p.Position.Equals(position)).Color.Equals(game.PlayerColor))
+                    {
+                        //zmien figure
+                    }
+                    else
+                    {
+                        // zbij
+                    }
+                }
+
+
             }
-            else
-            {
-                ClearBoardBackground();
-            }
+
+            RefreshBoard();
+
+
+            //    else if (secondButtonId == null)
+            //    {
+            //        button.BackColor = System.Drawing.Color.MediumVioletRed;
+            //        secondButtonId = buttonId;
+
+            //        if (secondButtonId == firstButtonId)
+            //        {
+            //            ClearBoardBackground();
+            //        }
+            //    }
+            //    else if (buttonId != firstButtonId && buttonId != secondButtonId)
+            //    {
+            //        PictureBox prevButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
+            //        prevButton.BackColor = GetDefaultBackColor((int)secondButtonId);
+
+            //        button.BackColor = System.Drawing.Color.MediumVioletRed;
+            //        secondButtonId = buttonId;
+            //    }
+            //    else
+            //    {
+            //        ClearBoardBackground();
+            //    }
+            //}
+            // </koniee> 
         }
         private System.Drawing.Color GetDefaultBackColor(int index)
         {
@@ -122,14 +152,10 @@ namespace Chess
         }
         private void ClearBoardBackground()
         {
-            PictureBox firstButton = (PictureBox)flowLayoutPanel1.Controls[(int)firstButtonId];
-            PictureBox secondButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
-
-            firstButton.BackColor = GetDefaultBackColor((int)firstButtonId);
-            secondButton.BackColor = GetDefaultBackColor((int)secondButtonId);
-
-            firstButtonId = null;
-            secondButtonId = null;
+           foreach(PictureBox pb in flowLayoutPanel1.Controls)
+            {
+                pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
+            }
         }
         private void CreateCanvasOnPictureBoxes()
         {
@@ -141,6 +167,8 @@ namespace Chess
         }
         private void RefreshBoard()
         {
+            CreateCanvasOnPictureBoxes();
+
             foreach (Piece piece in Board.Pieces)
             {
                 PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
