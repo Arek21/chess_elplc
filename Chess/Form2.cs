@@ -29,7 +29,7 @@ namespace Chess
                 client.PostSession(roomName, routerIp, player1, ip1, macAddress1);
             }
 
-            Form4 form4 = new Form4(roomName, player1);
+            Form4 form4 = new Form4(roomName, player1, true);
             form4.Show();
             this.Close();
 

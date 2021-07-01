@@ -8,8 +8,9 @@ namespace Chess
 {
     class Game
     {
-        WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
-        public Game()
+        private WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
+        private bool onTurn;
+        public Game(bool onStartTurn)
         {
             List<BoardDto> boardList = client.GetBoard().ToList();
             List<Piece> pieces = new List<Piece>();
@@ -19,7 +20,7 @@ namespace Chess
                 switch (element.PieceId)
                 {
                     case 1:
-                        pieces.Add(new Pawn(element.Id-1, (int) element.ColorId-1));
+                        pieces.Add(new Pawn(element.Id - 1, (int)element.ColorId - 1));
                         break;
                     case 2:
                         pieces.Add(new Knight(element.Id - 1, (int)element.ColorId - 1));
@@ -40,7 +41,12 @@ namespace Chess
             }
 
             Board.Pieces = pieces;
+            onTurn = onStartTurn;
         }
 
+        public void MakeTurn()
+        {
+
+        }
     }
 }

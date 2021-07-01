@@ -244,7 +244,7 @@ namespace Chess
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(524, 524);
             this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Click += new System.EventHandler(this.boxSelected);
+            this.flowLayoutPanel1.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox1
             // 
@@ -255,7 +255,7 @@ namespace Chess
             this.pictureBox1.Size = new System.Drawing.Size(65, 65);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox1.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox2
             // 
@@ -266,7 +266,7 @@ namespace Chess
             this.pictureBox2.Size = new System.Drawing.Size(65, 65);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox2.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox3
             // 
@@ -277,7 +277,7 @@ namespace Chess
             this.pictureBox3.Size = new System.Drawing.Size(65, 65);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox3.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox4
             // 
@@ -288,7 +288,7 @@ namespace Chess
             this.pictureBox4.Size = new System.Drawing.Size(65, 65);
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox4.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox5
             // 
@@ -299,7 +299,7 @@ namespace Chess
             this.pictureBox5.Size = new System.Drawing.Size(65, 65);
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox5.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox6
             // 
@@ -310,7 +310,7 @@ namespace Chess
             this.pictureBox6.Size = new System.Drawing.Size(65, 65);
             this.pictureBox6.TabIndex = 5;
             this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox6.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox7
             // 
@@ -321,7 +321,7 @@ namespace Chess
             this.pictureBox7.Size = new System.Drawing.Size(65, 65);
             this.pictureBox7.TabIndex = 6;
             this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox7.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox8
             // 
@@ -332,7 +332,7 @@ namespace Chess
             this.pictureBox8.Size = new System.Drawing.Size(65, 65);
             this.pictureBox8.TabIndex = 7;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox8.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox9
             // 
@@ -343,7 +343,7 @@ namespace Chess
             this.pictureBox9.Size = new System.Drawing.Size(65, 65);
             this.pictureBox9.TabIndex = 8;
             this.pictureBox9.TabStop = false;
-            this.pictureBox9.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox9.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox10
             // 
@@ -354,7 +354,7 @@ namespace Chess
             this.pictureBox10.Size = new System.Drawing.Size(65, 65);
             this.pictureBox10.TabIndex = 9;
             this.pictureBox10.TabStop = false;
-            this.pictureBox10.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox10.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox11
             // 
@@ -365,7 +365,7 @@ namespace Chess
             this.pictureBox11.Size = new System.Drawing.Size(65, 65);
             this.pictureBox11.TabIndex = 10;
             this.pictureBox11.TabStop = false;
-            this.pictureBox11.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox11.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox12
             // 
@@ -376,7 +376,7 @@ namespace Chess
             this.pictureBox12.Size = new System.Drawing.Size(65, 65);
             this.pictureBox12.TabIndex = 11;
             this.pictureBox12.TabStop = false;
-            this.pictureBox12.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox12.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox13
             // 
@@ -387,7 +387,7 @@ namespace Chess
             this.pictureBox13.Size = new System.Drawing.Size(65, 65);
             this.pictureBox13.TabIndex = 12;
             this.pictureBox13.TabStop = false;
-            this.pictureBox13.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox13.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox14
             // 
@@ -398,7 +398,7 @@ namespace Chess
             this.pictureBox14.Size = new System.Drawing.Size(65, 65);
             this.pictureBox14.TabIndex = 13;
             this.pictureBox14.TabStop = false;
-            this.pictureBox14.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox14.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox15
             // 
@@ -409,7 +409,7 @@ namespace Chess
             this.pictureBox15.Size = new System.Drawing.Size(65, 65);
             this.pictureBox15.TabIndex = 14;
             this.pictureBox15.TabStop = false;
-            this.pictureBox15.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox15.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox16
             // 
@@ -420,7 +420,7 @@ namespace Chess
             this.pictureBox16.Size = new System.Drawing.Size(65, 65);
             this.pictureBox16.TabIndex = 15;
             this.pictureBox16.TabStop = false;
-            this.pictureBox16.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox16.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox17
             // 
@@ -431,7 +431,7 @@ namespace Chess
             this.pictureBox17.Size = new System.Drawing.Size(65, 65);
             this.pictureBox17.TabIndex = 16;
             this.pictureBox17.TabStop = false;
-            this.pictureBox17.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox17.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox18
             // 
@@ -442,7 +442,7 @@ namespace Chess
             this.pictureBox18.Size = new System.Drawing.Size(65, 65);
             this.pictureBox18.TabIndex = 17;
             this.pictureBox18.TabStop = false;
-            this.pictureBox18.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox18.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox19
             // 
@@ -453,7 +453,7 @@ namespace Chess
             this.pictureBox19.Size = new System.Drawing.Size(65, 65);
             this.pictureBox19.TabIndex = 18;
             this.pictureBox19.TabStop = false;
-            this.pictureBox19.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox19.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox20
             // 
@@ -464,7 +464,7 @@ namespace Chess
             this.pictureBox20.Size = new System.Drawing.Size(65, 65);
             this.pictureBox20.TabIndex = 19;
             this.pictureBox20.TabStop = false;
-            this.pictureBox20.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox20.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox21
             // 
@@ -475,7 +475,7 @@ namespace Chess
             this.pictureBox21.Size = new System.Drawing.Size(65, 65);
             this.pictureBox21.TabIndex = 20;
             this.pictureBox21.TabStop = false;
-            this.pictureBox21.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox21.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox22
             // 
@@ -486,7 +486,7 @@ namespace Chess
             this.pictureBox22.Size = new System.Drawing.Size(65, 65);
             this.pictureBox22.TabIndex = 21;
             this.pictureBox22.TabStop = false;
-            this.pictureBox22.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox22.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox23
             // 
@@ -497,7 +497,7 @@ namespace Chess
             this.pictureBox23.Size = new System.Drawing.Size(65, 65);
             this.pictureBox23.TabIndex = 22;
             this.pictureBox23.TabStop = false;
-            this.pictureBox23.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox23.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox24
             // 
@@ -508,7 +508,7 @@ namespace Chess
             this.pictureBox24.Size = new System.Drawing.Size(65, 65);
             this.pictureBox24.TabIndex = 23;
             this.pictureBox24.TabStop = false;
-            this.pictureBox24.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox24.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox25
             // 
@@ -519,7 +519,7 @@ namespace Chess
             this.pictureBox25.Size = new System.Drawing.Size(65, 65);
             this.pictureBox25.TabIndex = 24;
             this.pictureBox25.TabStop = false;
-            this.pictureBox25.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox25.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox26
             // 
@@ -530,7 +530,7 @@ namespace Chess
             this.pictureBox26.Size = new System.Drawing.Size(65, 65);
             this.pictureBox26.TabIndex = 25;
             this.pictureBox26.TabStop = false;
-            this.pictureBox26.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox26.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox27
             // 
@@ -541,7 +541,7 @@ namespace Chess
             this.pictureBox27.Size = new System.Drawing.Size(65, 65);
             this.pictureBox27.TabIndex = 26;
             this.pictureBox27.TabStop = false;
-            this.pictureBox27.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox27.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox28
             // 
@@ -552,7 +552,7 @@ namespace Chess
             this.pictureBox28.Size = new System.Drawing.Size(65, 65);
             this.pictureBox28.TabIndex = 27;
             this.pictureBox28.TabStop = false;
-            this.pictureBox28.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox28.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox29
             // 
@@ -563,7 +563,7 @@ namespace Chess
             this.pictureBox29.Size = new System.Drawing.Size(65, 65);
             this.pictureBox29.TabIndex = 28;
             this.pictureBox29.TabStop = false;
-            this.pictureBox29.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox29.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox30
             // 
@@ -574,7 +574,7 @@ namespace Chess
             this.pictureBox30.Size = new System.Drawing.Size(65, 65);
             this.pictureBox30.TabIndex = 29;
             this.pictureBox30.TabStop = false;
-            this.pictureBox30.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox30.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox31
             // 
@@ -585,7 +585,7 @@ namespace Chess
             this.pictureBox31.Size = new System.Drawing.Size(65, 65);
             this.pictureBox31.TabIndex = 30;
             this.pictureBox31.TabStop = false;
-            this.pictureBox31.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox31.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox32
             // 
@@ -596,7 +596,7 @@ namespace Chess
             this.pictureBox32.Size = new System.Drawing.Size(65, 65);
             this.pictureBox32.TabIndex = 31;
             this.pictureBox32.TabStop = false;
-            this.pictureBox32.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox32.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox33
             // 
@@ -607,7 +607,7 @@ namespace Chess
             this.pictureBox33.Size = new System.Drawing.Size(65, 65);
             this.pictureBox33.TabIndex = 32;
             this.pictureBox33.TabStop = false;
-            this.pictureBox33.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox33.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox34
             // 
@@ -618,7 +618,7 @@ namespace Chess
             this.pictureBox34.Size = new System.Drawing.Size(65, 65);
             this.pictureBox34.TabIndex = 33;
             this.pictureBox34.TabStop = false;
-            this.pictureBox34.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox34.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox35
             // 
@@ -629,7 +629,7 @@ namespace Chess
             this.pictureBox35.Size = new System.Drawing.Size(65, 65);
             this.pictureBox35.TabIndex = 34;
             this.pictureBox35.TabStop = false;
-            this.pictureBox35.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox35.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox36
             // 
@@ -640,7 +640,7 @@ namespace Chess
             this.pictureBox36.Size = new System.Drawing.Size(65, 65);
             this.pictureBox36.TabIndex = 35;
             this.pictureBox36.TabStop = false;
-            this.pictureBox36.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox36.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox37
             // 
@@ -651,7 +651,7 @@ namespace Chess
             this.pictureBox37.Size = new System.Drawing.Size(65, 65);
             this.pictureBox37.TabIndex = 36;
             this.pictureBox37.TabStop = false;
-            this.pictureBox37.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox37.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox38
             // 
@@ -662,7 +662,7 @@ namespace Chess
             this.pictureBox38.Size = new System.Drawing.Size(65, 65);
             this.pictureBox38.TabIndex = 37;
             this.pictureBox38.TabStop = false;
-            this.pictureBox38.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox38.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox39
             // 
@@ -673,7 +673,7 @@ namespace Chess
             this.pictureBox39.Size = new System.Drawing.Size(65, 65);
             this.pictureBox39.TabIndex = 38;
             this.pictureBox39.TabStop = false;
-            this.pictureBox39.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox39.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox40
             // 
@@ -684,7 +684,7 @@ namespace Chess
             this.pictureBox40.Size = new System.Drawing.Size(65, 65);
             this.pictureBox40.TabIndex = 39;
             this.pictureBox40.TabStop = false;
-            this.pictureBox40.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox40.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox41
             // 
@@ -695,7 +695,7 @@ namespace Chess
             this.pictureBox41.Size = new System.Drawing.Size(65, 65);
             this.pictureBox41.TabIndex = 40;
             this.pictureBox41.TabStop = false;
-            this.pictureBox41.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox41.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox42
             // 
@@ -706,7 +706,7 @@ namespace Chess
             this.pictureBox42.Size = new System.Drawing.Size(65, 65);
             this.pictureBox42.TabIndex = 41;
             this.pictureBox42.TabStop = false;
-            this.pictureBox42.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox42.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox43
             // 
@@ -717,7 +717,7 @@ namespace Chess
             this.pictureBox43.Size = new System.Drawing.Size(65, 65);
             this.pictureBox43.TabIndex = 42;
             this.pictureBox43.TabStop = false;
-            this.pictureBox43.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox43.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox44
             // 
@@ -728,7 +728,7 @@ namespace Chess
             this.pictureBox44.Size = new System.Drawing.Size(65, 65);
             this.pictureBox44.TabIndex = 43;
             this.pictureBox44.TabStop = false;
-            this.pictureBox44.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox44.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox45
             // 
@@ -739,7 +739,7 @@ namespace Chess
             this.pictureBox45.Size = new System.Drawing.Size(65, 65);
             this.pictureBox45.TabIndex = 44;
             this.pictureBox45.TabStop = false;
-            this.pictureBox45.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox45.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox46
             // 
@@ -750,7 +750,7 @@ namespace Chess
             this.pictureBox46.Size = new System.Drawing.Size(65, 65);
             this.pictureBox46.TabIndex = 45;
             this.pictureBox46.TabStop = false;
-            this.pictureBox46.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox46.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox47
             // 
@@ -761,7 +761,7 @@ namespace Chess
             this.pictureBox47.Size = new System.Drawing.Size(65, 65);
             this.pictureBox47.TabIndex = 46;
             this.pictureBox47.TabStop = false;
-            this.pictureBox47.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox47.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox48
             // 
@@ -772,7 +772,7 @@ namespace Chess
             this.pictureBox48.Size = new System.Drawing.Size(65, 65);
             this.pictureBox48.TabIndex = 47;
             this.pictureBox48.TabStop = false;
-            this.pictureBox48.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox48.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox49
             // 
@@ -783,7 +783,7 @@ namespace Chess
             this.pictureBox49.Size = new System.Drawing.Size(65, 65);
             this.pictureBox49.TabIndex = 48;
             this.pictureBox49.TabStop = false;
-            this.pictureBox49.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox49.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox50
             // 
@@ -794,7 +794,7 @@ namespace Chess
             this.pictureBox50.Size = new System.Drawing.Size(65, 65);
             this.pictureBox50.TabIndex = 49;
             this.pictureBox50.TabStop = false;
-            this.pictureBox50.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox50.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox51
             // 
@@ -805,7 +805,7 @@ namespace Chess
             this.pictureBox51.Size = new System.Drawing.Size(65, 65);
             this.pictureBox51.TabIndex = 50;
             this.pictureBox51.TabStop = false;
-            this.pictureBox51.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox51.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox52
             // 
@@ -816,7 +816,7 @@ namespace Chess
             this.pictureBox52.Size = new System.Drawing.Size(65, 65);
             this.pictureBox52.TabIndex = 51;
             this.pictureBox52.TabStop = false;
-            this.pictureBox52.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox52.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox53
             // 
@@ -827,7 +827,7 @@ namespace Chess
             this.pictureBox53.Size = new System.Drawing.Size(65, 65);
             this.pictureBox53.TabIndex = 52;
             this.pictureBox53.TabStop = false;
-            this.pictureBox53.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox53.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox54
             // 
@@ -838,7 +838,7 @@ namespace Chess
             this.pictureBox54.Size = new System.Drawing.Size(65, 65);
             this.pictureBox54.TabIndex = 53;
             this.pictureBox54.TabStop = false;
-            this.pictureBox54.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox54.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox55
             // 
@@ -849,7 +849,7 @@ namespace Chess
             this.pictureBox55.Size = new System.Drawing.Size(65, 65);
             this.pictureBox55.TabIndex = 54;
             this.pictureBox55.TabStop = false;
-            this.pictureBox55.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox55.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox56
             // 
@@ -860,7 +860,7 @@ namespace Chess
             this.pictureBox56.Size = new System.Drawing.Size(65, 65);
             this.pictureBox56.TabIndex = 55;
             this.pictureBox56.TabStop = false;
-            this.pictureBox56.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox56.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox57
             // 
@@ -871,7 +871,7 @@ namespace Chess
             this.pictureBox57.Size = new System.Drawing.Size(65, 65);
             this.pictureBox57.TabIndex = 56;
             this.pictureBox57.TabStop = false;
-            this.pictureBox57.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox57.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox58
             // 
@@ -882,7 +882,7 @@ namespace Chess
             this.pictureBox58.Size = new System.Drawing.Size(65, 65);
             this.pictureBox58.TabIndex = 57;
             this.pictureBox58.TabStop = false;
-            this.pictureBox58.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox58.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox59
             // 
@@ -893,7 +893,7 @@ namespace Chess
             this.pictureBox59.Size = new System.Drawing.Size(65, 65);
             this.pictureBox59.TabIndex = 58;
             this.pictureBox59.TabStop = false;
-            this.pictureBox59.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox59.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox60
             // 
@@ -904,7 +904,7 @@ namespace Chess
             this.pictureBox60.Size = new System.Drawing.Size(65, 65);
             this.pictureBox60.TabIndex = 59;
             this.pictureBox60.TabStop = false;
-            this.pictureBox60.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox60.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox61
             // 
@@ -915,7 +915,7 @@ namespace Chess
             this.pictureBox61.Size = new System.Drawing.Size(65, 65);
             this.pictureBox61.TabIndex = 60;
             this.pictureBox61.TabStop = false;
-            this.pictureBox61.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox61.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox62
             // 
@@ -926,7 +926,7 @@ namespace Chess
             this.pictureBox62.Size = new System.Drawing.Size(65, 65);
             this.pictureBox62.TabIndex = 61;
             this.pictureBox62.TabStop = false;
-            this.pictureBox62.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox62.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox63
             // 
@@ -937,7 +937,7 @@ namespace Chess
             this.pictureBox63.Size = new System.Drawing.Size(65, 65);
             this.pictureBox63.TabIndex = 62;
             this.pictureBox63.TabStop = false;
-            this.pictureBox63.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox63.Click += new System.EventHandler(this.BoxSelected);
             // 
             // pictureBox64
             // 
@@ -948,7 +948,7 @@ namespace Chess
             this.pictureBox64.Size = new System.Drawing.Size(65, 65);
             this.pictureBox64.TabIndex = 63;
             this.pictureBox64.TabStop = false;
-            this.pictureBox64.Click += new System.EventHandler(this.boxSelected);
+            this.pictureBox64.Click += new System.EventHandler(this.BoxSelected);
             // 
             // contextMenuStrip1
             // 
@@ -1012,7 +1012,7 @@ namespace Chess
             this.sendChatButton.TabIndex = 8;
             this.sendChatButton.Text = "Send";
             this.sendChatButton.UseVisualStyleBackColor = false;
-            this.sendChatButton.Click += new System.EventHandler(this.sendChatButton_Click);
+            this.sendChatButton.Click += new System.EventHandler(this.SendChatButton_Click);
             // 
             // label1
             // 

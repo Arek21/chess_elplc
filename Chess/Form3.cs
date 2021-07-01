@@ -21,7 +21,7 @@ namespace Chess
         private void AddButton_Click(object sender, EventArgs e)
         {
             player2 = player2TextBox.Text;
-            Form4 form4 = new Form4(roomName, player2);
+            Form4 form4 = new Form4(roomName, player2, false);
             form4.Show();
             this.Hide();
         }
