@@ -146,17 +146,29 @@ namespace Chess
         public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
+            List<Position> temptempPosition = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            tempPositions.Add(new Position(Position.row + 1, Position.col + 1));
-            tempPositions.Add(new Position(Position.row + 1, Position.col - 1));
-            tempPositions.Add(new Position(Position.row - 1, Position.col + 1));
-            tempPositions.Add(new Position(Position.row - 1, Position.col - 1));
-            tempPositions.Add(new Position(Position.row + 1, Position.col));
-            tempPositions.Add(new Position(Position.row - 1, Position.col));
-            tempPositions.Add(new Position(Position.row, Position.col + 1));
-            tempPositions.Add(new Position(Position.row, Position.col - 1));
+            temptempPosition.Add(new Position(Position.row + 1, Position.col + 1));
+            temptempPosition.Add(new Position(Position.row + 1, Position.col - 1));
+            temptempPosition.Add(new Position(Position.row - 1, Position.col + 1));
+            temptempPosition.Add(new Position(Position.row - 1, Position.col - 1));
+            temptempPosition.Add(new Position(Position.row + 1, Position.col));
+            temptempPosition.Add(new Position(Position.row - 1, Position.col));
+            temptempPosition.Add(new Position(Position.row, Position.col + 1));
+            temptempPosition.Add(new Position(Position.row, Position.col - 1));
 
+            foreach (Position element in temptempPosition)
+            {
+                if (element.IsFieldEmpty())
+                {
+                    tempPositions.Add(element);
+                }
+                if (!element.IsFieldEmpty() && element.IsEnemyOnField(this))
+                {
+                    tempPositions.Add(element);
+                }
+            }
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -191,16 +203,112 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
+            //Queen = Bishop + Rook
+            //Bishop
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(Position.row + i, Position.col + i));//Bishop
+                tempPositions.Add(new Position(Position.row + i, Position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row + i, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row - i, Position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row - i, Position.col - i));
-                tempPositions.Add(new Position(Position.row + i, Position.col));//Rook
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            //Rook
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(Position.row + i, Position.col));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row, Position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 tempPositions.Add(new Position(Position.row, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
 
             foreach (Position tempPosition in tempPositions)
@@ -240,11 +348,55 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col + i));
-                tempPositions.Add(new Position(Position.row + i, Position.col - i));
-                tempPositions.Add(new Position(Position.row - i, Position.col + i));
-                tempPositions.Add(new Position(Position.row - i, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
-
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(Position.row + i, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(Position.row - i, Position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(Position.row - i, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
+            }
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -277,17 +429,29 @@ namespace Chess
         public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
+            List<Position> temptempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            tempPositions.Add(new Position(Position.row + 2, Position.col + 1));
-            tempPositions.Add(new Position(Position.row + 1, Position.col + 2));
-            tempPositions.Add(new Position(Position.row + 2, Position.col - 1));
-            tempPositions.Add(new Position(Position.row + 1, Position.col - 2));
-            tempPositions.Add(new Position(Position.row - 2, Position.col - 1));
-            tempPositions.Add(new Position(Position.row - 1, Position.col - 2));
-            tempPositions.Add(new Position(Position.row - 2, Position.col + 1));
-            tempPositions.Add(new Position(Position.row - 1, Position.col + 2));
+            temptempPositions.Add(new Position(Position.row + 2, Position.col + 1));
+            temptempPositions.Add(new Position(Position.row + 1, Position.col + 2));
+            temptempPositions.Add(new Position(Position.row + 2, Position.col - 1));
+            temptempPositions.Add(new Position(Position.row + 1, Position.col - 2));
+            temptempPositions.Add(new Position(Position.row - 2, Position.col - 1));
+            temptempPositions.Add(new Position(Position.row - 1, Position.col - 2));
+            temptempPositions.Add(new Position(Position.row - 2, Position.col + 1));
+            temptempPositions.Add(new Position(Position.row - 1, Position.col + 2));
 
+            foreach (Position element in temptempPositions)
+            {
+                if (element.IsFieldEmpty())
+                {
+                    tempPositions.Add(element);
+                }
+                if (!element.IsFieldEmpty() && element.IsEnemyOnField(this))
+                {
+                    tempPositions.Add(element);
+                }
+            }
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -325,22 +489,54 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty()) break;
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty()) break;
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col + i));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty()) break;
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col - i));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty()) break;
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                {
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
+                }
             }
             foreach (Position tempPosition in tempPositions)
             {
@@ -394,7 +590,6 @@ namespace Chess
                     availablePositions.Add(tempPosition);
                 }
             }
-
             foreach (Position tempPosition in tempPositionsCapture)
             {
                 if (tempPosition.IsPositionOnBoard() && tempPosition.IsEnemyOnField(this))
