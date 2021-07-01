@@ -66,14 +66,21 @@ namespace Chess
             if (index >= 0 && index < 64) return index;
             else throw new ArgumentException("Position out of bounds");
         }
+        public bool IsPositionOnBoard()
+        {
+            if ((this.row >= 0 && this.row <= 7) && (this.col >= 0 && this.col <= 7)) return true;
+            return false;
+        }
+        public bool IsEnemyOnBoard()//potrzebny identyfikator
+        {
+            return false;
+        }
     }
-
-
     interface IPiece
     {
         public void Move();
         public void Capture();
-        public List<int> PossibleMoves();
+        public List<Position> PossibleMoves();
 
     }
     public class Piece
@@ -94,53 +101,36 @@ namespace Chess
             else if (this.color == (int)Colors.Black) this.icon = '\u265a';
 
         }
-
         public void Capture()
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
-            List<int> posMoveList = new List<int>();
+            List<Position> tempPositions = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
 
-            if (position.row + 1 <= 7 && position.col <= 7) //prawa górna diagonala
-            {
-                field = 8 * (position.row + 1) + (position.col + 1);
-                posMoveList.Add(field);
-            }
-            if (position.row + 1 <= 7 && position.col >= 0) //lewa górna diagonala
-            {
-                field = 8 * (position.row + 1) + (position.col - 1);
-                posMoveList.Add(field);
-            }
-            if (position.row + 1 >= 0 && position.col >= 0) //lewa dolna diagonala
-            {
-                field = 8 * (position.row - 1) + (position.col - 1);
-                posMoveList.Add(field);
-            }
-            if (position.row + 1 >= 0 && position.col <= 7) //prawa dolna diagonala
-            {
-                field = 8 * (position.row - 1) + (position.col + 1);
-                posMoveList.Add(field);
-            }
-            field = 8 * position.row + 1;
-            posMoveList.Add(field);
-            field = 8 * position.row - 1;
-            posMoveList.Add(field);
+            tempPositions.Add(new Position(position.row + 1, position.col + 1));
+            tempPositions.Add(new Position(position.row + 1, position.col - 1));
+            tempPositions.Add(new Position(position.row - 1, position.col + 1));
+            tempPositions.Add(new Position(position.row - 1, position.col - 1));
+            tempPositions.Add(new Position(position.row + 1, position.col));
+            tempPositions.Add(new Position(position.row - 1, position.col));
+            tempPositions.Add(new Position(position.row, position.col + 1));
+            tempPositions.Add(new Position(position.row, position.col - 1));
 
-            field = 8 * 1 + position.col;
-            posMoveList.Add(field);
-            field = 8 * 1 - position.col;
-            posMoveList.Add(field);
-
-            return posMoveList;
+            foreach (Position tempPosition in tempPositions)
+            {
+                if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
+            }
+            return availablePositions;
         }
     }
     public class Queen : Piece, IPiece
@@ -158,90 +148,36 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
+            List<Position> tempPositions = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
 
-            List<int> posMoveList = new List<int>();
-
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 7; i++)
             {
-                if (position.row + i <= 7 && position.col <= 7) //prawa górna diagonala
-                {
-                    field = 8 * (position.row + i) + (position.col + i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i <= 7 && position.col >= 0) //lewa górna diagonala
-                {
-                    field = 8 * (position.row + i) + (position.col - i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i >= 0 && position.col >= 0) //lewa dolna diagonala
-                {
-                    field = 8 * (position.row - i) + (position.col - i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i >= 0 && position.col <= 7) //prawa dolna diagonala
-                {
-                    field = 8 * (position.row - i) + (position.col + i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)//dostepne kolumny
-            {
-                field = 8 * position.row + i;
-                posMoveList.Add(field);
-
-                if (field == 8 * position.row + position.col)
-                {
-                    posMoveList.Remove(field);
-                }
-            }
-            for (int i = 0; i < 8; i++)//dostepne rzedy
-            {
-                field = 8 * i + position.col;
-                posMoveList.Add(field);
-
-                if (field == 8 * position.row + position.col)
-                {
-                    posMoveList.Remove(field);
-                }
+                tempPositions.Add(new Position(position.row + i, position.col + i));//Bishop
+                tempPositions.Add(new Position(position.row + i, position.col - i));
+                tempPositions.Add(new Position(position.row - i, position.col + i));
+                tempPositions.Add(new Position(position.row - i, position.col - i));
+                tempPositions.Add(new Position(position.row + i, position.col));//Rook
+                tempPositions.Add(new Position(position.row - i, position.col));
+                tempPositions.Add(new Position(position.row, position.col + i));
+                tempPositions.Add(new Position(position.row, position.col - i));
             }
 
-            return posMoveList;
+            foreach (Position tempPosition in tempPositions)
+            {
+                if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
+            }
+            return availablePositions;
         }
-
     }
     public class Bishop : Piece, IPiece
     {
@@ -258,67 +194,31 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
-            List<int> posMoveList = new List<int>();
-            for (int i = 0; i < 8; i++)
+            List<Position> tempPositions = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
+
+            for(int i = 0; i < 7; i++)
             {
-                if (position.row + i <= 7 && position.col <= 7) //prawa górna diagonala
-                {
-                    field = 8 * (position.row + i) + (position.col + i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i <= 7 && position.col >= 0) //lewa górna diagonala
-                {
-                    field = 8 * (position.row + i) + (position.col - i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i >= 0 && position.col >= 0) //lewa dolna diagonala
-                {
-                    field = 8 * (position.row - i) + (position.col - i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                if (position.row + i >= 0 && position.col <= 7) //prawa dolna diagonala
-                {
-                    field = 8 * (position.row - i) + (position.col + i);
-                    posMoveList.Add(field);
-                }
-                else
-                {
-                    break;
-                }
+                tempPositions.Add(new Position(position.row + i, position.col + i));
+                tempPositions.Add(new Position(position.row + i, position.col - i));
+                tempPositions.Add(new Position(position.row - i, position.col + i));
+                tempPositions.Add(new Position(position.row - i, position.col - i));
             }
 
-            return posMoveList;
+            foreach (Position tempPosition in tempPositions)
+            {
+                if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
+            }
+            return availablePositions;
         }
     }
     public class Knight : Piece, IPiece
@@ -336,62 +236,32 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
-            List<int> posMoveList = new List<int>();
+            List<Position> tempPositions = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
 
-            if (position.col + 1 <= 7 && position.row + 2 <= 7)
+            tempPositions.Add(new Position(position.row + 2, position.col + 1));
+            tempPositions.Add(new Position(position.row + 1, position.col + 2));
+            tempPositions.Add(new Position(position.row + 2, position.col - 1));
+            tempPositions.Add(new Position(position.row + 1, position.col - 2));
+            tempPositions.Add(new Position(position.row - 2, position.col - 1));
+            tempPositions.Add(new Position(position.row - 1, position.col - 2));
+            tempPositions.Add(new Position(position.row - 2, position.col + 1));
+            tempPositions.Add(new Position(position.row - 1, position.col + 2));
+            
+            foreach (Position tempPosition in tempPositions)
             {
-                field = 8 * (position.row + 2) + (position.col + 1);
-
-                //field = Position.fun(new Position(position.row+1,position.col+1));
-
-                posMoveList.Add(field);
+                if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
             }
-            if (position.col + 2 <= 7 && position.row + 1 <= 7)
-            {
-                field = 8 * (position.row + 1) + (position.col + 2);
-                posMoveList.Add(field);
-            }
-            if (position.col - 1 >= 0 && position.row + 2 <= 7)
-            {
-                field = 8 * (position.row + 2) + (position.col - 1);
-                posMoveList.Add(field);
-            }
-            if (position.col - 2 >= 0 && position.row + 1 <= 7)
-            {
-                field = 8 * (position.row + 1) + (position.col - 2);
-                posMoveList.Add(field);
-            }
-            if (position.col - 1 >= 0 && position.row - 2 >= 0)
-            {
-                field = 8 * (position.row - 2) + (position.col - 1);
-                posMoveList.Add(field);
-            }
-            if (position.col - 2 >= 0 && position.row - 1 >= 0)
-            {
-                field = 8 * (position.row - 1) + (position.col - 2);
-                posMoveList.Add(field);
-            }
-            if (position.col + 1 <= 7 && position.row - 2 >= 0)
-            {
-                field = 8 * (position.row - 2) + (position.col + 1);
-                posMoveList.Add(field);
-            }
-            if (position.col + 2 <= 7 && position.row - 1 >= 0)
-            {
-                field = 8 * (position.row - 1) + (position.col + 2);
-                posMoveList.Add(field);
-            }
-
-            return posMoveList;
+            return availablePositions;
         }
     }
     public class Rook : Piece, IPiece
@@ -409,31 +279,32 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
-            List<int> posMoveList = new List<int>();
+            List<Position> tempPositions = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
 
-            for (int i = 0; i < 8; i++)//dostepne kolumny
+            for (int i = 0; i < 7; i++)
             {
-                field = 8 * position.row + i;
-                posMoveList.Add(field);
-
-                if (field == 8 * position.row + position.col)
+                tempPositions.Add(new Position(position.row + i, position.col));
+                tempPositions.Add(new Position(position.row - i, position.col));
+                tempPositions.Add(new Position(position.row, position.col + i));
+                tempPositions.Add(new Position(position.row, position.col - i));
+            }
+            foreach (Position tempPosition in tempPositions)
+            {
+                if (tempPosition.IsPositionOnBoard())
                 {
-                    posMoveList.Remove(field);
+                    availablePositions.Add(tempPosition);
                 }
             }
-            return posMoveList;
+            return availablePositions;
         }
     }
-
     public class Pawn : Piece, IPiece
     {
         public Pawn(int positionIndex, int color)
@@ -445,35 +316,43 @@ namespace Chess
             else if (this.color == (int)Colors.Black) this.icon = '\u265f';
 
         }
-
         public void Capture()
         {
             throw new NotImplementedException();
         }
-
         public void Move()
         {
             throw new NotImplementedException();
         }
-
-        public List<int> PossibleMoves()
+        public List<Position> PossibleMoves()
         {
-            int field;
-            List<int> posMoveList = new List<int>();
+            List<Position> tempPositions = new List<Position>();
+            List<Position> tempPositionCapture = new List<Position>();
+            List<Position> availablePositions = new List<Position>();
 
-            if (position.row >= 0 && position.row <= 7)
+            tempPositions.Add(new Position(position.row + 1, position.col));
+
+            if(position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
+
+            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
+            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
+
+            foreach (Position tempPosition in tempPositions)
             {
-                field = 8 * position.row + (position.col + 1);
-                posMoveList.Add(field);
+                if (tempPosition.IsPositionOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
             }
-            if (position.row == 1)
+
+            foreach (Position tempPosition in tempPositionCapture)
             {
-                field = 8 * position.row + (position.col + 2);
-                posMoveList.Add(field);
+                if (tempPosition.IsPositionOnBoard() && tempPosition.IsEnemyOnBoard())
+                {
+                    availablePositions.Add(tempPosition);
+                }
             }
-            //Dodać jeszcze bicie
-            return posMoveList;
+            return availablePositions;
         }
     }
 }
-

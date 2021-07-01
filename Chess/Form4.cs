@@ -105,9 +105,9 @@ namespace Chess
 
             if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0))
             {
-                return Color.SaddleBrown;
+                return Color.SandyBrown;
             }
-            else return Color.SandyBrown;
+            else return Color.SaddleBrown;
         }
         private void clearBoardBackground()
         {
