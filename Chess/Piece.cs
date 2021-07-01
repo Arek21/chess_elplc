@@ -302,10 +302,24 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(position.row + i, position.col));
-                tempPositions.Add(new Position(position.row - i, position.col));
-                tempPositions.Add(new Position(position.row, position.col + i));
-                tempPositions.Add(new Position(position.row, position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty()) break;
             }
+            for(int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(position.row - i, position.col));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty()) break;
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(position.row, position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty()) break;
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                tempPositions.Add(new Position(position.row, position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty()) break;
+            }
+
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -343,8 +357,8 @@ namespace Chess
             List<Position> availablePositions = new List<Position>();
 
             tempPositions.Add(new Position(position.row + 1, position.col));
-
-            if (position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
+            if (!tempPositions[0].IsFieldEmpty()) tempPositions.Clear();
+            if(tempPositions[0].IsFieldEmpty() && position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
 
             tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
             tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
