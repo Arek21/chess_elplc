@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Chess
 {
@@ -71,9 +72,19 @@ namespace Chess
             if ((this.row >= 0 && this.row <= 7) && (this.col >= 0 && this.col <= 7)) return true;
             return false;
         }
-        public bool IsEnemyOnBoard()//potrzebny identyfikator
+        public bool IsEnemyOnField(Piece piece)
         {
+            List<Piece> pieces = Board.Pieces;
+
+            if (pieces.Where(p => p.position == this && p.color != piece.color).Count() != 0) return true;
             return false;
+        }
+        public bool IsFieldEmpty()
+        {
+            List<Piece> pieces = Board.Pieces;
+
+            if (pieces.Where(p => p.position == this).Count() != 0) return false;
+            return true;
         }
     }
     interface IPiece
@@ -203,7 +214,7 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(position.row + i, position.col + i));
                 tempPositions.Add(new Position(position.row + i, position.col - i));
@@ -253,7 +264,7 @@ namespace Chess
             tempPositions.Add(new Position(position.row - 1, position.col - 2));
             tempPositions.Add(new Position(position.row - 2, position.col + 1));
             tempPositions.Add(new Position(position.row - 1, position.col + 2));
-            
+
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -324,18 +335,19 @@ namespace Chess
         {
             throw new NotImplementedException();
         }
+
         public List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
-            List<Position> tempPositionCapture = new List<Position>();
+            List<Position> tempPositionsCapture = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
             tempPositions.Add(new Position(position.row + 1, position.col));
 
-            if(position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
+            if (position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
 
-            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
-            tempPositionCapture.Add(new Position(position.row + 1, position.col + 1));
+            tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
+            tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
 
             foreach (Position tempPosition in tempPositions)
             {
@@ -345,13 +357,14 @@ namespace Chess
                 }
             }
 
-            foreach (Position tempPosition in tempPositionCapture)
+            foreach (Position tempPosition in tempPositionsCapture)
             {
-                if (tempPosition.IsPositionOnBoard() && tempPosition.IsEnemyOnBoard())
+                if (tempPosition.IsPositionOnBoard() && tempPosition.IsEnemyOnField(this))
                 {
                     availablePositions.Add(tempPosition);
                 }
             }
+
             return availablePositions;
         }
     }
