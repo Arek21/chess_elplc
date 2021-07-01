@@ -66,15 +66,29 @@ namespace Chess
             PictureBox button = sender as PictureBox;
             int buttonId = flowLayoutPanel1.Controls.GetChildIndex(button);
 
+            // <start>
+
+            if (!Position.GetPositionFromIndex(buttonId).IsFieldEmpty())
+            {
+
+
+
+
+            }
+
+
+            // </koniee>
+
+
             if (firstButtonId == null)
             {
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 firstButtonId = buttonId;
 
             }
             else if (secondButtonId == null)
             {
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 secondButtonId = buttonId;
 
                 if (secondButtonId == firstButtonId)
@@ -87,7 +101,7 @@ namespace Chess
                 PictureBox prevButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
                 prevButton.BackColor = GetDefaultBackColor((int)secondButtonId);
 
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 secondButtonId = buttonId;
             }
             else
@@ -95,16 +109,16 @@ namespace Chess
                 ClearBoardBackground();
             }
         }
-        private Color GetDefaultBackColor(int index)
+        private System.Drawing.Color GetDefaultBackColor(int index)
         {
             int row = (int)Math.Floor((double)index / 8);
             int col = index % 8;
 
             if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0))
             {
-                return Color.SandyBrown;
+                return System.Drawing.Color.SandyBrown;
             }
-            else return Color.SaddleBrown;
+            else return System.Drawing.Color.SaddleBrown;
         }
         private void ClearBoardBackground()
         {
@@ -129,13 +143,13 @@ namespace Chess
         {
             foreach (Piece piece in Board.Pieces)
             {
-                PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.position)];
+                PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
                 Font font = new Font("FreeSerif", 24f);
                 using (Graphics G = Graphics.FromImage(pictureBox.Image))
                 {
                     G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-                    G.DrawString(piece.icon.ToString(), font, Brushes.Black, 5f, 10f);
+                    G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
                 }
 
                 pictureBox.Invalidate();
@@ -157,13 +171,17 @@ namespace Chess
         {
             if (sendChatTextbox.Text.Length != 0)
             {
+                string message = sendChatTextbox.Text;
+
                 Task.Run(() =>
                 {
                     if (mqttClient != null && mqttClient.IsConnected)
                     {
-                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + sendChatTextbox.Text));
+                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + message));
                     }
                 });
+
+                sendChatTextbox.Text = string.Empty;
             }
 
         }
