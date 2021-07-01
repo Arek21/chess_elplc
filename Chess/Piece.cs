@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Chess
 {
-    enum Cols
+    public enum Cols
     {
         cA,
         cB,
@@ -16,7 +16,7 @@ namespace Chess
         cG,
         cH
     }
-    enum Rows
+    public enum Rows
     {
         r1,
         r2,
@@ -27,7 +27,7 @@ namespace Chess
         r7,
         r8
     }
-    enum Pieces
+    public enum Pieces
     {
         Pawn = 1,
         Knight,
@@ -36,7 +36,7 @@ namespace Chess
         Queen,
         King
     }
-    enum Colors
+    public enum Colors
     {
         White,
         Black
@@ -76,14 +76,14 @@ namespace Chess
         {
             List<Piece> pieces = Board.Pieces;
 
-            if (pieces.Where(p => p.position == this && p.color != piece.color).Count() != 0) return true;
+            if (pieces.Where(p => p.Position == this && p.Color != piece.Color).Count() != 0) return true;
             return false;
         }
         public bool IsFieldEmpty()
         {
             List<Piece> pieces = Board.Pieces;
 
-            if (pieces.Where(p => p.position == this).Count() != 0) return false;
+            if (pieces.Where(p => p.Position == this).Count() != 0) return false;
             return true;
         }
     }
@@ -96,20 +96,39 @@ namespace Chess
     }
     public class Piece
     {
-        public Position position;
-        public int color;
-        public char icon;
+        private Position position;
+        private Colors color;
+        private char icon;
+
+        public Position Position
+        {
+            get { return this.position; }
+            set { this.position = value; }
+        }
+
+        public Colors Color
+        {
+            get { return this.color; }
+            set { this.color = value; }
+        }
+
+        public char Icon
+        {
+            get { return this.icon; }
+            set { this.icon = value; }
+        }
+
     }
 
     public class King : Piece, IPiece
     {
-        public King(int positionIndex, int color)
+        public King(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2654';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265a';
+            if (this.Color == Colors.White) this.Icon = '\u2654';
+            else if (this.Color == Colors.Black) this.Icon = '\u265a';
 
         }
         public void Capture()
@@ -125,14 +144,14 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            tempPositions.Add(new Position(position.row + 1, position.col + 1));
-            tempPositions.Add(new Position(position.row + 1, position.col - 1));
-            tempPositions.Add(new Position(position.row - 1, position.col + 1));
-            tempPositions.Add(new Position(position.row - 1, position.col - 1));
-            tempPositions.Add(new Position(position.row + 1, position.col));
-            tempPositions.Add(new Position(position.row - 1, position.col));
-            tempPositions.Add(new Position(position.row, position.col + 1));
-            tempPositions.Add(new Position(position.row, position.col - 1));
+            tempPositions.Add(new Position(Position.row + 1, Position.col + 1));
+            tempPositions.Add(new Position(Position.row + 1, Position.col - 1));
+            tempPositions.Add(new Position(Position.row - 1, Position.col + 1));
+            tempPositions.Add(new Position(Position.row - 1, Position.col - 1));
+            tempPositions.Add(new Position(Position.row + 1, Position.col));
+            tempPositions.Add(new Position(Position.row - 1, Position.col));
+            tempPositions.Add(new Position(Position.row, Position.col + 1));
+            tempPositions.Add(new Position(Position.row, Position.col - 1));
 
             foreach (Position tempPosition in tempPositions)
             {
@@ -146,13 +165,13 @@ namespace Chess
     }
     public class Queen : Piece, IPiece
     {
-        public Queen(int positionIndex, int color)
+        public Queen(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2655';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265b';
+            if (this.Color == Colors.White) this.Icon = '\u2655';
+            else if (this.Color == Colors.Black) this.Icon = '\u265b';
 
         }
         public void Capture()
@@ -170,14 +189,14 @@ namespace Chess
 
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(position.row + i, position.col + i));//Bishop
-                tempPositions.Add(new Position(position.row + i, position.col - i));
-                tempPositions.Add(new Position(position.row - i, position.col + i));
-                tempPositions.Add(new Position(position.row - i, position.col - i));
-                tempPositions.Add(new Position(position.row + i, position.col));//Rook
-                tempPositions.Add(new Position(position.row - i, position.col));
-                tempPositions.Add(new Position(position.row, position.col + i));
-                tempPositions.Add(new Position(position.row, position.col - i));
+                tempPositions.Add(new Position(Position.row + i, Position.col + i));//Bishop
+                tempPositions.Add(new Position(Position.row + i, Position.col - i));
+                tempPositions.Add(new Position(Position.row - i, Position.col + i));
+                tempPositions.Add(new Position(Position.row - i, Position.col - i));
+                tempPositions.Add(new Position(Position.row + i, Position.col));//Rook
+                tempPositions.Add(new Position(Position.row - i, Position.col));
+                tempPositions.Add(new Position(Position.row, Position.col + i));
+                tempPositions.Add(new Position(Position.row, Position.col - i));
             }
 
             foreach (Position tempPosition in tempPositions)
@@ -192,13 +211,13 @@ namespace Chess
     }
     public class Bishop : Piece, IPiece
     {
-        public Bishop(int positionIndex, int color)
+        public Bishop(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2657';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265d';
+            if (this.Color == Colors.White) this.Icon = '\u2657';
+            else if (this.Color == Colors.Black) this.Icon = '\u265d';
 
         }
         public void Capture()
@@ -216,10 +235,10 @@ namespace Chess
 
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(position.row + i, position.col + i));
-                tempPositions.Add(new Position(position.row + i, position.col - i));
-                tempPositions.Add(new Position(position.row - i, position.col + i));
-                tempPositions.Add(new Position(position.row - i, position.col - i));
+                tempPositions.Add(new Position(Position.row + i, Position.col + i));
+                tempPositions.Add(new Position(Position.row + i, Position.col - i));
+                tempPositions.Add(new Position(Position.row - i, Position.col + i));
+                tempPositions.Add(new Position(Position.row - i, Position.col - i));
             }
 
             foreach (Position tempPosition in tempPositions)
@@ -234,13 +253,13 @@ namespace Chess
     }
     public class Knight : Piece, IPiece
     {
-        public Knight(int positionIndex, int color)
+        public Knight(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2658';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265e';
+            if (this.Color == Colors.White) this.Icon = '\u2658';
+            else if (this.Color == Colors.Black) this.Icon = '\u265e';
 
         }
         public void Capture()
@@ -256,14 +275,14 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            tempPositions.Add(new Position(position.row + 2, position.col + 1));
-            tempPositions.Add(new Position(position.row + 1, position.col + 2));
-            tempPositions.Add(new Position(position.row + 2, position.col - 1));
-            tempPositions.Add(new Position(position.row + 1, position.col - 2));
-            tempPositions.Add(new Position(position.row - 2, position.col - 1));
-            tempPositions.Add(new Position(position.row - 1, position.col - 2));
-            tempPositions.Add(new Position(position.row - 2, position.col + 1));
-            tempPositions.Add(new Position(position.row - 1, position.col + 2));
+            tempPositions.Add(new Position(Position.row + 2, Position.col + 1));
+            tempPositions.Add(new Position(Position.row + 1, Position.col + 2));
+            tempPositions.Add(new Position(Position.row + 2, Position.col - 1));
+            tempPositions.Add(new Position(Position.row + 1, Position.col - 2));
+            tempPositions.Add(new Position(Position.row - 2, Position.col - 1));
+            tempPositions.Add(new Position(Position.row - 1, Position.col - 2));
+            tempPositions.Add(new Position(Position.row - 2, Position.col + 1));
+            tempPositions.Add(new Position(Position.row - 1, Position.col + 2));
 
             foreach (Position tempPosition in tempPositions)
             {
@@ -277,13 +296,13 @@ namespace Chess
     }
     public class Rook : Piece, IPiece
     {
-        public Rook(int positionIndex, int color)
+        public Rook(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2656';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265c';
+            if (this.Color == Colors.White) this.Icon = '\u2656';
+            else if (this.Color == Colors.Black) this.Icon = '\u265c';
 
         }
         public void Capture()
@@ -319,7 +338,6 @@ namespace Chess
                 tempPositions.Add(new Position(position.row, position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty()) break;
             }
-
             foreach (Position tempPosition in tempPositions)
             {
                 if (tempPosition.IsPositionOnBoard())
@@ -332,13 +350,13 @@ namespace Chess
     }
     public class Pawn : Piece, IPiece
     {
-        public Pawn(int positionIndex, int color)
+        public Pawn(int positionIndex, Colors color)
         {
-            this.position = Position.GetPositionFromIndex(positionIndex);
-            this.color = color;
+            this.Position = Position.GetPositionFromIndex(positionIndex);
+            this.Color = color;
 
-            if (this.color == (int)Colors.White) this.icon = '\u2659';
-            else if (this.color == (int)Colors.Black) this.icon = '\u265f';
+            if (this.Color == Colors.White) this.Icon = '\u2659';
+            else if (this.Color == Colors.Black) this.Icon = '\u265f';
 
         }
         public void Capture()
@@ -360,8 +378,8 @@ namespace Chess
             if (!tempPositions[0].IsFieldEmpty()) tempPositions.Clear();
             if(tempPositions[0].IsFieldEmpty() && position.row == 1) tempPositions.Add(new Position(position.row + 2, position.col));
 
-            tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
-            tempPositionsCapture.Add(new Position(position.row + 1, position.col + 1));
+            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col + 1));
+            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col + 1));
 
             foreach (Position tempPosition in tempPositions)
             {

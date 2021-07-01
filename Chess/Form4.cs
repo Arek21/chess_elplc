@@ -20,31 +20,32 @@ namespace Chess
         private int? firstButtonId = null;
         private int? secondButtonId = null;
 
-        private string opponentScore = "0"; //Póżniej uzywac lokalnie
-        private string userScore = "0";     //Póżniej uzywac lokalnie
+        //private string opponentScore = "0"; //Póżniej uzywac lokalnie
+        //private string userScore = "0";     //Póżniej uzywac lokalnie
 
         private string roomName;
         private string playerName;
+        private bool onStartTurn;
 
-        public Form4(string roomName, string playerName)
+        public Form4(string roomName, string playerName, bool onStartTurn)
         {
             InitializeComponent();
+
             this.roomName = roomName;
             this.playerName = playerName;
+            this.onStartTurn = onStartTurn;
         }
         private void Form4_Load(object sender, EventArgs e)
         {
-            string numOfSesions = string.Empty;
-            string opponentName = string.Empty;
-            string userName = string.Empty;
+            //string numOfSesions = string.Empty;
+            //string opponentName = string.Empty;
+            //string userName = string.Empty;
 
-            sessionIdLabel.Text = "Room nr: " + numOfSesions;
-            opponentNameLabel.Text = "Opponent name: " + opponentName;
-            oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
-            userNameLabel.Text = "Your name: " + userName;
-            userScoreLabel.Text = "Your score: " + userScore;
-
-            // <MQTT>
+            //sessionIdLabel.Text = "Room nr: " + numOfSesions;
+            //opponentNameLabel.Text = "Opponent name: " + opponentName;
+            //oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
+            //userNameLabel.Text = "Your name: " + userName;
+            //userScoreLabel.Text = "Your score: " + userScore;
 
             mqqtConnectString = "ELPLC/" + roomName;
             Task.Run(() =>
@@ -56,73 +57,81 @@ namespace Chess
                 mqttClient.Connect(playerName);
             });
 
-
-            game = new Game();
-            createCanvasOnPictureBoxes();
-            refreshBoard();
-            // </MQTT>
+            game = new Game(onStartTurn);
+            CreateCanvasOnPictureBoxes();
+            RefreshBoard();
         }
-
-
-        private void boxSelected(object sender, EventArgs e)
+        private void BoxSelected(object sender, EventArgs e)
         {
             PictureBox button = sender as PictureBox;
             int buttonId = flowLayoutPanel1.Controls.GetChildIndex(button);
 
+            // <start>
+
+            if (!Position.GetPositionFromIndex(buttonId).IsFieldEmpty())
+            {
+
+
+
+
+            }
+
+
+            // </koniee>
+
+
             if (firstButtonId == null)
             {
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 firstButtonId = buttonId;
 
             }
             else if (secondButtonId == null)
             {
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 secondButtonId = buttonId;
 
                 if (secondButtonId == firstButtonId)
                 {
-                    clearBoardBackground();
+                    ClearBoardBackground();
                 }
             }
             else if (buttonId != firstButtonId && buttonId != secondButtonId)
             {
                 PictureBox prevButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
-                prevButton.BackColor = getDefaultBackColor((int)secondButtonId);
+                prevButton.BackColor = GetDefaultBackColor((int)secondButtonId);
 
-                button.BackColor = Color.MediumVioletRed;
+                button.BackColor = System.Drawing.Color.MediumVioletRed;
                 secondButtonId = buttonId;
             }
             else
             {
-                clearBoardBackground();
+                ClearBoardBackground();
             }
         }
-        private Color getDefaultBackColor(int index)
+        private System.Drawing.Color GetDefaultBackColor(int index)
         {
             int row = (int)Math.Floor((double)index / 8);
             int col = index % 8;
 
             if ((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0))
             {
-                return Color.SandyBrown;
+                return System.Drawing.Color.SandyBrown;
             }
-            else return Color.SaddleBrown;
+            else return System.Drawing.Color.SaddleBrown;
         }
-        private void clearBoardBackground()
+        private void ClearBoardBackground()
         {
             PictureBox firstButton = (PictureBox)flowLayoutPanel1.Controls[(int)firstButtonId];
             PictureBox secondButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
 
-            firstButton.BackColor = getDefaultBackColor((int)firstButtonId);
-            secondButton.BackColor = getDefaultBackColor((int)secondButtonId);
+            firstButton.BackColor = GetDefaultBackColor((int)firstButtonId);
+            secondButton.BackColor = GetDefaultBackColor((int)secondButtonId);
 
             firstButtonId = null;
             secondButtonId = null;
         }
-
-
-        private void createCanvasOnPictureBoxes()
+        private void CreateCanvasOnPictureBoxes()
         {
             foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
             {
@@ -130,25 +139,23 @@ namespace Chess
                 pictureBox.Image = bmp;
             }
         }
-
-        private void refreshBoard()
+        private void RefreshBoard()
         {
             foreach (Piece piece in Board.Pieces)
             {
-                PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.position)];
+                PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
                 Font font = new Font("FreeSerif", 24f);
                 using (Graphics G = Graphics.FromImage(pictureBox.Image))
                 {
                     G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-                    G.DrawString(piece.icon.ToString(), font, Brushes.Black, 5f,10f);
+                    G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
                 }
 
                 pictureBox.Invalidate();
             }
         }
-
-        private void MqttClient_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
+        private void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             if (e.Topic.Equals(mqqtConnectString + "/Chat"))
             {
@@ -160,20 +167,24 @@ namespace Chess
 
             }
         }
-
-        private void sendChatButton_Click(object sender, EventArgs e)
+        private void SendChatButton_Click(object sender, EventArgs e)
         {
             if (sendChatTextbox.Text.Length != 0)
             {
+                string message = sendChatTextbox.Text;
+
                 Task.Run(() =>
                 {
                     if (mqttClient != null && mqttClient.IsConnected)
                     {
-                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + sendChatTextbox.Text));
+                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + message));
                     }
                 });
+
+                sendChatTextbox.Text = string.Empty;
             }
 
         }
+
     }
 }
