@@ -135,5 +135,6 @@ namespace Chess
             if (PlayerColor.Equals(ColorsEnum.White)) return ColorsEnum.Black;
             return ColorsEnum.White;
         }
+        //private static 
     }
 }
