@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
@@ -72,6 +73,10 @@ namespace Chess
             }
             else if (e.Topic.Equals(mqqtConnectionString + "/Game"))
             {
+                var json = Encoding.UTF8.GetString(e.Message);
+                GameDto gameDto = JsonSerializer.Deserialize<GameDto>(json);
+                Game.PiecesOnBoard = gameDto.PiecesOnBoard;
+                Game.IsMyTurn = gameDto.IsMyTurn;
 
             }
         }
@@ -110,6 +115,19 @@ namespace Chess
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
 
+
+                        Task.Run(() =>
+                        {
+                            string json = JsonSerializer.Serialize(new GameDto(true, Game.PiecesOnBoard));
+
+                            if (mqttClient != null && mqttClient.IsConnected)
+                            {
+                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(playerName + ": " + json));
+                            }
+                        });
+
+                        Game.IsMyTurn = false;
+
                     }
 
                     else if (Game.IsMyPiece(selectedButtonId) &&
@@ -130,6 +148,18 @@ namespace Chess
                         ClearBoardBackgrounds();
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
+
+                        Task.Run(() =>
+                        {
+                            string json = JsonSerializer.Serialize(new GameDto(true, Game.PiecesOnBoard));
+
+                            if (mqttClient != null && mqttClient.IsConnected)
+                            {
+                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(playerName + ": " + json));
+                            }
+                        });
+
+                        Game.IsMyTurn = false;
                     }
 
                     else if (selectedButtonId == firstSelectedButtonId) // CLEAR PIECE SELECTION
@@ -226,7 +256,7 @@ namespace Chess
 
 
 
-
+        // to delete
         public ListBox GetChatListBox
         {
             get { return chatListBox; }
