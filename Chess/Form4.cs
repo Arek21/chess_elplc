@@ -85,6 +85,7 @@ namespace Chess
                 {
                     Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
                     Game.IsMyTurn = gameDto.IsMyTurn;
+                    HighlightSelectedButton(Position.GetIndexFromPosition(gameDto.RecentMove));
                     RefreshBoardIcons();
                 }
             }
@@ -109,7 +110,7 @@ namespace Chess
                     Game.IsMyPiece(selectedButtonId))   //  SELECT PIECE TO MOVE
                 {
                     firstSelectedButtonId = selectedButtonId;
-                    HighlightSelectedButton(selectedButton);
+                    HighlightSelectedButton(selectedButtonId);
                     HighlightPossibleMoves(Game.GetPossibleMoves(selectedButtonId));
                 }
 
@@ -122,7 +123,6 @@ namespace Chess
                         Game.Move((int)firstSelectedButtonId, (int)secondSelectedButtonId);
 
                         ClearBoardBackgrounds();
-                        HighlightSelectedButton(selectedButton);
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
 
@@ -134,7 +134,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor()), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor(), Position.GetPositionFromIndex(selectedButtonId)), settings);
 
 
                             if (mqttClient != null && mqttClient.IsConnected)
@@ -152,7 +152,7 @@ namespace Chess
                     {
                         firstSelectedButtonId = selectedButtonId;
                         ClearBoardBackgrounds();
-                        HighlightSelectedButton(selectedButton);
+                        HighlightSelectedButton(selectedButtonId);
                         HighlightPossibleMoves(Game.GetPossibleMoves(selectedButtonId));
                     }
 
@@ -163,7 +163,6 @@ namespace Chess
                         Game.Capture((int)firstSelectedButtonId, (int)secondSelectedButtonId);
 
                         ClearBoardBackgrounds();
-                        HighlightSelectedButton(selectedButton);
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
 
@@ -174,7 +173,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor()), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor(), Position.GetPositionFromIndex(selectedButtonId)), settings);
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
                                 mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
@@ -236,8 +235,9 @@ namespace Chess
                 btn.BackColor = Color.PaleVioletRed;
             }
         }
-        private void HighlightSelectedButton(PictureBox selectedButton)
+        private void HighlightSelectedButton(int selectedButtonId)
         {
+            PictureBox selectedButton = (PictureBox)flowLayoutPanel1.Controls[selectedButtonId];
             selectedButton.BackColor = Color.MediumVioletRed;
         }
         private void ClearBoardBackgrounds()

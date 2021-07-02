@@ -9,12 +9,14 @@ namespace Chess
         private bool isMyTurn;
         private ColorsEnum playerColor;
         private List<Piece> piecesOnBoard;
+        private Position recentMove;
 
-        public GameDto(bool isMyTurn, List<Piece> piecesOnBoard,ColorsEnum playerColor)
+        public GameDto(bool isMyTurn, List<Piece> piecesOnBoard,ColorsEnum playerColor,Position recentMove)
         {
             this.isMyTurn = isMyTurn;
             this.playerColor = playerColor;
-            this.piecesOnBoard = piecesOnBoard;            
+            this.piecesOnBoard = piecesOnBoard;
+            this.recentMove = recentMove;
         }
 
         public GameDto()
@@ -38,6 +40,12 @@ namespace Chess
         {
             get { return this.isMyTurn; }
             set { this.isMyTurn = value; }
+        }
+
+        public Position RecentMove
+        {
+            get { return this.recentMove; }
+            set { this.recentMove = value; }
         }
     }
 }
