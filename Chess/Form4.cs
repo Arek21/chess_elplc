@@ -251,13 +251,22 @@ namespace Chess
         {
             foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
             {
-                Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
-                pictureBox.Image = bmp;
+                lock (pictureBox.Image)
+                {
+                    Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
+                    pictureBox.Image = bmp;
+                    System.Diagnostics.Debug.WriteLine("Wykonuje sie wewnatrz LOCK !!! :)");
+                }
             }
         }
         private void RefreshBoardIcons()
         {
+            System.Diagnostics.Debug.WriteLine("PRZED LOCK");
+
             CreateCanvasOnPictureBoxes();
+
+            System.Diagnostics.Debug.WriteLine("PO LOCK");
+
 
             foreach (Piece piece in Game.PiecesOnBoard.ToList())
             {
