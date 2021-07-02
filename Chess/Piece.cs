@@ -5,31 +5,9 @@ using System.Linq;
 
 namespace Chess
 {
-    public enum ColsEnum
-    {
-        cA,
-        cB,
-        cC,
-        cD,
-        cE,
-        cF,
-        cG,
-        cH
-    }
-    public enum RowsEnum
-    {
-        r1,
-        r2,
-        r3,
-        r4,
-        r5,
-        r6,
-        r7,
-        r8
-    }
     public enum PiecesEnum
     {
-        Pawn = 1,
+        Pawn,
         Knight,
         Bishop,
         Rook,
@@ -41,7 +19,6 @@ namespace Chess
         White,
         Black
     }
-
     public class Position
     {
         public int row;
@@ -85,13 +62,13 @@ namespace Chess
         }
         public bool IsEnemyOnField(Piece piece)
         {
-            List<Piece> pieces = Board.Pieces;
+            List<Piece> pieces = Game.PiecesOnBoard;
             if (pieces.Exists(p => p.Position.Equals(this) && !p.Color.Equals(piece.Color))) return true;
             return false;
         }
         public bool IsFieldEmpty()
         {
-            List<Piece> pieces = Board.Pieces;
+            List<Piece> pieces = Game.PiecesOnBoard;
             if (pieces.Exists(p => p.Position.Equals(this))) return false;
             return true;
         }
@@ -118,9 +95,6 @@ namespace Chess
             get { return this.icon; }
             set { this.icon = value; }
         }
-
-        public abstract void Move();
-        public abstract void Capture();
         public abstract List<Position> PossibleMoves();
 
     }
@@ -135,16 +109,9 @@ namespace Chess
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265a';
 
         }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
         public override List<Position> PossibleMoves()
         {
+
             List<Position> tempPositions = new List<Position>();
             List<Position> temptempPosition = new List<Position>();
             List<Position> availablePositions = new List<Position>();
@@ -189,14 +156,6 @@ namespace Chess
             if (this.Color == ColorsEnum.White) this.Icon = '\u2655';
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265b';
 
-        }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
         }
         public override List<Position> PossibleMoves()
         {
@@ -331,15 +290,7 @@ namespace Chess
             if (this.Color == ColorsEnum.White) this.Icon = '\u2657';
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265d';
 
-        }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
+        } 
         public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
@@ -418,14 +369,6 @@ namespace Chess
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265e';
 
         }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
         public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
@@ -447,6 +390,7 @@ namespace Chess
                 {
                     tempPositions.Add(element);
                 }
+
                 if (!element.IsFieldEmpty() && element.IsEnemyOnField(this))
                 {
                     tempPositions.Add(element);
@@ -472,14 +416,6 @@ namespace Chess
             if (this.Color == ColorsEnum.White) this.Icon = '\u2656';
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265c';
 
-        }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
         }
         public override List<Position> PossibleMoves()
         {
@@ -559,15 +495,6 @@ namespace Chess
             else if (this.Color == ColorsEnum.Black) this.Icon = '\u265f';
 
         }
-        public override void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
-
         public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
@@ -601,4 +528,5 @@ namespace Chess
             return availablePositions;
         }
     }
+
 }
