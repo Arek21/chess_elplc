@@ -243,8 +243,11 @@ namespace Chess
         {
             foreach (PictureBox pb in flowLayoutPanel1.Controls)
             {
-                pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
-                pb.Invalidate();
+                lock (pb)
+                {
+                    pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
+                    pb.Invalidate();
+                }    
             }
         }
         private void CreateCanvasOnPictureBoxes()
@@ -253,7 +256,7 @@ namespace Chess
             {
                 lock (pictureBox)
                 {
-                    Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
+                    Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height);
                     pictureBox.Image = bmp;
                     System.Diagnostics.Debug.WriteLine("Wykonuje sie wewnatrz LOCK !!! :)");
                 }
@@ -272,15 +275,18 @@ namespace Chess
             {
                 PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
-                Font font = new Font("FreeSerif", 24f);
-                Graphics G = Graphics.FromImage(pictureBox.Image);
+                lock (pictureBox)
+                {
+                    Font font = new Font("FreeSerif", 24f);
+                    Graphics G = Graphics.FromImage(pictureBox.Image);
 
 
-                G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-                G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
+                    G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                    G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
 
 
-                pictureBox.Invalidate();
+                    pictureBox.Invalidate();
+                }        
             }
         }
 
