@@ -53,6 +53,7 @@ namespace Chess
             else
             {
                 playerColor = ColorsEnum.Black;
+                ReverseBoard();
             }
         }
         public static List<Piece> PiecesOnBoard
@@ -137,9 +138,12 @@ namespace Chess
             if (PlayerColor.Equals(ColorsEnum.White)) return ColorsEnum.Black;
             return ColorsEnum.White;
         }
-        public static void ReverseIndexOnBoard ()
+        public static void ReverseBoard ()
         {
-            
+            foreach (Piece piece in piecesOnBoard)
+            {
+                piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
+            }
         }
     }
 }
