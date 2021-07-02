@@ -447,54 +447,50 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col));
-                if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
                 {
-                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                    else
-                    {
-                        tempPositions.Remove(tempPositions.LastOrDefault());
-                        break;
-                    }
+                    tempPositions.Remove(tempPositions.LastOrDefault());
+                    break;
                 }
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
-                if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                {
-                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                    else
-                    {
-                        tempPositions.Remove(tempPositions.LastOrDefault());
-                        break;
-                    }
-                }
+                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                //{
+                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                //    else
+                //    {
+                //        tempPositions.Remove(tempPositions.LastOrDefault());
+                //        break;
+                //    }
+                //}
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col + i));
-                if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                {
-                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                    else
-                    {
-                        tempPositions.Remove(tempPositions.LastOrDefault());
-                        break;
-                    }
-                }
+                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                //{
+                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                //    else
+                //    {
+                //        tempPositions.Remove(tempPositions.LastOrDefault());
+                //        break;
+                //    }
+                //}
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col - i));
-                if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                {
-                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                    else
-                    {
-                        tempPositions.Remove(tempPositions.LastOrDefault());
-                        break;
-                    }
-                }
+                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                //{
+                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                //    else
+                //    {
+                //        tempPositions.Remove(tempPositions.LastOrDefault());
+                //        break;
+                //    }
+                //}
             }
             foreach (Position tempPosition in tempPositions)
             {
@@ -529,12 +525,12 @@ namespace Chess
 
             if (new Position(Position.row - 1, Position.col).IsFieldEmpty())
             {
-                tempPositions.Add(new Position(Position.row - 1, Position.col));//Zmiana z inwersą indeksu//
-                if (new Position(Position.row - 2, Position.col).IsFieldEmpty() && Position.row == 6) tempPositions.Add(new Position(Position.row - 2, Position.col));//Zmiana z inwersą indeksu//
+                tempPositions.Add(new Position(Position.row - 1, Position.col));
+                if (new Position(Position.row - 2, Position.col).IsFieldEmpty() && Position.row == 6) tempPositions.Add(new Position(Position.row - 2, Position.col));
             }
 
-            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col - 1));//Zmiana z inwersą indeksu//
-            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col + 1));//Zmiana z inwersą indeksu//
+            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col - 1));
+            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col + 1));
 
             foreach (Position tempPosition in tempPositions)
             {
@@ -554,5 +550,4 @@ namespace Chess
             return availablePositions;
         }
     }
-
 }
