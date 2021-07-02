@@ -135,6 +135,12 @@ namespace Chess
             if (PlayerColor.Equals(ColorsEnum.White)) return ColorsEnum.Black;
             return ColorsEnum.White;
         }
-        //private static 
+        private static int ReverseIndexOnBoard ( int oldIndex)
+        {
+
+            int newIndex = 0;
+
+            return newIndex; 
+        }
     }
 }
