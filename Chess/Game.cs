@@ -14,6 +14,8 @@ namespace Chess
         private static ColorsEnum playerColor;
         private static List<Piece> piecesOnBoard = new List<Piece>();
 
+
+
         public static void initGame(bool onStartTurn)
         {
             List<BoardDto> boardDtoList = client.GetBoard().ToList();
@@ -128,6 +130,7 @@ namespace Chess
 
             PiecesOnBoard.Remove(opontentsPiece);
             myPiece.Position = tempPosition;
+
         }
         private static ColorsEnum GetOpontentsColor()
         {

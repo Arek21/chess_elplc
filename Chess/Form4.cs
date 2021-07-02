@@ -93,7 +93,9 @@ namespace Chess
 
             if (Game.IsMyTurn)
             {
+                //flowLayoutPanel1.FlowDirection = (FlowDirection.BottomUp & FlowDirection.LeftToRight);
                 //flowLayoutPanel1.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+
                 if (firstSelectedButtonId == null &&
                     Game.IsMyPiece(selectedButtonId))   //  SELECT PIECE TO MOVE
                 {
