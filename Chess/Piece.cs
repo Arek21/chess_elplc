@@ -174,7 +174,7 @@ namespace Chess
 
             //Queen = Bishop + Rook
             //Bishop
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col + i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -187,7 +187,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -200,7 +200,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col + i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -213,7 +213,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -227,7 +227,7 @@ namespace Chess
                 }
             }
             //Rook
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -240,7 +240,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -253,7 +253,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col + i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -266,7 +266,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -310,7 +310,7 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col + i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -323,7 +323,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row + i, Position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -336,7 +336,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col + i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -349,7 +349,7 @@ namespace Chess
                     }
                 }
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col - i));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -444,7 +444,7 @@ namespace Chess
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 if (new Position(Position.row + i, Position.col).IsFieldEmpty())
                 {
@@ -456,7 +456,8 @@ namespace Chess
                 }
                     
             }
-            for (int i = 0; i < 7; i++)
+
+            for (int i = 1; i <= 7; i++)
             {
                 if (new Position(Position.row - i, Position.col).IsFieldEmpty())
                 {
@@ -476,7 +477,7 @@ namespace Chess
                 //    }
                 //}
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 if (new Position(Position.row, Position.col + i).IsFieldEmpty())
                 {
@@ -496,7 +497,7 @@ namespace Chess
                 //    }
                 //}
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 if (new Position(Position.row, Position.col - i).IsFieldEmpty())
                 {
