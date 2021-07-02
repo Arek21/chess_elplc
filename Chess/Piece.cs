@@ -449,13 +449,18 @@ namespace Chess
                 tempPositions.Add(new Position(Position.row + i, Position.col));
                 if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
                 {
-                    tempPositions.Remove(tempPositions.LastOrDefault());
+                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
                     break;
                 }
             }
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
+                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                {
+                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
+                    break;
+                }
                 //if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 //{
                 //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
@@ -469,6 +474,11 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col + i));
+                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                {
+                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
+                    break;
+                }
                 //if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 //{
                 //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
@@ -482,6 +492,11 @@ namespace Chess
             for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row, Position.col - i));
+                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                {
+                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
+                    break;
+                }
                 //if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 //{
                 //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
