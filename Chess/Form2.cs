@@ -11,9 +11,7 @@ namespace Chess
     {
 
         WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
-        string routerIp;
-        string macAddress1;
-        string ip1;
+       
         public Form2()
         {
             InitializeComponent();
@@ -24,7 +22,7 @@ namespace Chess
             string player1 = player1TextBox.Text;
 
 
-            if (roomName != null && ip1 != null && macAddress1 != null)
+            if (roomName != null && player1 != null && roomName != "" && player1 != "")
             {
                 client.PostSession(roomName, player1);
             }
@@ -37,10 +35,6 @@ namespace Chess
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
-            routerIp = getRouterIp();
-            macAddress1 = getMac();
-            ip1 = getIp();
 
         }
 

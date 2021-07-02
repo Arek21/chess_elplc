@@ -85,7 +85,8 @@ namespace Chess
                 {
                     Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
                     Game.IsMyTurn = gameDto.IsMyTurn;
-                    HighlightSelectedButton(Position.GetIndexFromPosition(gameDto.RecentMove));
+
+                    HighlightSelectedButton(63-Position.GetIndexFromPosition(gameDto.RecentMove));
                     RefreshBoardIcons();
                 }
             }
