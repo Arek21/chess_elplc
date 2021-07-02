@@ -122,6 +122,7 @@ namespace Chess
                         Game.Move((int)firstSelectedButtonId, (int)secondSelectedButtonId);
 
                         ClearBoardBackgrounds();
+                        HighlightSelectedButton(selectedButton);
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
 
@@ -162,6 +163,7 @@ namespace Chess
                         Game.Capture((int)firstSelectedButtonId, (int)secondSelectedButtonId);
 
                         ClearBoardBackgrounds();
+                        HighlightSelectedButton(selectedButton);
                         firstSelectedButtonId = null;
                         secondSelectedButtonId = null;
 
