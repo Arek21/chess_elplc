@@ -100,8 +100,6 @@ namespace Chess
 
             int selectedButtonId = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
 
-            System.Diagnostics.Debug.WriteLine(selectedButtonId);
-
             if (Game.IsMyTurn)
             {
                 //flowLayoutPanel1.FlowDirection = (FlowDirection.BottomUp & FlowDirection.LeftToRight);
