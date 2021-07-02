@@ -13,11 +13,6 @@ namespace Chess
 {
     public partial class Form4 : Form
     {
-
-        MqttClient mqttClient = null;
-
-        private string mqqtConnectString;
-
         private int? firstSelectedButtonId = null;
         private int? secondSelectedButtonId = null;
 
@@ -27,6 +22,7 @@ namespace Chess
         private string roomName;
         private string playerName;
         private bool onStartTurn;
+        MqttConnection mqttConnection;
 
         public Form4(string roomName, string playerName, bool onStartTurn)
         {
@@ -48,21 +44,17 @@ namespace Chess
             //userNameLabel.Text = "Your name: " + userName;
             //userScoreLabel.Text = "Your score: " + userScore;
 
-            mqqtConnectString = "ELPLC/" + roomName;
-            Task.Run(() =>
-            {
-                mqttClient = new MqttClient("broker.hivemq.com");
-                mqttClient.MqttMsgPublishReceived += MqttClient_MqttMsgPublishReceived;
-                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Chat" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-                mqttClient.Subscribe(new string[] { mqqtConnectString + "/Game" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
-                mqttClient.Connect(playerName);
-            });
 
-            Game.initGame(onStartTurn);
+            mqttConnection = new MqttConnection(this);
+            mqttConnection.Connect();
 
             ClearBoardBackgrounds();
             RefreshBoardIcons();
         }
+
+
+
+
         private void BoxSelected(object sender, EventArgs e)
         {
             PictureBox selectedButton = sender as PictureBox;
@@ -124,6 +116,21 @@ namespace Chess
                 RefreshBoardIcons();
             }
         }
+        private void SendChatButton_Click(object sender, EventArgs e)
+        {
+            if (sendChatTextbox.Text.Length != 0)
+            {
+                mqttConnection.SendChatMesseage(sendChatTextbox.Text);
+                sendChatTextbox.Text = string.Empty;
+            }
+
+        }
+
+
+
+
+
+
         private Color GetDefaultBackColor(int index)
         {
             int row = (int)Math.Floor((double)index / 8);
@@ -183,36 +190,27 @@ namespace Chess
         }
 
 
-        private void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+
+
+
+        public ListBox GetChatListBox
         {
-            if (e.Topic.Equals(mqqtConnectString + "/Chat"))
-            {
-                var message = Encoding.UTF8.GetString(e.Message);
-                chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
-            }
-            else if (e.Topic.Equals(mqqtConnectString + "/Game"))
-            {
-
-            }
+            get { return chatListBox; }
         }
-        private void SendChatButton_Click(object sender, EventArgs e)
+        public string RoomName
         {
-            if (sendChatTextbox.Text.Length != 0)
-            {
-                string message = sendChatTextbox.Text;
-
-                Task.Run(() =>
-                {
-                    if (mqttClient != null && mqttClient.IsConnected)
-                    {
-                        mqttClient.Publish(mqqtConnectString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + message));
-                    }
-                });
-
-                sendChatTextbox.Text = string.Empty;
-            }
-
+            get { return roomName; }
+            set { roomName = value; }
         }
-
+        public string PlayerName
+        {
+            get { return roomName; }
+            set { roomName = value; }
+        }
+        public bool OnStartTurn
+        {
+            get { return onStartTurn; }
+            set { onStartTurn = value; }
+        }
     }
 }

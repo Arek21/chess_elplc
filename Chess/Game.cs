@@ -47,8 +47,11 @@ namespace Chess
             Game.PiecesOnBoard = pieces;
             isMyTurn = onStartTurn;
 
-            if(isMyTurn) playerColor = ColorsEnum.White;
-            else playerColor = ColorsEnum.Black;
+            if (isMyTurn) playerColor = ColorsEnum.White;
+            else
+            {
+                playerColor = ColorsEnum.Black;
+            }
         }
         public static List<Piece> PiecesOnBoard
         {
