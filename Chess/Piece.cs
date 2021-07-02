@@ -102,6 +102,10 @@ namespace Chess
     }
     public class King : Piece
     {
+        public King()
+        {
+
+        }
         public King(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -150,6 +154,10 @@ namespace Chess
     }
     public class Queen : Piece
     {
+        public Queen()
+        {
+
+        }
         public Queen(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -284,6 +292,10 @@ namespace Chess
     }
     public class Bishop : Piece
     {
+        public Bishop()
+        {
+
+        }
         public Bishop(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -362,6 +374,10 @@ namespace Chess
     }
     public class Knight : Piece
     {
+        public Knight()
+        {
+
+        }
         public Knight(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -410,6 +426,10 @@ namespace Chess
     }
     public class Rook : Piece
     {
+        public Rook()
+        {
+
+        }
         public Rook(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -488,6 +508,10 @@ namespace Chess
     }
     public class Pawn : Piece
     {
+        public Pawn()
+        {
+
+        }
         public Pawn(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
