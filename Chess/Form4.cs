@@ -86,7 +86,9 @@ namespace Chess
         private void BoxSelected(object sender, EventArgs e)
         {
             PictureBox selectedButton = sender as PictureBox;
-            int selectedButtonId = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
+            
+            int reversedIndex = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
+            int selectedButtonId = Game.ReverseIndexOnBoard(reversedIndex);
 
             System.Diagnostics.Debug.WriteLine(selectedButtonId);
 
