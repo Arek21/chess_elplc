@@ -120,7 +120,7 @@ namespace Chess
 
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
-                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(playerName + ": " + json));
+                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
                             }
                         });
 
@@ -153,7 +153,7 @@ namespace Chess
 
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
-                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(playerName + ": " + json));
+                                mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
                             }
                         });
 
