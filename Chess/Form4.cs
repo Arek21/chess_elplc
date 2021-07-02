@@ -95,7 +95,7 @@ namespace Chess
         private void BoxSelected(object sender, EventArgs e)
         {
             PictureBox selectedButton = sender as PictureBox;
-            
+
             int selectedButtonId = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
 
             System.Diagnostics.Debug.WriteLine(selectedButtonId);
@@ -133,7 +133,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard,Game.GetOpontentsColor()), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor()), settings);
 
 
                             if (mqttClient != null && mqttClient.IsConnected)
@@ -172,7 +172,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard,Game.GetOpontentsColor()), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard, Game.GetOpontentsColor()), settings);
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
                                 mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
@@ -203,7 +203,7 @@ namespace Chess
                 {
                     if (mqttClient != null && mqttClient.IsConnected)
                     {
-                        mqttClient.Publish(mqqtConnectionString + "/Chat", System.Text.Encoding.UTF8.GetBytes(playerName + ": " + message ));
+                        mqttClient.Publish(mqqtConnectionString + "/Chat", System.Text.Encoding.UTF8.GetBytes(playerName + ": " + message));
                     }
                 }); sendChatTextbox.Text = string.Empty;
             }
@@ -263,11 +263,12 @@ namespace Chess
                 PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
                 Font font = new Font("FreeSerif", 24f);
-                using (Graphics G = Graphics.FromImage(pictureBox.Image))
-                {
-                    G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-                    G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
-                }
+                Graphics G = Graphics.FromImage(pictureBox.Image);
+
+
+                G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
+
 
                 pictureBox.Invalidate();
             }
