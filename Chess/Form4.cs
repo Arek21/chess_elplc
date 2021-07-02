@@ -253,7 +253,7 @@ namespace Chess
         {
             foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
             {
-                lock (pictureBox.Image)
+                lock (pictureBox)
                 {
                     Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
                     pictureBox.Image = bmp;
