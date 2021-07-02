@@ -86,7 +86,7 @@ namespace Chess
                     Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
                     Game.IsMyTurn = gameDto.IsMyTurn;
 
-                    HighlightSelectedButton(63-Position.GetIndexFromPosition(gameDto.RecentMove));
+                    HighlightSelectedButton(63 - Position.GetIndexFromPosition(gameDto.RecentMove));
                     RefreshBoardIcons();
                 }
             }
@@ -243,50 +243,36 @@ namespace Chess
         {
             foreach (PictureBox pb in flowLayoutPanel1.Controls)
             {
-                lock (pb)
-                {
-                    pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
-                    pb.Invalidate();
-                }    
-            }
-        }
-        private void CreateCanvasOnPictureBoxes()
-        {
-            foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
-            {
-                lock (pictureBox)
-                {
-                    Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height);
-                    pictureBox.Image = bmp;
-                    System.Diagnostics.Debug.WriteLine("Wykonuje sie wewnatrz LOCK !!! :)");
-                }
+                pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
+                pb.Invalidate();
+
             }
         }
         private void RefreshBoardIcons()
         {
-            System.Diagnostics.Debug.WriteLine("PRZED LOCK");
 
-            CreateCanvasOnPictureBoxes();
+            foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
+            {
+                Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height);
+                pictureBox.Image = bmp;
 
-            System.Diagnostics.Debug.WriteLine("PO LOCK");
-
+            }
 
             foreach (Piece piece in Game.PiecesOnBoard.ToList())
             {
                 PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
-                lock (pictureBox)
-                {
-                    Font font = new Font("FreeSerif", 24f);
-                    Graphics G = Graphics.FromImage(pictureBox.Image);
+
+                Font font = new Font("FreeSerif", 24f);
+                Graphics G = Graphics.FromImage(pictureBox.Image);
 
 
-                    G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-                    G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
+                G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                G.DrawString(piece.Icon.ToString(), font, Brushes.Black, 5f, 10f);
 
 
-                    pictureBox.Invalidate();
-                }        
+                pictureBox.Invalidate();
+
             }
         }
 
