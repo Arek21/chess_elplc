@@ -23,7 +23,7 @@ namespace Chess
 
             foreach (BoardDto boardDto in boardDtoList)
             {
-                switch ((PiecesEnum?)boardDto.PieceId-1)
+                switch ((PiecesEnum?)boardDto.PieceId - 1)
                 {
                     case PiecesEnum.Pawn:
                         pieces.Add(new Pawn(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
@@ -46,14 +46,17 @@ namespace Chess
                 }
             }
 
-            Game.PiecesOnBoard = pieces;
             isMyTurn = onStartTurn;
 
-            if (isMyTurn) playerColor = ColorsEnum.White;
+            if (isMyTurn)
+            {
+                playerColor = ColorsEnum.White;
+                Game.PiecesOnBoard = pieces;
+            }
             else
             {
                 playerColor = ColorsEnum.Black;
-                ReverseBoard();
+                Game.PiecesOnBoard = Game.ReverseBoard(pieces);
             }
         }
         public static List<Piece> PiecesOnBoard
@@ -71,7 +74,7 @@ namespace Chess
             get { return playerColor; }
             set { playerColor = value; }
         }
-  
+
         public static List<int> GetPossibleMoves(int selectedPositionId)
         {
             Position selectedPosition = Position.GetPositionFromIndex(selectedPositionId);
@@ -79,7 +82,7 @@ namespace Chess
             List<Position> possiblePositionsToMove = selectedPiece.PossibleMoves();
             List<int> possibleMoves = new List<int>();
 
-            foreach(Position position in possiblePositionsToMove)
+            foreach (Position position in possiblePositionsToMove)
             {
                 possibleMoves.Add(Position.GetIndexFromPosition(position));
             }
@@ -133,17 +136,18 @@ namespace Chess
             myPiece.Position = tempPosition;
 
         }
-        private static ColorsEnum GetOpontentsColor()
+        public static ColorsEnum GetOpontentsColor()
         {
             if (PlayerColor.Equals(ColorsEnum.White)) return ColorsEnum.Black;
             return ColorsEnum.White;
         }
-        public static void ReverseBoard ()
+        public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-            foreach (Piece piece in piecesOnBoard)
+            foreach (Piece piece in pieces)
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
             }
+            return pieces;
         }
     }
 }

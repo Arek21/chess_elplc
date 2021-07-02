@@ -7,11 +7,13 @@ namespace Chess
     class GameDto
     {
         private bool isMyTurn;
+        private ColorsEnum playerColor;
         private List<Piece> piecesOnBoard;
 
-        public GameDto(bool isMyTurn, List<Piece> piecesOnBoard)
+        public GameDto(bool isMyTurn, List<Piece> piecesOnBoard,ColorsEnum playerColor)
         {
             this.isMyTurn = isMyTurn;
+            this.playerColor = playerColor;
             this.piecesOnBoard = piecesOnBoard;            
         }
 
@@ -24,6 +26,12 @@ namespace Chess
         {
             get { return this.piecesOnBoard; }
             set { this.piecesOnBoard = value; }
+        }
+
+        public ColorsEnum PlayerColor
+        {
+            get { return this.playerColor; }
+            set { this.playerColor = value; }
         }
 
         public bool IsMyTurn

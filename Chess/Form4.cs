@@ -79,9 +79,12 @@ namespace Chess
 
                 var json = Encoding.UTF8.GetString(e.Message);
                 GameDto gameDto = JsonConvert.DeserializeObject<GameDto>(json, settings);
-                Game.PiecesOnBoard = gameDto.PiecesOnBoard;
-                Game.IsMyTurn = gameDto.IsMyTurn;
 
+                if (gameDto.PlayerColor.Equals(Game.PlayerColor))
+                {
+                    Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
+                    Game.IsMyTurn = gameDto.IsMyTurn;
+                }
             }
         }
 
@@ -128,7 +131,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard,Game.GetOpontentsColor()), settings);
 
 
                             if (mqttClient != null && mqttClient.IsConnected)
@@ -167,7 +170,7 @@ namespace Chess
                                 TypeNameHandling = TypeNameHandling.All
                             };
 
-                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard), settings);
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard,Game.GetOpontentsColor()), settings);
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
                                 mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
