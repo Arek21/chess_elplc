@@ -48,6 +48,8 @@ namespace Chess
             mqttConnection = new MqttConnection(this);
             mqttConnection.Connect();
 
+            Game.initGame(onStartTurn);
+
             ClearBoardBackgrounds();
             RefreshBoardIcons();
         }

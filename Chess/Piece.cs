@@ -76,7 +76,6 @@ namespace Chess
     public abstract class Piece
     {
         private Position position;
-        private List<Position> possibleMoves;
         private ColorsEnum color;
         private char icon;
 
