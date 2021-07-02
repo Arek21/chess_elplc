@@ -64,13 +64,13 @@ namespace Chess
         }
         private void PublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            if (e.Topic.Equals(mqqtConnectString + "/Chat"))
+            if (e.Topic.Equals(mqqtConnectionString + "/Chat"))
             {
                 var message = Encoding.UTF8.GetString(e.Message);
 
-                form.GetChatListBox.Invoke((MethodInvoker)(() => form.GetChatListBox.Items.Add(message)));
+                chatListBox.Invoke((MethodInvoker)(() => chatListBox.Items.Add(message)));
             }
-            else if (e.Topic.Equals(mqqtConnectString + "/Game"))
+            else if (e.Topic.Equals(mqqtConnectionString + "/Game"))
             {
 
             }
