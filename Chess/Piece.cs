@@ -502,12 +502,12 @@ namespace Chess
 
             if (new Position(Position.row - 1, Position.col).IsFieldEmpty())
             {
-                tempPositions.Add(new Position(Position.row - 1, Position.col));
-                if (new Position(Position.row - 2, Position.col).IsFieldEmpty()) tempPositions.Add(new Position(Position.row - 2, Position.col));
+                tempPositions.Add(new Position(Position.row - 1, Position.col));//Zmiana z inwersą indeksu//
+                if (new Position(Position.row - 2, Position.col).IsFieldEmpty() && Position.row == 6) tempPositions.Add(new Position(Position.row - 2, Position.col));//Zmiana z inwersą indeksu//
             }
 
-            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col + 1));
-            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col - 1));
+            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col - 1));//Zmiana z inwersą indeksu//
+            tempPositionsCapture.Add(new Position(Position.row - 1, Position.col + 1));//Zmiana z inwersą indeksu//
 
             foreach (Position tempPosition in tempPositions)
             {
