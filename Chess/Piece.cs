@@ -446,37 +446,24 @@ namespace Chess
 
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(Position.row + i, Position.col));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                if (new Position(Position.row + i, Position.col).IsFieldEmpty())
                 {
-                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
+                    tempPositions.Add(new Position(Position.row + i, Position.col));
+                }
+                else
+                {
                     break;
                 }
+                    
             }
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(Position.row - i, Position.col));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                if (new Position(Position.row - i, Position.col).IsFieldEmpty())
                 {
-                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
-                    break;
+                    tempPositions.Add(new Position(Position.row - i, Position.col));
                 }
-                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                //{
-                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                //    else
-                //    {
-                //        tempPositions.Remove(tempPositions.LastOrDefault());
-                //        break;
-                //    }
-                //}
-            }
-            for (int i = 0; i < 7; i++)
-            {
-                tempPositions.Add(new Position(Position.row, Position.col + i));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                else
                 {
-                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
                     break;
                 }
                 //if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -491,10 +478,32 @@ namespace Chess
             }
             for (int i = 0; i < 7; i++)
             {
-                tempPositions.Add(new Position(Position.row, Position.col - i));
-                if (!tempPositions[tempPositions.Count - 1].IsFieldEmpty())
+                if (new Position(Position.row, Position.col + i).IsFieldEmpty())
                 {
-                    tempPositions.Remove(tempPositions[tempPositions.Count - 1]);
+                    tempPositions.Add(new Position(Position.row, Position.col + i));
+                }
+                else
+                {
+                    break;
+                }
+                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
+                //{
+                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                //    else
+                //    {
+                //        tempPositions.Remove(tempPositions.LastOrDefault());
+                //        break;
+                //    }
+                //}
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                if (new Position(Position.row, Position.col - i).IsFieldEmpty())
+                {
+                    tempPositions.Add(new Position(Position.row, Position.col - i));
+                }
+                else
+                {
                     break;
                 }
                 //if (!tempPositions.LastOrDefault().IsFieldEmpty())
