@@ -253,8 +253,11 @@ namespace Chess
         {
             foreach (PictureBox pictureBox in flowLayoutPanel1.Controls)
             {
-                Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
-                pictureBox.Image = bmp;
+                lock (pictureBox.Image)
+                {
+                    Bitmap bmp = new Bitmap(pictureBox.ClientSize.Width, pictureBox1.ClientSize.Height);
+                    pictureBox.Image = bmp;
+                }
             }
         }
         private void RefreshBoardIcons()
