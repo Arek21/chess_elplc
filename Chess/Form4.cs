@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+
 namespace Chess
 {
     public partial class Form4 : Form
     {
 
         MqttClient mqttClient = null;
-        Game game = null;
 
         private string mqqtConnectString;
-        private int? firstButtonId = null;
-        private int? secondButtonId = null;
+
+        private int? firstSelectedButtonId = null;
+        private int? secondSelectedButtonId = null;
 
         //private string opponentScore = "0"; //Póżniej uzywac lokalnie
         //private string userScore = "0";     //Póżniej uzywac lokalnie
@@ -57,59 +58,72 @@ namespace Chess
                 mqttClient.Connect(playerName);
             });
 
-            game = new Game(onStartTurn);
-            CreateCanvasOnPictureBoxes();
-            RefreshBoard();
+            Game.initGame(onStartTurn);
+
+            ClearBoardBackgrounds();
+            RefreshBoardIcons();
         }
         private void BoxSelected(object sender, EventArgs e)
         {
-            PictureBox button = sender as PictureBox;
-            int buttonId = flowLayoutPanel1.Controls.GetChildIndex(button);
+            PictureBox selectedButton = sender as PictureBox;
+            int selectedButtonId = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
 
-            // <start>
-
-            if (!Position.GetPositionFromIndex(buttonId).IsFieldEmpty())
+            if (Game.IsMyTurn)
             {
-
-
-
-
-            }
-
-            List<Position> ava = Pos
-            // </koniec>
-
-
-            if (firstButtonId == null)
-            {
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                firstButtonId = buttonId;
-
-            }
-            else if (secondButtonId == null)
-            {
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                secondButtonId = buttonId;
-
-                if (secondButtonId == firstButtonId)
+                if (firstSelectedButtonId == null &&
+                    Game.IsMyPiece(selectedButtonId))   //  SELECT PIECE TO MOVE
                 {
-                    ClearBoardBackground();
+                    firstSelectedButtonId = selectedButtonId;
+                    HighlightSelectedButton(selectedButton);
+                    HighlightPossibleMoves(Game.GetPossibleMoves(selectedButtonId));
                 }
-            }
-            else if (buttonId != firstButtonId && buttonId != secondButtonId)
-            {
-                PictureBox prevButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
-                prevButton.BackColor = GetDefaultBackColor((int)secondButtonId);
 
-                button.BackColor = System.Drawing.Color.MediumVioletRed;
-                secondButtonId = buttonId;
-            }
-            else
-            {
-                ClearBoardBackground();
+                else if (firstSelectedButtonId != null)
+                {
+                    if (Game.IsFieldEmpty(selectedButtonId) &&
+                        Game.GetPossibleMoves((int)firstSelectedButtonId).Contains(selectedButtonId))   //  MOVE PIECE
+                    {
+                        secondSelectedButtonId = selectedButtonId;
+                        Game.Move((int)firstSelectedButtonId, (int)secondSelectedButtonId);
+
+                        ClearBoardBackgrounds();
+                        firstSelectedButtonId = null;
+                        secondSelectedButtonId = null;
+
+                    }
+
+                    else if (Game.IsMyPiece(selectedButtonId) &&
+                        selectedButtonId != firstSelectedButtonId) //   CHANGE SELECTED PIECE
+                    {
+                        firstSelectedButtonId = selectedButtonId;
+                        ClearBoardBackgrounds();
+                        HighlightSelectedButton(selectedButton);
+                        HighlightPossibleMoves(Game.GetPossibleMoves(selectedButtonId));
+                    }
+
+                    else if (Game.IsMyOpontentsPiece(selectedButtonId) &&
+                        Game.GetPossibleMoves((int)firstSelectedButtonId).Contains(selectedButtonId)) //    CAPTURE PIECE
+                    {
+                        secondSelectedButtonId = selectedButtonId;
+                        Game.Capture((int)firstSelectedButtonId, (int)secondSelectedButtonId);
+
+                        ClearBoardBackgrounds();
+                        firstSelectedButtonId = null;
+                        secondSelectedButtonId = null;
+                    }
+
+                    else if (selectedButtonId == firstSelectedButtonId) // CLEAR PIECE SELECTION
+                    {
+                        firstSelectedButtonId = null;
+                        ClearBoardBackgrounds();
+
+                    }
+                }
+
+                RefreshBoardIcons();
             }
         }
-        private System.Drawing.Color GetDefaultBackColor(int index)
+        private Color GetDefaultBackColor(int index)
         {
             int row = (int)Math.Floor((double)index / 8);
             int col = index % 8;
@@ -120,16 +134,25 @@ namespace Chess
             }
             else return System.Drawing.Color.SaddleBrown;
         }
-        private void ClearBoardBackground()
+        private void HighlightPossibleMoves(List<int> possibleMoves)
         {
-            PictureBox firstButton = (PictureBox)flowLayoutPanel1.Controls[(int)firstButtonId];
-            PictureBox secondButton = (PictureBox)flowLayoutPanel1.Controls[(int)secondButtonId];
-
-            firstButton.BackColor = GetDefaultBackColor((int)firstButtonId);
-            secondButton.BackColor = GetDefaultBackColor((int)secondButtonId);
-
-            firstButtonId = null;
-            secondButtonId = null;
+            foreach (int possibleMove in possibleMoves)
+            {
+                PictureBox btn = (PictureBox)flowLayoutPanel1.Controls[possibleMove];
+                btn.BackColor = Color.PaleVioletRed;
+            }
+        }
+        private void HighlightSelectedButton(PictureBox selectedButton)
+        {
+            selectedButton.BackColor = Color.MediumVioletRed;
+        }
+        private void ClearBoardBackgrounds()
+        {
+            foreach (PictureBox pb in flowLayoutPanel1.Controls)
+            {
+                pb.BackColor = GetDefaultBackColor(flowLayoutPanel1.Controls.IndexOf(pb));
+                pb.Invalidate();
+            }
         }
         private void CreateCanvasOnPictureBoxes()
         {
@@ -139,9 +162,11 @@ namespace Chess
                 pictureBox.Image = bmp;
             }
         }
-        private void RefreshBoard()
+        private void RefreshBoardIcons()
         {
-            foreach (Piece piece in Board.Pieces)
+            CreateCanvasOnPictureBoxes();
+
+            foreach (Piece piece in Game.PiecesOnBoard)
             {
                 PictureBox pictureBox = (PictureBox)flowLayoutPanel1.Controls[Position.GetIndexFromPosition(piece.Position)];
 
@@ -155,6 +180,8 @@ namespace Chess
                 pictureBox.Invalidate();
             }
         }
+
+
         private void MqttClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             if (e.Topic.Equals(mqqtConnectString + "/Chat"))

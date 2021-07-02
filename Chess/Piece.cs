@@ -5,49 +5,19 @@ using System.Linq;
 
 namespace Chess
 {
-    public enum Cols
+    public enum PiecesEnum
     {
-        cA,
-        cB,
-        cC,
-        cD,
-        cE,
-        cF,
-        cG,
-        cH
-    }
-    public enum Rows
-    {
-        r1,
-        r2,
-        r3,
-        r4,
-        r5,
-        r6,
-        r7,
-        r8
-    }
-    public enum Pieces
-    {
-        Pawn = 1,
+        Pawn,
         Knight,
         Bishop,
         Rook,
         Queen,
         King
     }
-    public enum Colors
+    public enum ColorsEnum
     {
         White,
         Black
-    }
-
-    interface IPiece
-    {
-        public void Move();
-        public void Capture();
-        public List<Position> PossibleMoves();
-
     }
     public class Position
     {
@@ -57,6 +27,18 @@ namespace Chess
         {
             this.row = row;
             this.col = col;
+        }
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Position p = (Position)obj;
+                return (this.row == p.row) && (this.col == p.col);
+            }
         }
         public static Position GetPositionFromIndex(int index)
         {
@@ -76,28 +58,26 @@ namespace Chess
         }
         public bool IsPositionOnBoard()
         {
-            if ((this.row >= 0 && this.row <= 7) && (this.col >= 0 && this.col <= 7)) return true;
-            return false;
+            return (this.row >= 0 && this.row <= 7) && (this.col >= 0 && this.col <= 7);
         }
         public bool IsEnemyOnField(Piece piece)
         {
-            List<Piece> pieces = Board.Pieces;
-
-            if (pieces.Where(p => p.Position == this && p.Color != piece.Color).Count() != 0) return true;
+            List<Piece> pieces = Game.PiecesOnBoard;
+            if (pieces.Exists(p => p.Position.Equals(this) && !p.Color.Equals(piece.Color))) return true;
             return false;
         }
         public bool IsFieldEmpty()
         {
-            List<Piece> pieces = Board.Pieces;
-
-            if (pieces.Where(p => p.Position == this).Count() != 0) return false;
+            List<Piece> pieces = Game.PiecesOnBoard;
+            if (pieces.Exists(p => p.Position.Equals(this))) return false;
             return true;
         }
     }
-    public class Piece
+    public abstract class Piece
     {
         private Position position;
-        private Colors color;
+        private List<Position> possibleMoves;
+        private ColorsEnum color;
         private char icon;
 
         public Position Position
@@ -105,7 +85,7 @@ namespace Chess
             get { return this.position; }
             set { this.position = value; }
         }
-        public Colors Color
+        public ColorsEnum Color
         {
             get { return this.color; }
             set { this.color = value; }
@@ -115,29 +95,23 @@ namespace Chess
             get { return this.icon; }
             set { this.icon = value; }
         }
-    }
+        public abstract List<Position> PossibleMoves();
 
-    public class King : Piece, IPiece
+    }
+    public class King : Piece
     {
-        public King(int positionIndex, Colors color)
+        public King(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2654';
-            else if (this.Color == Colors.Black) this.Icon = '\u265a';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2654';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265a';
 
         }
-        public void Capture()
+        public override List<Position> PossibleMoves()
         {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
-        {
+
             List<Position> tempPositions = new List<Position>();
             List<Position> temptempPosition = new List<Position>();
             List<Position> availablePositions = new List<Position>();
@@ -172,26 +146,18 @@ namespace Chess
             return availablePositions;
         }
     }
-    public class Queen : Piece, IPiece
+    public class Queen : Piece
     {
-        public Queen(int positionIndex, Colors color)
+        public Queen(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2655';
-            else if (this.Color == Colors.Black) this.Icon = '\u265b';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2655';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265b';
 
         }
-        public void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
+        public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
@@ -314,26 +280,18 @@ namespace Chess
             return availablePositions;
         }
     }
-    public class Bishop : Piece, IPiece
+    public class Bishop : Piece
     {
-        public Bishop(int positionIndex, Colors color)
+        public Bishop(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2657';
-            else if (this.Color == Colors.Black) this.Icon = '\u265d';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2657';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265d';
 
-        }
-        public void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
+        } 
+        public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
@@ -400,26 +358,18 @@ namespace Chess
             return availablePositions;
         }
     }
-    public class Knight : Piece, IPiece
+    public class Knight : Piece
     {
-        public Knight(int positionIndex, Colors color)
+        public Knight(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2658';
-            else if (this.Color == Colors.Black) this.Icon = '\u265e';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2658';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265e';
 
         }
-        public void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
+        public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
             List<Position> temptempPositions = new List<Position>();
@@ -440,6 +390,7 @@ namespace Chess
                 {
                     tempPositions.Add(element);
                 }
+
                 if (!element.IsFieldEmpty() && element.IsEnemyOnField(this))
                 {
                     tempPositions.Add(element);
@@ -455,25 +406,18 @@ namespace Chess
             return availablePositions;
         }
     }
-    public class Rook : Piece, IPiece
+    public class Rook : Piece
     {
-        public Rook(int positionIndex, Colors color)
+        public Rook(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2656';
-            else if (this.Color == Colors.Black) this.Icon = '\u265c';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2656';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265c';
+
         }
-        public void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
+        public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
             List<Position> availablePositions = new List<Position>();
@@ -491,7 +435,7 @@ namespace Chess
                     }
                 }
             }
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 tempPositions.Add(new Position(Position.row - i, Position.col));
                 if (!tempPositions.LastOrDefault().IsFieldEmpty())
@@ -540,36 +484,31 @@ namespace Chess
             return availablePositions;
         }
     }
-    public class Pawn : Piece, IPiece
+    public class Pawn : Piece
     {
-        public Pawn(int positionIndex, Colors color)
+        public Pawn(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
             this.Color = color;
 
-            if (this.Color == Colors.White) this.Icon = '\u2659';
-            else if (this.Color == Colors.Black) this.Icon = '\u265f';
+            if (this.Color == ColorsEnum.White) this.Icon = '\u2659';
+            else if (this.Color == ColorsEnum.Black) this.Icon = '\u265f';
+
         }
-        public void Capture()
-        {
-            throw new NotImplementedException();
-        }
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
-        public List<Position> PossibleMoves()
+        public override List<Position> PossibleMoves()
         {
             List<Position> tempPositions = new List<Position>();
             List<Position> tempPositionsCapture = new List<Position>();
             List<Position> availablePositions = new List<Position>();
 
-            tempPositions.Add(new Position(Position.row + 1, Position.col));
-            if (!tempPositions[0].IsFieldEmpty()) tempPositions.Clear();
-            if(tempPositions[0].IsFieldEmpty() && Position.row == 1) tempPositions.Add(new Position(Position.row + 2, Position.col));
+            if (new Position(Position.row - 1, Position.col).IsFieldEmpty())
+            {
+                tempPositions.Add(new Position(Position.row - 1, Position.col));
+                if (new Position(Position.row - 2, Position.col).IsFieldEmpty()) tempPositions.Add(new Position(Position.row - 2, Position.col));
+            }
 
             tempPositionsCapture.Add(new Position(Position.row + 1, Position.col + 1));
-            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col + 1));
+            tempPositionsCapture.Add(new Position(Position.row + 1, Position.col - 1));
 
             foreach (Position tempPosition in tempPositions)
             {
@@ -589,4 +528,5 @@ namespace Chess
             return availablePositions;
         }
     }
+
 }
