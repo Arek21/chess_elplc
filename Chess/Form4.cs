@@ -145,11 +145,12 @@ namespace Chess
         {
             if (sendChatTextbox.Text.Length != 0)
             {
+                string message = sendChatTextbox.Text;
+
                 Task.Run(() =>
                 {
                     if (mqttClient != null && mqttClient.IsConnected)
                     {
-                        string message = sendChatTextbox.Text;
                         mqttClient.Publish(mqqtConnectionString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + message ));
                     }
                 }); sendChatTextbox.Text = string.Empty;
