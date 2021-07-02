@@ -84,6 +84,7 @@ namespace Chess
                 {
                     Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
                     Game.IsMyTurn = gameDto.IsMyTurn;
+                    RefreshBoardIcons();
                 }
             }
         }
