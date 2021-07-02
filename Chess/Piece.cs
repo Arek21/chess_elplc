@@ -446,76 +446,55 @@ namespace Chess
 
             for (int i = 1; i <= 7; i++)
             {
-                if (new Position(Position.row + i, Position.col).IsFieldEmpty())
+                tempPositions.Add(new Position(Position.row + i, Position.col));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 {
-                    tempPositions.Add(new Position(Position.row + i, Position.col));
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
-                    
-            }
-
-            for (int i = 1; i <= 7; i++)
-            {
-                if (new Position(Position.row - i, Position.col).IsFieldEmpty())
-                {
-                    tempPositions.Add(new Position(Position.row - i, Position.col));
-                }
-                else
-                {
-                    break;
-                }
-                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                //{
-                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                //    else
-                //    {
-                //        tempPositions.Remove(tempPositions.LastOrDefault());
-                //        break;
-                //    }
-                //}
             }
             for (int i = 1; i <= 7; i++)
             {
-                if (new Position(Position.row, Position.col + i).IsFieldEmpty())
+                tempPositions.Add(new Position(Position.row - i, Position.col));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 {
-                    tempPositions.Add(new Position(Position.row, Position.col + i));
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
-                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                //{
-                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                //    else
-                //    {
-                //        tempPositions.Remove(tempPositions.LastOrDefault());
-                //        break;
-                //    }
-                //}
             }
             for (int i = 1; i <= 7; i++)
             {
-                if (new Position(Position.row, Position.col - i).IsFieldEmpty())
+                tempPositions.Add(new Position(Position.row, Position.col + i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 {
-                    tempPositions.Add(new Position(Position.row, Position.col - i));
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
                 }
-                else
+            }
+            for (int i = 1; i <= 7; i++)
+            {
+                tempPositions.Add(new Position(Position.row, Position.col - i));
+                if (!tempPositions.LastOrDefault().IsFieldEmpty())
                 {
-                    break;
+                    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
+                    else
+                    {
+                        tempPositions.Remove(tempPositions.LastOrDefault());
+                        break;
+                    }
                 }
-                //if (!tempPositions.LastOrDefault().IsFieldEmpty())
-                //{
-                //    if (tempPositions.LastOrDefault().IsEnemyOnField(this)) break;
-                //    else
-                //    {
-                //        tempPositions.Remove(tempPositions.LastOrDefault());
-                //        break;
-                //    }
-                //}
             }
             foreach (Position tempPosition in tempPositions)
             {
