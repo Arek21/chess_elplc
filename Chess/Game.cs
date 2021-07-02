@@ -75,6 +75,8 @@ namespace Chess
             set { playerColor = value; }
         }
 
+
+
         public static List<int> GetPossibleMoves(int selectedPositionId)
         {
             Position selectedPosition = Position.GetPositionFromIndex(selectedPositionId);

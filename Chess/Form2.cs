@@ -26,7 +26,7 @@ namespace Chess
 
             if (roomName != null && ip1 != null && macAddress1 != null)
             {
-                client.PostSession(roomName, routerIp, player1, ip1, macAddress1);
+                client.PostSession(roomName, player1);
             }
 
             Form4 form4 = new Form4(roomName, player1, true);

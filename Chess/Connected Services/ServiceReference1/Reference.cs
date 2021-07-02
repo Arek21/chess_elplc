@@ -20,13 +20,7 @@ namespace ServiceReference1
         
         private string RoomNameField;
         
-        private string Player1Field;
-        
-        private string Ip1Field;
-        
-        private string Player2Field;
-        
-        private string Ip2Field;
+        private string CreatedByField;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string RoomName
@@ -42,54 +36,15 @@ namespace ServiceReference1
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string Player1
+        public string CreatedBy
         {
             get
             {
-                return this.Player1Field;
+                return this.CreatedByField;
             }
             set
             {
-                this.Player1Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string Ip1
-        {
-            get
-            {
-                return this.Ip1Field;
-            }
-            set
-            {
-                this.Ip1Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string Player2
-        {
-            get
-            {
-                return this.Player2Field;
-            }
-            set
-            {
-                this.Player2Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string Ip2
-        {
-            get
-            {
-                return this.Ip2Field;
-            }
-            set
-            {
-                this.Ip2Field = value;
+                this.CreatedByField = value;
             }
         }
     }
@@ -164,13 +119,6 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PostSession", ReplyAction="*")]
         System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(ServiceReference1.PostSessionRequest request);
-        
-        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu player2 z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSession", ReplyAction="*")]
-        ServiceReference1.UpdateSessionResponse UpdateSession(ServiceReference1.UpdateSessionRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSession", ReplyAction="*")]
-        System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> UpdateSessionAsync(ServiceReference1.UpdateSessionRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteSession", ReplyAction="*")]
         bool DeleteSession(int sessionId);
@@ -289,28 +237,16 @@ namespace ServiceReference1
         public string roomName;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string routerIp;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string player1;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string ip1;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string macAddress1;
+        public string createdBy;
         
         public PostSessionRequestBody()
         {
         }
         
-        public PostSessionRequestBody(string roomName, string routerIp, string player1, string ip1, string macAddress1)
+        public PostSessionRequestBody(string roomName, string createdBy)
         {
             this.roomName = roomName;
-            this.routerIp = routerIp;
-            this.player1 = player1;
-            this.ip1 = ip1;
-            this.macAddress1 = macAddress1;
+            this.createdBy = createdBy;
         }
     }
     
@@ -351,98 +287,6 @@ namespace ServiceReference1
         public PostSessionResponseBody(bool PostSessionResult)
         {
             this.PostSessionResult = PostSessionResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class UpdateSessionRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateSession", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.UpdateSessionRequestBody Body;
-        
-        public UpdateSessionRequest()
-        {
-        }
-        
-        public UpdateSessionRequest(ServiceReference1.UpdateSessionRequestBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class UpdateSessionRequestBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public int sessionId;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string player2;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string ip2;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string macAddres2;
-        
-        public UpdateSessionRequestBody()
-        {
-        }
-        
-        public UpdateSessionRequestBody(int sessionId, string player2, string ip2, string macAddres2)
-        {
-            this.sessionId = sessionId;
-            this.player2 = player2;
-            this.ip2 = ip2;
-            this.macAddres2 = macAddres2;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class UpdateSessionResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateSessionResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.UpdateSessionResponseBody Body;
-        
-        public UpdateSessionResponse()
-        {
-        }
-        
-        public UpdateSessionResponse(ServiceReference1.UpdateSessionResponseBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class UpdateSessionResponseBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public bool UpdateSessionResult;
-        
-        public UpdateSessionResponseBody()
-        {
-        }
-        
-        public UpdateSessionResponseBody(bool UpdateSessionResult)
-        {
-            this.UpdateSessionResult = UpdateSessionResult;
         }
     }
     
@@ -594,15 +438,12 @@ namespace ServiceReference1
             return base.Channel.PostSession(request);
         }
         
-        public bool PostSession(string roomName, string routerIp, string player1, string ip1, string macAddress1)
+        public bool PostSession(string roomName, string createdBy)
         {
             ServiceReference1.PostSessionRequest inValue = new ServiceReference1.PostSessionRequest();
             inValue.Body = new ServiceReference1.PostSessionRequestBody();
             inValue.Body.roomName = roomName;
-            inValue.Body.routerIp = routerIp;
-            inValue.Body.player1 = player1;
-            inValue.Body.ip1 = ip1;
-            inValue.Body.macAddress1 = macAddress1;
+            inValue.Body.createdBy = createdBy;
             ServiceReference1.PostSessionResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).PostSession(inValue);
             return retVal.Body.PostSessionResult;
         }
@@ -613,51 +454,13 @@ namespace ServiceReference1
             return base.Channel.PostSessionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(string roomName, string routerIp, string player1, string ip1, string macAddress1)
+        public System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(string roomName, string createdBy)
         {
             ServiceReference1.PostSessionRequest inValue = new ServiceReference1.PostSessionRequest();
             inValue.Body = new ServiceReference1.PostSessionRequestBody();
             inValue.Body.roomName = roomName;
-            inValue.Body.routerIp = routerIp;
-            inValue.Body.player1 = player1;
-            inValue.Body.ip1 = ip1;
-            inValue.Body.macAddress1 = macAddress1;
+            inValue.Body.createdBy = createdBy;
             return ((ServiceReference1.WebServiceSoap)(this)).PostSessionAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceReference1.UpdateSessionResponse ServiceReference1.WebServiceSoap.UpdateSession(ServiceReference1.UpdateSessionRequest request)
-        {
-            return base.Channel.UpdateSession(request);
-        }
-        
-        public bool UpdateSession(int sessionId, string player2, string ip2, string macAddres2)
-        {
-            ServiceReference1.UpdateSessionRequest inValue = new ServiceReference1.UpdateSessionRequest();
-            inValue.Body = new ServiceReference1.UpdateSessionRequestBody();
-            inValue.Body.sessionId = sessionId;
-            inValue.Body.player2 = player2;
-            inValue.Body.ip2 = ip2;
-            inValue.Body.macAddres2 = macAddres2;
-            ServiceReference1.UpdateSessionResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).UpdateSession(inValue);
-            return retVal.Body.UpdateSessionResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> ServiceReference1.WebServiceSoap.UpdateSessionAsync(ServiceReference1.UpdateSessionRequest request)
-        {
-            return base.Channel.UpdateSessionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> UpdateSessionAsync(int sessionId, string player2, string ip2, string macAddres2)
-        {
-            ServiceReference1.UpdateSessionRequest inValue = new ServiceReference1.UpdateSessionRequest();
-            inValue.Body = new ServiceReference1.UpdateSessionRequestBody();
-            inValue.Body.sessionId = sessionId;
-            inValue.Body.player2 = player2;
-            inValue.Body.ip2 = ip2;
-            inValue.Body.macAddres2 = macAddres2;
-            return ((ServiceReference1.WebServiceSoap)(this)).UpdateSessionAsync(inValue);
         }
         
         public bool DeleteSession(int sessionId)
