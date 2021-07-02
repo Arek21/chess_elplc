@@ -15,6 +15,11 @@ namespace Chess
             this.piecesOnBoard = piecesOnBoard;            
         }
 
+        public GameDto()
+        {
+      
+        }
+
         public List<Piece> PiecesOnBoard
         {
             get { return this.piecesOnBoard; }
