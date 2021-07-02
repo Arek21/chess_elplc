@@ -78,7 +78,10 @@ namespace Chess
         private Position position;
         private ColorsEnum color;
         private char icon;
+        public Piece()
+        {
 
+        }
         public Position Position
         {
             get { return this.position; }
