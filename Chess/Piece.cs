@@ -42,6 +42,13 @@ namespace Chess
         Black
     }
 
+    interface IPiece
+    {
+        public void Move();
+        public void Capture();
+        public List<Position> PossibleMoves();
+
+    }
     public class Position
     {
         public int row;
@@ -87,13 +94,6 @@ namespace Chess
             return true;
         }
     }
-    interface IPiece
-    {
-        public void Move();
-        public void Capture();
-        public List<Position> PossibleMoves();
-
-    }
     public class Piece
     {
         private Position position;
@@ -105,19 +105,16 @@ namespace Chess
             get { return this.position; }
             set { this.position = value; }
         }
-
         public Colors Color
         {
             get { return this.color; }
             set { this.color = value; }
         }
-
         public char Icon
         {
             get { return this.icon; }
             set { this.icon = value; }
         }
-
     }
 
     public class King : Piece, IPiece

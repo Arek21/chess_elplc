@@ -76,8 +76,8 @@ namespace Chess
 
             }
 
-
-            // </koniee>
+            List<Position> ava = Pos
+            // </koniec>
 
 
             if (firstButtonId == null)
