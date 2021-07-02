@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
@@ -73,8 +71,14 @@ namespace Chess
             }
             else if (e.Topic.Equals(mqqtConnectionString + "/Game"))
             {
+
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
+
                 var json = Encoding.UTF8.GetString(e.Message);
-                GameDto gameDto = JsonSerializer.Deserialize<GameDto>(json);
+                GameDto gameDto = JsonConvert.DeserializeObject<GameDto>(json, settings);
                 Game.PiecesOnBoard = gameDto.PiecesOnBoard;
                 Game.IsMyTurn = gameDto.IsMyTurn;
 
@@ -117,7 +121,13 @@ namespace Chess
 
                         Task.Run(() =>
                         {
-                            string json = JsonSerializer.Serialize(new GameDto(true, Game.PiecesOnBoard));
+                            JsonSerializerSettings settings = new JsonSerializerSettings
+                            {
+                                TypeNameHandling = TypeNameHandling.All
+                            };
+
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard), settings);
+
 
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
@@ -150,8 +160,12 @@ namespace Chess
 
                         Task.Run(() =>
                         {
-                            string json = JsonSerializer.Serialize(new GameDto(true, Game.PiecesOnBoard));
+                            JsonSerializerSettings settings = new JsonSerializerSettings
+                            {
+                                TypeNameHandling = TypeNameHandling.All
+                            };
 
+                            string json = JsonConvert.SerializeObject(new GameDto(true, Game.PiecesOnBoard), settings);
                             if (mqttClient != null && mqttClient.IsConnected)
                             {
                                 mqttClient.Publish(mqqtConnectionString + "/Game", Encoding.UTF8.GetBytes(json));
@@ -182,7 +196,7 @@ namespace Chess
                 {
                     if (mqttClient != null && mqttClient.IsConnected)
                     {
-                        mqttClient.Publish(mqqtConnectionString + "/Chat", Encoding.UTF8.GetBytes(playerName + ": " + message ));
+                        mqttClient.Publish(mqqtConnectionString + "/Chat", System.Text.Encoding.UTF8.GetBytes(playerName + ": " + message ));
                     }
                 }); sendChatTextbox.Text = string.Empty;
             }
