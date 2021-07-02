@@ -83,9 +83,11 @@ namespace Chess
             PictureBox selectedButton = sender as PictureBox;
             int selectedButtonId = flowLayoutPanel1.Controls.GetChildIndex(selectedButton);
 
+            System.Diagnostics.Debug.WriteLine(selectedButtonId);
+
             if (Game.IsMyTurn)
             {
-                flowLayoutPanel1.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+                //flowLayoutPanel1.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
                 if (firstSelectedButtonId == null &&
                     Game.IsMyPiece(selectedButtonId))   //  SELECT PIECE TO MOVE
                 {
