@@ -70,6 +70,7 @@ namespace Chess
 
             if (Game.IsMyTurn)
             {
+                //flowLayoutPanel1.FlowDirection = FlowDirection.BottomUp; 
                 if (firstSelectedButtonId == null &&
                     Game.IsMyPiece(selectedButtonId))   //  SELECT PIECE TO MOVE
                 {
