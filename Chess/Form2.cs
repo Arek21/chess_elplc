@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Linq;
 using ServiceReference1;
+using System.Collections.Generic;
 
 namespace Chess
 {
@@ -11,7 +12,7 @@ namespace Chess
     {
 
         WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
-       
+
         public Form2()
         {
             InitializeComponent();
@@ -19,18 +20,19 @@ namespace Chess
         private void AddButton_Click(object sender, EventArgs e)
         {
             string roomName = roomNameTextBox.Text;
-            string player1 = player1TextBox.Text;
+            string playerName = player1TextBox.Text;
 
+            SessionDto sessionDto = new SessionDto();
 
-            if (roomName != null && player1 != null && roomName != "" && player1 != "")
+            if (roomName != null && playerName != null && roomName != "" && playerName != "")
             {
-                client.PostSession(roomName, player1);
+                sessionDto = client.PostSession(roomName, playerName);
+                List<BoardDto> board = client.GetStartingBoard().ToList();
+                client.SaveGameState(sessionDto, board.ToArray());
+                Form4 form4 = new Form4(sessionDto, sessionDto.FirstPlayer);
+                form4.Show();
+                this.Close();
             }
-
-            Form4 form4 = new Form4(roomName, player1, true);
-            form4.Show();
-            this.Close();
-
         }
 
         private void Form2_Load(object sender, EventArgs e)

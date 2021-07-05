@@ -5,24 +5,37 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using ServiceReference1;
 
 namespace Chess
 {
     public partial class Form3 : Form
     {
-        private string roomName;
-        private string player2;
-        public Form3(string roomName)
+        SessionDto session;
+        WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
+
+        public Form3(SessionDto sessionDto)
         {
             InitializeComponent();
-            this.roomName = roomName;
+            this.session = sessionDto;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            player2 = player2TextBox.Text;
-            Form4 form4 = new Form4(roomName, player2, false);
-            form4.Show();
+            string playerName = player2TextBox.Text;
+
+            if (session.SecondPlayer == null)
+            {
+                SessionDto updatedSession = client.UpdateSession(session.Id, playerName);
+                Form4 form4 = new Form4(updatedSession, updatedSession.SecondPlayer);
+                form4.Show();
+            }
+            else if(session.FirstPlayer == playerName || session.SecondPlayer == playerName)
+            {
+                Form4 form4 = new Form4(session, playerName);
+                form4.Show();
+            }
+
             this.Close();
         }
     }

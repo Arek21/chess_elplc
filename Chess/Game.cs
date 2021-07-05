@@ -1,8 +1,9 @@
-﻿using ServiceReference1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using ServiceReference1;
 
 namespace Chess
 {
@@ -13,12 +14,14 @@ namespace Chess
         private static bool isMyTurn;
         private static ColorsEnum playerColor;
         private static List<Piece> piecesOnBoard = new List<Piece>();
-
-
-
-        public static void initGame(bool onStartTurn)
+        private static SessionDto session;
+        private static string playerName;
+        public static void initGame(SessionDto session, string playerName)
         {
-            List<BoardDto> boardDtoList = client.GetBoard().ToList();
+            Game.session = session;
+            Game.playerName = playerName;
+
+            List<BoardDto> boardDtoList = client.GetGameState(session.Id, session.RoomName).ToList();
             List<Piece> pieces = new List<Piece>();
 
             foreach (BoardDto boardDto in boardDtoList)
@@ -26,37 +29,37 @@ namespace Chess
                 switch ((PiecesEnum?)boardDto.PieceId - 1)
                 {
                     case PiecesEnum.Pawn:
-                        pieces.Add(new Pawn(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new Pawn(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                     case PiecesEnum.Knight:
-                        pieces.Add(new Knight(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new Knight(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                     case PiecesEnum.Bishop:
-                        pieces.Add(new Bishop(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new Bishop(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                     case PiecesEnum.Rook:
-                        pieces.Add(new Rook(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new Rook(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                     case PiecesEnum.Queen:
-                        pieces.Add(new Queen(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new Queen(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                     case PiecesEnum.King:
-                        pieces.Add(new King(boardDto.Id - 1, (ColorsEnum)boardDto.ColorId - 1));
+                        pieces.Add(new King(boardDto.PositionIndex - 1, (ColorsEnum)boardDto.ColorId - 1));
                         break;
                 }
             }
 
-            isMyTurn = onStartTurn;
-
-            if (isMyTurn)
+            if (playerName == session.FirstPlayer)
             {
                 playerColor = ColorsEnum.White;
                 Game.PiecesOnBoard = pieces;
+                isMyTurn = session.FirstPlayerOnTurn;
             }
-            else
+            else if (playerName == session.SecondPlayer)
             {
                 playerColor = ColorsEnum.Black;
                 Game.PiecesOnBoard = Game.ReverseBoard(pieces);
+                isMyTurn = !session.FirstPlayerOnTurn;
             }
         }
         public static List<Piece> PiecesOnBoard
@@ -123,6 +126,8 @@ namespace Chess
             Position selectedPiecePosition = Position.GetPositionFromIndex((int)selectedPieceId);
             Piece selectedPiece = piecesOnBoard.Find(p => p.Position.Equals(selectedPiecePosition));
             selectedPiece.Position = Position.GetPositionFromIndex(selectedFieldId);
+            Game.IsMyTurn = false;
+            Game.SaveGameState(Game.session, Game.piecesOnBoard);
         }
         public static void Capture(int myPieceId, int opontentsPieceId)
         {
@@ -136,6 +141,8 @@ namespace Chess
 
             PiecesOnBoard.Remove(opontentsPiece);
             myPiece.Position = tempPosition;
+            Game.IsMyTurn = false;
+            Game.SaveGameState(Game.session, Game.piecesOnBoard);
 
         }
         public static ColorsEnum GetOpontentsColor()
@@ -151,5 +158,57 @@ namespace Chess
             }
             return pieces;
         }
+        public static void SaveGameState(SessionDto session, List<Piece> pieces)
+        {
+
+            List<BoardDto> board = new List<BoardDto>();
+
+            foreach (Piece piece in pieces)
+            {
+                BoardDto boardItem = new BoardDto();
+                boardItem.PositionIndex = Position.GetIndexFromPosition(piece.Position) + 1;
+                boardItem.ColorId = (int)piece.Color + 1;
+
+                switch (piece.GetType().Name)
+                {
+                    case "Pawn":
+                        boardItem.PieceId = (int)PiecesEnum.Pawn + 1;
+                        break;
+                    case "Knight":
+                        boardItem.PieceId = (int)PiecesEnum.Knight + 1;
+                        break;
+                    case "Bishop":
+                        boardItem.PieceId = (int)PiecesEnum.Bishop + 1;
+                        break;
+                    case "Rook":
+                        boardItem.PieceId = (int)PiecesEnum.Rook + 1;
+                        break;
+                    case "Queen":
+                        boardItem.PieceId = (int)PiecesEnum.Queen + 1;
+                        break;
+                    case "King":
+                        boardItem.PieceId = (int)PiecesEnum.King + 1;
+                        break;
+                }
+
+                board.Add(boardItem);
+            }
+
+            if (playerName == session.FirstPlayer) session.FirstPlayerOnTurn = isMyTurn;
+            else if (playerName == session.SecondPlayer) session.FirstPlayerOnTurn = !isMyTurn;
+
+            SessionDto sessionDto = new SessionDto();
+            sessionDto = session;
+
+            List<BoardDto> boardDto = new List<BoardDto>();
+            boardDto = board.ToList();
+
+            Task.Run(() =>
+            {
+                client.SaveGameState(sessionDto, boardDto.ToArray());
+            });
+
+        }
+
     }
 }

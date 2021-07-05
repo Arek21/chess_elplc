@@ -18,48 +18,17 @@ namespace ServiceReference1
     public partial class SessionDto : object
     {
         
-        private string RoomNameField;
-        
-        private string CreatedByField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string RoomName
-        {
-            get
-            {
-                return this.RoomNameField;
-            }
-            set
-            {
-                this.RoomNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string CreatedBy
-        {
-            get
-            {
-                return this.CreatedByField;
-            }
-            set
-            {
-                this.CreatedByField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BoardDto", Namespace="http://tempuri.org/")]
-    public partial class BoardDto : object
-    {
-        
         private int IdField;
         
-        private System.Nullable<int> PieceIdField;
+        private string RoomNameField;
         
-        private System.Nullable<int> ColorIdField;
+        private bool IsBusyField;
+        
+        private string FirstPlayerField;
+        
+        private string SecondPlayerField;
+        
+        private bool FirstPlayerOnTurnField;
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int Id
@@ -74,8 +43,99 @@ namespace ServiceReference1
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string RoomName
+        {
+            get
+            {
+                return this.RoomNameField;
+            }
+            set
+            {
+                this.RoomNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public bool IsBusy
+        {
+            get
+            {
+                return this.IsBusyField;
+            }
+            set
+            {
+                this.IsBusyField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FirstPlayer
+        {
+            get
+            {
+                return this.FirstPlayerField;
+            }
+            set
+            {
+                this.FirstPlayerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string SecondPlayer
+        {
+            get
+            {
+                return this.SecondPlayerField;
+            }
+            set
+            {
+                this.SecondPlayerField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public bool FirstPlayerOnTurn
+        {
+            get
+            {
+                return this.FirstPlayerOnTurnField;
+            }
+            set
+            {
+                this.FirstPlayerOnTurnField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BoardDto", Namespace="http://tempuri.org/")]
+    public partial class BoardDto : object
+    {
+        
+        private int PositionIndexField;
+        
+        private int PieceIdField;
+        
+        private int ColorIdField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<int> PieceId
+        public int PositionIndex
+        {
+            get
+            {
+                return this.PositionIndexField;
+            }
+            set
+            {
+                this.PositionIndexField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public int PieceId
         {
             get
             {
@@ -88,7 +148,7 @@ namespace ServiceReference1
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
-        public System.Nullable<int> ColorId
+        public int ColorId
         {
             get
             {
@@ -120,18 +180,39 @@ namespace ServiceReference1
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PostSession", ReplyAction="*")]
         System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(ServiceReference1.PostSessionRequest request);
         
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu secondPlayer z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSession", ReplyAction="*")]
+        ServiceReference1.UpdateSessionResponse UpdateSession(ServiceReference1.UpdateSessionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSession", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> UpdateSessionAsync(ServiceReference1.UpdateSessionRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteSession", ReplyAction="*")]
         bool DeleteSession(int sessionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteSession", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> DeleteSessionAsync(int sessionId);
         
-        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu GetBoardResult z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBoard", ReplyAction="*")]
-        ServiceReference1.GetBoardResponse GetBoard(ServiceReference1.GetBoardRequest request);
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu sessionDto z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveGameState", ReplyAction="*")]
+        ServiceReference1.SaveGameStateResponse SaveGameState(ServiceReference1.SaveGameStateRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBoard", ReplyAction="*")]
-        System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> GetBoardAsync(ServiceReference1.GetBoardRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveGameState", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.SaveGameStateResponse> SaveGameStateAsync(ServiceReference1.SaveGameStateRequest request);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu roomName z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetGameState", ReplyAction="*")]
+        ServiceReference1.GetGameStateResponse GetGameState(ServiceReference1.GetGameStateRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetGameState", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetGameStateResponse> GetGameStateAsync(ServiceReference1.GetGameStateRequest request);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu GetStartingBoardResult z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStartingBoard", ReplyAction="*")]
+        ServiceReference1.GetStartingBoardResponse GetStartingBoard(ServiceReference1.GetStartingBoardRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStartingBoard", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStartingBoardResponse> GetStartingBoardAsync(ServiceReference1.GetStartingBoardRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -237,16 +318,16 @@ namespace ServiceReference1
         public string roomName;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string createdBy;
+        public string firstPlayer;
         
         public PostSessionRequestBody()
         {
         }
         
-        public PostSessionRequestBody(string roomName, string createdBy)
+        public PostSessionRequestBody(string roomName, string firstPlayer)
         {
             this.roomName = roomName;
-            this.createdBy = createdBy;
+            this.firstPlayer = firstPlayer;
         }
     }
     
@@ -277,14 +358,14 @@ namespace ServiceReference1
     public partial class PostSessionResponseBody
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public bool PostSessionResult;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.SessionDto PostSessionResult;
         
         public PostSessionResponseBody()
         {
         }
         
-        public PostSessionResponseBody(bool PostSessionResult)
+        public PostSessionResponseBody(ServiceReference1.SessionDto PostSessionResult)
         {
             this.PostSessionResult = PostSessionResult;
         }
@@ -294,49 +375,17 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetBoardRequest
+    public partial class UpdateSessionRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBoard", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetBoardRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateSession", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.UpdateSessionRequestBody Body;
         
-        public GetBoardRequest()
+        public UpdateSessionRequest()
         {
         }
         
-        public GetBoardRequest(ServiceReference1.GetBoardRequestBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class GetBoardRequestBody
-    {
-        
-        public GetBoardRequestBody()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetBoardResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBoardResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetBoardResponseBody Body;
-        
-        public GetBoardResponse()
-        {
-        }
-        
-        public GetBoardResponse(ServiceReference1.GetBoardResponseBody Body)
+        public UpdateSessionRequest(ServiceReference1.UpdateSessionRequestBody Body)
         {
             this.Body = Body;
         }
@@ -346,19 +395,295 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetBoardResponseBody
+    public partial class UpdateSessionRequestBody
     {
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ServiceReference1.BoardDto[] GetBoardResult;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int sessionId;
         
-        public GetBoardResponseBody()
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string secondPlayer;
+        
+        public UpdateSessionRequestBody()
         {
         }
         
-        public GetBoardResponseBody(ServiceReference1.BoardDto[] GetBoardResult)
+        public UpdateSessionRequestBody(int sessionId, string secondPlayer)
         {
-            this.GetBoardResult = GetBoardResult;
+            this.sessionId = sessionId;
+            this.secondPlayer = secondPlayer;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateSessionResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateSessionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.UpdateSessionResponseBody Body;
+        
+        public UpdateSessionResponse()
+        {
+        }
+        
+        public UpdateSessionResponse(ServiceReference1.UpdateSessionResponseBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class UpdateSessionResponseBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.SessionDto UpdateSessionResult;
+        
+        public UpdateSessionResponseBody()
+        {
+        }
+        
+        public UpdateSessionResponseBody(ServiceReference1.SessionDto UpdateSessionResult)
+        {
+            this.UpdateSessionResult = UpdateSessionResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveGameStateRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveGameState", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.SaveGameStateRequestBody Body;
+        
+        public SaveGameStateRequest()
+        {
+        }
+        
+        public SaveGameStateRequest(ServiceReference1.SaveGameStateRequestBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SaveGameStateRequestBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.SessionDto sessionDto;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public ServiceReference1.BoardDto[] boardToSave;
+        
+        public SaveGameStateRequestBody()
+        {
+        }
+        
+        public SaveGameStateRequestBody(ServiceReference1.SessionDto sessionDto, ServiceReference1.BoardDto[] boardToSave)
+        {
+            this.sessionDto = sessionDto;
+            this.boardToSave = boardToSave;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveGameStateResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveGameStateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.SaveGameStateResponseBody Body;
+        
+        public SaveGameStateResponse()
+        {
+        }
+        
+        public SaveGameStateResponse(ServiceReference1.SaveGameStateResponseBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SaveGameStateResponseBody
+    {
+        
+        public SaveGameStateResponseBody()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetGameStateRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGameState", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetGameStateRequestBody Body;
+        
+        public GetGameStateRequest()
+        {
+        }
+        
+        public GetGameStateRequest(ServiceReference1.GetGameStateRequestBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetGameStateRequestBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int sessionId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string roomName;
+        
+        public GetGameStateRequestBody()
+        {
+        }
+        
+        public GetGameStateRequestBody(int sessionId, string roomName)
+        {
+            this.sessionId = sessionId;
+            this.roomName = roomName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetGameStateResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetGameStateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetGameStateResponseBody Body;
+        
+        public GetGameStateResponse()
+        {
+        }
+        
+        public GetGameStateResponse(ServiceReference1.GetGameStateResponseBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetGameStateResponseBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.BoardDto[] GetGameStateResult;
+        
+        public GetGameStateResponseBody()
+        {
+        }
+        
+        public GetGameStateResponseBody(ServiceReference1.BoardDto[] GetGameStateResult)
+        {
+            this.GetGameStateResult = GetGameStateResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetStartingBoardRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStartingBoard", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetStartingBoardRequestBody Body;
+        
+        public GetStartingBoardRequest()
+        {
+        }
+        
+        public GetStartingBoardRequest(ServiceReference1.GetStartingBoardRequestBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetStartingBoardRequestBody
+    {
+        
+        public GetStartingBoardRequestBody()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetStartingBoardResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStartingBoardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ServiceReference1.GetStartingBoardResponseBody Body;
+        
+        public GetStartingBoardResponse()
+        {
+        }
+        
+        public GetStartingBoardResponse(ServiceReference1.GetStartingBoardResponseBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetStartingBoardResponseBody
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public ServiceReference1.BoardDto[] GetStartingBoardResult;
+        
+        public GetStartingBoardResponseBody()
+        {
+        }
+        
+        public GetStartingBoardResponseBody(ServiceReference1.BoardDto[] GetStartingBoardResult)
+        {
+            this.GetStartingBoardResult = GetStartingBoardResult;
         }
     }
     
@@ -438,12 +763,12 @@ namespace ServiceReference1
             return base.Channel.PostSession(request);
         }
         
-        public bool PostSession(string roomName, string createdBy)
+        public ServiceReference1.SessionDto PostSession(string roomName, string firstPlayer)
         {
             ServiceReference1.PostSessionRequest inValue = new ServiceReference1.PostSessionRequest();
             inValue.Body = new ServiceReference1.PostSessionRequestBody();
             inValue.Body.roomName = roomName;
-            inValue.Body.createdBy = createdBy;
+            inValue.Body.firstPlayer = firstPlayer;
             ServiceReference1.PostSessionResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).PostSession(inValue);
             return retVal.Body.PostSessionResult;
         }
@@ -454,13 +779,44 @@ namespace ServiceReference1
             return base.Channel.PostSessionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(string roomName, string createdBy)
+        public System.Threading.Tasks.Task<ServiceReference1.PostSessionResponse> PostSessionAsync(string roomName, string firstPlayer)
         {
             ServiceReference1.PostSessionRequest inValue = new ServiceReference1.PostSessionRequest();
             inValue.Body = new ServiceReference1.PostSessionRequestBody();
             inValue.Body.roomName = roomName;
-            inValue.Body.createdBy = createdBy;
+            inValue.Body.firstPlayer = firstPlayer;
             return ((ServiceReference1.WebServiceSoap)(this)).PostSessionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.UpdateSessionResponse ServiceReference1.WebServiceSoap.UpdateSession(ServiceReference1.UpdateSessionRequest request)
+        {
+            return base.Channel.UpdateSession(request);
+        }
+        
+        public ServiceReference1.SessionDto UpdateSession(int sessionId, string secondPlayer)
+        {
+            ServiceReference1.UpdateSessionRequest inValue = new ServiceReference1.UpdateSessionRequest();
+            inValue.Body = new ServiceReference1.UpdateSessionRequestBody();
+            inValue.Body.sessionId = sessionId;
+            inValue.Body.secondPlayer = secondPlayer;
+            ServiceReference1.UpdateSessionResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).UpdateSession(inValue);
+            return retVal.Body.UpdateSessionResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> ServiceReference1.WebServiceSoap.UpdateSessionAsync(ServiceReference1.UpdateSessionRequest request)
+        {
+            return base.Channel.UpdateSessionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.UpdateSessionResponse> UpdateSessionAsync(int sessionId, string secondPlayer)
+        {
+            ServiceReference1.UpdateSessionRequest inValue = new ServiceReference1.UpdateSessionRequest();
+            inValue.Body = new ServiceReference1.UpdateSessionRequestBody();
+            inValue.Body.sessionId = sessionId;
+            inValue.Body.secondPlayer = secondPlayer;
+            return ((ServiceReference1.WebServiceSoap)(this)).UpdateSessionAsync(inValue);
         }
         
         public bool DeleteSession(int sessionId)
@@ -474,30 +830,91 @@ namespace ServiceReference1
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ServiceReference1.GetBoardResponse ServiceReference1.WebServiceSoap.GetBoard(ServiceReference1.GetBoardRequest request)
+        ServiceReference1.SaveGameStateResponse ServiceReference1.WebServiceSoap.SaveGameState(ServiceReference1.SaveGameStateRequest request)
         {
-            return base.Channel.GetBoard(request);
+            return base.Channel.SaveGameState(request);
         }
         
-        public ServiceReference1.BoardDto[] GetBoard()
+        public void SaveGameState(ServiceReference1.SessionDto sessionDto, ServiceReference1.BoardDto[] boardToSave)
         {
-            ServiceReference1.GetBoardRequest inValue = new ServiceReference1.GetBoardRequest();
-            inValue.Body = new ServiceReference1.GetBoardRequestBody();
-            ServiceReference1.GetBoardResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).GetBoard(inValue);
-            return retVal.Body.GetBoardResult;
+            ServiceReference1.SaveGameStateRequest inValue = new ServiceReference1.SaveGameStateRequest();
+            inValue.Body = new ServiceReference1.SaveGameStateRequestBody();
+            inValue.Body.sessionDto = sessionDto;
+            inValue.Body.boardToSave = boardToSave;
+            ServiceReference1.SaveGameStateResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).SaveGameState(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> ServiceReference1.WebServiceSoap.GetBoardAsync(ServiceReference1.GetBoardRequest request)
+        System.Threading.Tasks.Task<ServiceReference1.SaveGameStateResponse> ServiceReference1.WebServiceSoap.SaveGameStateAsync(ServiceReference1.SaveGameStateRequest request)
         {
-            return base.Channel.GetBoardAsync(request);
+            return base.Channel.SaveGameStateAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetBoardResponse> GetBoardAsync()
+        public System.Threading.Tasks.Task<ServiceReference1.SaveGameStateResponse> SaveGameStateAsync(ServiceReference1.SessionDto sessionDto, ServiceReference1.BoardDto[] boardToSave)
         {
-            ServiceReference1.GetBoardRequest inValue = new ServiceReference1.GetBoardRequest();
-            inValue.Body = new ServiceReference1.GetBoardRequestBody();
-            return ((ServiceReference1.WebServiceSoap)(this)).GetBoardAsync(inValue);
+            ServiceReference1.SaveGameStateRequest inValue = new ServiceReference1.SaveGameStateRequest();
+            inValue.Body = new ServiceReference1.SaveGameStateRequestBody();
+            inValue.Body.sessionDto = sessionDto;
+            inValue.Body.boardToSave = boardToSave;
+            return ((ServiceReference1.WebServiceSoap)(this)).SaveGameStateAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.GetGameStateResponse ServiceReference1.WebServiceSoap.GetGameState(ServiceReference1.GetGameStateRequest request)
+        {
+            return base.Channel.GetGameState(request);
+        }
+        
+        public ServiceReference1.BoardDto[] GetGameState(int sessionId, string roomName)
+        {
+            ServiceReference1.GetGameStateRequest inValue = new ServiceReference1.GetGameStateRequest();
+            inValue.Body = new ServiceReference1.GetGameStateRequestBody();
+            inValue.Body.sessionId = sessionId;
+            inValue.Body.roomName = roomName;
+            ServiceReference1.GetGameStateResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).GetGameState(inValue);
+            return retVal.Body.GetGameStateResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference1.GetGameStateResponse> ServiceReference1.WebServiceSoap.GetGameStateAsync(ServiceReference1.GetGameStateRequest request)
+        {
+            return base.Channel.GetGameStateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetGameStateResponse> GetGameStateAsync(int sessionId, string roomName)
+        {
+            ServiceReference1.GetGameStateRequest inValue = new ServiceReference1.GetGameStateRequest();
+            inValue.Body = new ServiceReference1.GetGameStateRequestBody();
+            inValue.Body.sessionId = sessionId;
+            inValue.Body.roomName = roomName;
+            return ((ServiceReference1.WebServiceSoap)(this)).GetGameStateAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ServiceReference1.GetStartingBoardResponse ServiceReference1.WebServiceSoap.GetStartingBoard(ServiceReference1.GetStartingBoardRequest request)
+        {
+            return base.Channel.GetStartingBoard(request);
+        }
+        
+        public ServiceReference1.BoardDto[] GetStartingBoard()
+        {
+            ServiceReference1.GetStartingBoardRequest inValue = new ServiceReference1.GetStartingBoardRequest();
+            inValue.Body = new ServiceReference1.GetStartingBoardRequestBody();
+            ServiceReference1.GetStartingBoardResponse retVal = ((ServiceReference1.WebServiceSoap)(this)).GetStartingBoard(inValue);
+            return retVal.Body.GetStartingBoardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference1.GetStartingBoardResponse> ServiceReference1.WebServiceSoap.GetStartingBoardAsync(ServiceReference1.GetStartingBoardRequest request)
+        {
+            return base.Channel.GetStartingBoardAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStartingBoardResponse> GetStartingBoardAsync()
+        {
+            ServiceReference1.GetStartingBoardRequest inValue = new ServiceReference1.GetStartingBoardRequest();
+            inValue.Body = new ServiceReference1.GetStartingBoardRequestBody();
+            return ((ServiceReference1.WebServiceSoap)(this)).GetStartingBoardAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

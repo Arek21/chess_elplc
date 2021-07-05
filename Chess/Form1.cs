@@ -41,7 +41,8 @@ namespace Chess
         {
 
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            Form3 form3 = new Form3(row.Cells[0].Value.ToString());
+            SessionDto session = (SessionDto) row.DataBoundItem;
+            Form3 form3 = new Form3(session);
             form3.Show();
             this.Hide();
         }
