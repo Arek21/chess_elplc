@@ -66,9 +66,9 @@ namespace Chess
             this.AddSessionLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.AddSessionLabel.Location = new System.Drawing.Point(24, 16);
             this.AddSessionLabel.Name = "AddSessionLabel";
-            this.AddSessionLabel.Size = new System.Drawing.Size(220, 37);
+            this.AddSessionLabel.Size = new System.Drawing.Size(231, 37);
             this.AddSessionLabel.TabIndex = 1;
-            this.AddSessionLabel.Text = "Available Session";
+            this.AddSessionLabel.Text = "Available Sessions";
             // 
             // AddSessionButton
             // 
