@@ -24,19 +24,20 @@ namespace Chess
         {
             string playerName = player2TextBox.Text;
 
-            if (session.SecondPlayer == null)
+            if (session.FirstPlayer != null && session.SecondPlayer == null)
             {
                 SessionDto updatedSession = client.UpdateSession(session.Id, playerName);
                 Form4 form4 = new Form4(updatedSession, updatedSession.SecondPlayer);
                 form4.Show();
+               this.Close();
             }
             else if(session.FirstPlayer == playerName || session.SecondPlayer == playerName)
             {
                 Form4 form4 = new Form4(session, playerName);
                 form4.Show();
+                this.Close();
             }
 
-            this.Close();
         }
     }
 }
