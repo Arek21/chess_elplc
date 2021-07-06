@@ -163,7 +163,7 @@ namespace Chess
         {
 
             List<Piece> pieces = piecesList.ToList();
-            if (playerName == session.SecondPlayer) pieces = ReverseBoard(pieces);
+           // if (playerName == session.SecondPlayer) pieces = ReverseBoard(pieces);
 
             List<BoardDto> board = new List<BoardDto>();
 
