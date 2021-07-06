@@ -153,11 +153,13 @@ namespace Chess
         }
         public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-            foreach (Piece piece in pieces.ToList())
+            List<Piece> piecesList = pieces.ToList();
+
+            foreach (Piece piece in piecesList)
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
             }
-            return pieces;
+            return piecesList;
         }
         public static void SaveGameState(SessionDto session, List<Piece> pieces)
         {
