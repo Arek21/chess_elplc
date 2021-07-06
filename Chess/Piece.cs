@@ -34,6 +34,11 @@ namespace Chess
             this.row = position.row;
             this.col = position.col;
         }
+
+        public Position()
+        {
+
+        }
         public override bool Equals(object obj)
         {
             if ((obj == null) || !this.GetType().Equals(obj.GetType()))
@@ -84,7 +89,7 @@ namespace Chess
         private Position position;
         private ColorsEnum color;
         private char icon;
-      
+        
         public Position Position
         {
             get { return this.position; }
