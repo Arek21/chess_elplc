@@ -128,7 +128,10 @@ namespace Chess
             Piece selectedPiece = piecesOnBoard.Find(p => p.Position.Equals(selectedPiecePosition));
             selectedPiece.Position = Position.GetPositionFromIndex(selectedFieldId);
             Game.IsMyTurn = false;
-            Game.SaveGameState(Game.session, Game.piecesOnBoard);
+
+            List<Piece> pieces = Game.PiecesOnBoard.ToList();
+
+            Game.SaveGameState(Game.session, pieces);
         }
         public static void Capture(int myPieceId, int opontentsPieceId)
         {
@@ -143,7 +146,9 @@ namespace Chess
             PiecesOnBoard.Remove(opontentsPiece);
             myPiece.Position = tempPosition;
             Game.IsMyTurn = false;
-            Game.SaveGameState(Game.session, Game.piecesOnBoard);
+            List<Piece> pieces = new List<Piece>();
+            pieces = Game.piecesOnBoard;
+            Game.SaveGameState(Game.session, pieces);
 
         }
         public static ColorsEnum GetOpontentsColor()
@@ -153,29 +158,21 @@ namespace Chess
         }
         public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-            // TWORZE KOPIE LISTY KUR*A
-            List<Piece> piecesList = new List<Piece>();
-            piecesList = pieces.ToList();
-
-            foreach (Piece piece in piecesList)
+        
+            foreach (Piece piece in pieces)
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
             }
-            return piecesList;
+            return pieces;
         }
         public static void SaveGameState(SessionDto session, List<Piece> pieces)
         {
 
             List<BoardDto> board = new List<BoardDto>();
 
-            // TWORZE KOPIE LISTY KUR*A
-            List<Piece> pieceList = new List<Piece>();
-            pieceList = pieces.ToList();
+            if (playerName.Equals(session.SecondPlayer)) pieces = ReverseBoard(pieces);
 
-
-            if (playerName.Equals(session.SecondPlayer)) pieceList = ReverseBoard(pieceList);
-
-            foreach (Piece piece in pieceList)
+            foreach (Piece piece in pieces)
             {
                 BoardDto boardItem = new BoardDto();
                 boardItem.PositionIndex = Position.GetIndexFromPosition(piece.Position) + 1;
