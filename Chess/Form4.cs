@@ -17,12 +17,8 @@ namespace Chess
         private int? firstSelectedButtonId = null;
         private int? secondSelectedButtonId = null;
 
-        //private string opponentScore = "0"; //Póżniej uzywac lokalnie
-        //private string userScore = "0";     //Póżniej uzywac lokalnie
-
         SessionDto sessionDto;
         private string playerName;
-        private bool onStartTurn;
 
         private MqttClient mqttClient = null;
         private string mqqtConnectionString;
@@ -36,16 +32,8 @@ namespace Chess
 
         }
         private void Form4_Load(object sender, EventArgs e)
-        {
-            //string numOfSesions = string.Empty;
-            //string opponentName = string.Empty;
-            //string userName = string.Empty;
-
-            //sessionIdLabel.Text = "Room nr: " + numOfSesions;
-            //opponentNameLabel.Text = "Opponent name: " + opponentName;
-            //oppoentScoreLabel.Text = "Opponent score: " + opponentScore;
-            //userNameLabel.Text = "Your name: " + userName;
-            //userScoreLabel.Text = sat"Your score: " + userScore;
+        { 
+            sessionIdLabel.Text = "Room: " + sessionDto.RoomName;
 
             Game.initGame(sessionDto, playerName);
 
@@ -207,10 +195,6 @@ namespace Chess
         }
 
 
-
-
-
-
         private Color GetDefaultBackColor(int index)
         {
             int row = (int)Math.Floor((double)index / 8);
@@ -270,6 +254,5 @@ namespace Chess
 
             }
         }
-
     }
 }

@@ -17,6 +17,8 @@ namespace Chess
         List<SessionDto> sessionList = new List<SessionDto>();
         BindingSource bindingSource = new BindingSource();
         WebServiceSoapClient client = new WebServiceSoapClient(new WebServiceSoapClient.EndpointConfiguration());
+        
+        private static Form1 form1;
 
         public Form1()
         {
@@ -26,8 +28,9 @@ namespace Chess
         private void AddSessionButton_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
-            form2.Show();
             this.Hide();
+            form2.ShowDialog();
+            this.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,8 +47,9 @@ namespace Chess
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             SessionDto session = (SessionDto)row.DataBoundItem;
             Form3 form3 = new Form3(session);
-            form3.Show();
             this.Hide();
+            form3.ShowDialog();
+            this.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,6 +58,12 @@ namespace Chess
             sessionList = client.GetSessions().ToList();
             bindingSource.DataSource = sessionList;
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+            Application.Exit();
         }
     }
 }

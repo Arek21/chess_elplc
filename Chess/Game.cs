@@ -127,6 +127,7 @@ namespace Chess
             selectedPiece.Position = Position.GetPositionFromIndex(selectedFieldId);
             Game.IsMyTurn = false;
             Game.SaveGameState(Game.session, Game.PiecesOnBoard);
+
         }
         public static void Capture(int myPieceId, int opontentsPieceId)
         {
@@ -153,11 +154,11 @@ namespace Chess
         {
             List<Piece> piecesTemp = new List<Piece>();
 
-            foreach(Piece piece in pieces)
+            foreach (Piece piece in pieces)
             {
                 piecesTemp.Add(Piece.Clone(piece));
             }
-  
+
             foreach (Piece piece in piecesTemp)
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));

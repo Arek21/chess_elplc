@@ -30,7 +30,8 @@ namespace Chess
                 List<BoardDto> board = client.GetStartingBoard().ToList();
                 client.SaveGameState(sessionDto, board.ToArray());
                 Form4 form4 = new Form4(sessionDto, sessionDto.FirstPlayer);
-                form4.Show();
+                this.Hide();
+                form4.ShowDialog();
                 this.Close();
             }
         }
