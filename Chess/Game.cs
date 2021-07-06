@@ -201,14 +201,13 @@ namespace Chess
                 board.Add(boardItem);
             }
 
-            if (playerName == session.FirstPlayer) session.FirstPlayerOnTurn = false;
-            else if (playerName == session.SecondPlayer) session.FirstPlayerOnTurn = true;
 
             SessionDto sessionDto = new SessionDto();
             sessionDto.Id = session.Id;
             sessionDto.IsBusy = session.IsBusy;
             sessionDto.FirstPlayerOnTurn = session.FirstPlayerOnTurn;
-            sessionDto.FirstPlayer = session.FirstPlayer;
+            if (playerName == session.FirstPlayer) sessionDto.FirstPlayerOnTurn = false;
+            else if (playerName == session.SecondPlayer) sessionDto.FirstPlayerOnTurn = true;
             sessionDto.SecondPlayer = session.SecondPlayer;
             sessionDto.RoomName = session.RoomName;
 

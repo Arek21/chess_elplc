@@ -29,7 +29,7 @@ namespace Chess
                 SessionDto updatedSession = client.UpdateSession(session.Id, playerName);
                 Form4 form4 = new Form4(updatedSession, updatedSession.SecondPlayer);
                 form4.Show();
-               this.Close();
+                this.Close();
             }
             else if(session.FirstPlayer == playerName || session.SecondPlayer == playerName)
             {
