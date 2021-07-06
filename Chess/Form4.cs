@@ -85,7 +85,7 @@ namespace Chess
 
                 if (gameDto.PlayerColor.Equals(Game.PlayerColor))
                 {
-                    Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard);
+                    Game.PiecesOnBoard = Game.ReverseBoard(gameDto.PiecesOnBoard.ToList());
                     Game.IsMyTurn = gameDto.IsMyTurn;
 
                     HighlightSelectedButton(63 - Position.GetIndexFromPosition(gameDto.RecentMove));

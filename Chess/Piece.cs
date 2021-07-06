@@ -28,6 +28,12 @@ namespace Chess
             this.row = row;
             this.col = col;
         }
+
+        public Position(Position position)
+        {
+            this.row = position.row;
+            this.col = position.col;
+        }
         public override bool Equals(object obj)
         {
             if ((obj == null) || !this.GetType().Equals(obj.GetType()))
@@ -78,10 +84,7 @@ namespace Chess
         private Position position;
         private ColorsEnum color;
         private char icon;
-        public Piece()
-        {
-
-        }
+      
         public Position Position
         {
             get { return this.position; }
@@ -97,6 +100,34 @@ namespace Chess
             get { return this.icon; }
             set { this.icon = value; }
         }
+        public static Piece Clone(Piece piece)
+        {
+            switch (piece.GetType().Name)
+            {
+                case "Pawn":
+                    return new Pawn((Pawn) piece);
+                    break;
+                case "Knight":
+                    return new Knight((Knight) piece);
+                    break;
+                case "Bishop":
+                    return new Bishop((Bishop) piece);
+                    break;
+                case "Rook":
+                    return new Rook((Rook) piece);
+                    break;
+                case "Queen":
+                    return new Queen((Queen) piece);
+                    break;
+                case "King":
+                    return new King((King) piece);
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
+
         public abstract List<Position> PossibleMoves();
 
     }
@@ -105,6 +136,13 @@ namespace Chess
         public King()
         {
 
+        }
+
+        public King(King king)
+        {
+            this.Position = new Position(king.Position);
+            this.Color = king.Color;
+            this.Icon = king.Icon;
         }
         public King(int positionIndex, ColorsEnum color)
         {
@@ -157,6 +195,13 @@ namespace Chess
         public Queen()
         {
 
+        }
+
+        public Queen(Queen queen)
+        {
+            this.Position = new Position(queen.Position);
+            this.Color = queen.Color;
+            this.Icon = queen.Icon;
         }
         public Queen(int positionIndex, ColorsEnum color)
         {
@@ -296,6 +341,13 @@ namespace Chess
         {
 
         }
+
+        public Bishop(Bishop bishop)
+        {
+            this.Position = new Position(bishop.Position);
+            this.Color = bishop.Color;
+            this.Icon = bishop.Icon;
+        }
         public Bishop(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -378,6 +430,13 @@ namespace Chess
         {
 
         }
+
+        public Knight(Knight knight)
+        {
+            this.Position = new Position(knight.Position);
+            this.Color = knight.Color;
+            this.Icon = knight.Icon;
+        }
         public Knight(int positionIndex, ColorsEnum color)
         {
             this.Position = Position.GetPositionFromIndex(positionIndex);
@@ -429,6 +488,13 @@ namespace Chess
         public Rook()
         {
 
+        }
+
+        public Rook(Rook rook)
+        {
+            this.Position = new Position(rook.Position);
+            this.Color = rook.Color;
+            this.Icon = rook.Icon;
         }
         public Rook(int positionIndex, ColorsEnum color)
         {
@@ -511,6 +577,13 @@ namespace Chess
         public Pawn()
         {
 
+        }
+
+        public Pawn(Pawn pawn)
+        {
+            this.Position = new Position(pawn.Position);
+            this.Color = pawn.Color;
+            this.Icon = pawn.Icon;
         }
         public Pawn(int positionIndex, ColorsEnum color)
         {

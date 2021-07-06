@@ -58,7 +58,7 @@ namespace Chess
             else if (playerName == session.SecondPlayer)
             {
                 playerColor = ColorsEnum.Black;
-                Game.PiecesOnBoard = Game.ReverseBoard(pieces);
+                Game.PiecesOnBoard = Game.ReverseBoard(pieces.ToList());
                 isMyTurn = !session.FirstPlayerOnTurn;
             }
 
@@ -128,10 +128,7 @@ namespace Chess
             Piece selectedPiece = piecesOnBoard.Find(p => p.Position.Equals(selectedPiecePosition));
             selectedPiece.Position = Position.GetPositionFromIndex(selectedFieldId);
             Game.IsMyTurn = false;
-
-            List<Piece> pieces = Game.PiecesOnBoard.ToList();
-
-            Game.SaveGameState(Game.session, pieces);
+            Game.SaveGameState(Game.session, Game.PiecesOnBoard);
         }
         public static void Capture(int myPieceId, int opontentsPieceId)
         {
@@ -146,9 +143,7 @@ namespace Chess
             PiecesOnBoard.Remove(opontentsPiece);
             myPiece.Position = tempPosition;
             Game.IsMyTurn = false;
-            List<Piece> pieces = new List<Piece>();
-            pieces = Game.piecesOnBoard;
-            Game.SaveGameState(Game.session, pieces);
+            Game.SaveGameState(Game.session, Game.PiecesOnBoard);
 
         }
         public static ColorsEnum GetOpontentsColor()
@@ -158,19 +153,24 @@ namespace Chess
         }
         public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-        
-            foreach (Piece piece in pieces)
+            List<Piece> piecesTemp = new List<Piece>();
+
+            foreach(Piece piece in pieces)
+            {
+                piecesTemp.Add(Piece.Clone(piece));
+            }
+  
+            foreach (Piece piece in piecesTemp)
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
             }
-            return pieces;
+            return piecesTemp;
         }
         public static void SaveGameState(SessionDto session, List<Piece> pieces)
         {
-
             List<BoardDto> board = new List<BoardDto>();
 
-            if (playerName.Equals(session.SecondPlayer)) pieces = ReverseBoard(pieces);
+            if (playerName.Equals(session.SecondPlayer)) pieces = ReverseBoard(pieces.ToList());
 
             foreach (Piece piece in pieces)
             {
