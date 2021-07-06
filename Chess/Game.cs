@@ -79,8 +79,6 @@ namespace Chess
             set { playerColor = value; }
         }
 
-
-
         public static List<int> GetPossibleMoves(int selectedPositionId)
         {
             Position selectedPosition = Position.GetPositionFromIndex(selectedPositionId);
@@ -203,8 +201,8 @@ namespace Chess
                 board.Add(boardItem);
             }
 
-            if (playerName == session.FirstPlayer) session.FirstPlayerOnTurn = isMyTurn;
-            else if (playerName == session.SecondPlayer) session.FirstPlayerOnTurn = !isMyTurn;
+            if (playerName == session.FirstPlayer) session.FirstPlayerOnTurn = false;
+            else if (playerName == session.SecondPlayer) session.FirstPlayerOnTurn = true;
 
             SessionDto sessionDto = new SessionDto();
             sessionDto.Id = session.Id;
