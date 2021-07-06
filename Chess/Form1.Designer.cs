@@ -32,6 +32,7 @@ namespace Chess
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.AddSessionLabel = new System.Windows.Forms.Label();
             this.AddSessionButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,19 +65,30 @@ namespace Chess
             // 
             // AddSessionButton
             // 
-            this.AddSessionButton.Location = new System.Drawing.Point(425, 325);
+            this.AddSessionButton.Location = new System.Drawing.Point(468, 314);
             this.AddSessionButton.Name = "AddSessionButton";
-            this.AddSessionButton.Size = new System.Drawing.Size(180, 33);
+            this.AddSessionButton.Size = new System.Drawing.Size(137, 44);
             this.AddSessionButton.TabIndex = 2;
             this.AddSessionButton.Text = "Add Session";
             this.AddSessionButton.UseVisualStyleBackColor = true;
             this.AddSessionButton.Click += new System.EventHandler(this.AddSessionButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(535, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(70, 39);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 380);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.AddSessionButton);
             this.Controls.Add(this.AddSessionLabel);
             this.Controls.Add(this.dataGridView1);
@@ -94,6 +106,7 @@ namespace Chess
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label AddSessionLabel;
         private System.Windows.Forms.Button AddSessionButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 

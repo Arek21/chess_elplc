@@ -24,7 +24,7 @@ namespace Chess
         }
 
         private void AddSessionButton_Click(object sender, EventArgs e)
-        { 
+        {
             Form2 form2 = new Form2();
             form2.Show();
             this.Hide();
@@ -32,19 +32,28 @@ namespace Chess
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             sessionList = client.GetSessions().ToList();
             bindingSource.DataSource = sessionList;
             dataGridView1.DataSource = bindingSource;
+
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            SessionDto session = (SessionDto) row.DataBoundItem;
+            SessionDto session = (SessionDto)row.DataBoundItem;
             Form3 form3 = new Form3(session);
             form3.Show();
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            sessionList = client.GetSessions().ToList();
+            bindingSource.DataSource = sessionList;
+
         }
     }
 }
