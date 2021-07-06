@@ -1,9 +1,6 @@
 ﻿{
   "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
   "Version": "15.0.40203.910",
-  "GettingStartedDocument": {
-    "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
-  },
   "ExtendedData": {
     "inputs": [
       "https://chesswebservice.azurewebsites.net/WebService.asmx"
@@ -21,7 +18,6 @@
       "Grpc.Net.Client, {Grpc.Net.Client, 2.32.0}",
       "Grpc.Net.ClientFactory, {Grpc.Net.ClientFactory, 2.32.0}",
       "Grpc.Net.Common, {Grpc.Net.Common, 2.32.0}",
-      "M2Mqtt.Net, {M2Mqtt, 4.3.0}",
       "Microsoft.Extensions.Configuration, {Microsoft.Extensions.Configuration, 3.0.3}",
       "Microsoft.Extensions.Configuration.Abstractions, {Microsoft.Extensions.Configuration.Abstractions, 3.0.3}",
       "Microsoft.Extensions.Configuration.Binder, {Microsoft.Extensions.Configuration.Binder, 3.0.3}",
@@ -32,8 +28,6 @@
       "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 3.0.3}",
       "Microsoft.Extensions.Options, {Microsoft.Extensions.Options, 3.0.3}",
       "Microsoft.Extensions.Primitives, {Microsoft.Extensions.Primitives, 3.0.3}",
-      "MQTTnet, {MQTTnet, 3.0.16}",
-      "Newtonsoft.Json, {Newtonsoft.Json, 13.0.1}",
       "System.Data.SqlClient, {System.Data.SqlClient, 4.8.2}",
       "System.Diagnostics.DiagnosticSource, {System.Diagnostics.DiagnosticSource, 4.5.1}",
       "System.Runtime.CompilerServices.Unsafe, {System.Runtime.CompilerServices.Unsafe, 4.5.2}",

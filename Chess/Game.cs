@@ -61,6 +61,7 @@ namespace Chess
                 Game.PiecesOnBoard = Game.ReverseBoard(pieces);
                 isMyTurn = !session.FirstPlayerOnTurn;
             }
+
         }
         public static List<Piece> PiecesOnBoard
         {
@@ -158,8 +159,11 @@ namespace Chess
             }
             return pieces;
         }
-        public static void SaveGameState(SessionDto session, List<Piece> pieces)
+        public static void SaveGameState(SessionDto session, List<Piece> piecesList)
         {
+
+            List<Piece> pieces = piecesList.ToList();
+            if (playerName == session.SecondPlayer) pieces = ReverseBoard(pieces);
 
             List<BoardDto> board = new List<BoardDto>();
 
@@ -198,14 +202,19 @@ namespace Chess
             else if (playerName == session.SecondPlayer) session.FirstPlayerOnTurn = !isMyTurn;
 
             SessionDto sessionDto = new SessionDto();
-            sessionDto = session;
+            sessionDto.Id = session.Id;
+            sessionDto.IsBusy = session.IsBusy;
+            sessionDto.FirstPlayerOnTurn = session.FirstPlayerOnTurn;
+            sessionDto.FirstPlayer = session.FirstPlayer;
+            sessionDto.SecondPlayer = session.SecondPlayer;
+            sessionDto.RoomName = session.RoomName;
 
             List<BoardDto> boardDto = new List<BoardDto>();
             boardDto = board.ToList();
 
             Task.Run(() =>
             {
-                client.SaveGameState(sessionDto, boardDto.ToArray());
+                client.SaveGameState(sessionDto, board.ToList().ToArray());
             });
 
         }

@@ -93,9 +93,6 @@ namespace Chess
                 }
             }
         }
-
-
-
         private void BoxSelected(object sender, EventArgs e)
         {
             PictureBox selectedButton = sender as PictureBox;
@@ -273,7 +270,6 @@ namespace Chess
 
             }
         }
-
 
     }
 }
