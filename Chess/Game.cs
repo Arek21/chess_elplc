@@ -159,15 +159,15 @@ namespace Chess
             }
             return pieces;
         }
-        public static void SaveGameState(SessionDto session, List<Piece> piecesList)
+        public static void SaveGameState(SessionDto session, List<Piece> pieces)
         {
 
-            List<Piece> pieces = piecesList.ToList();
-           // if (playerName == session.SecondPlayer) pieces = ReverseBoard(pieces);
-
             List<BoardDto> board = new List<BoardDto>();
+            List<Piece> pieceList = pieces.ToList();
 
-            foreach (Piece piece in pieces)
+            if (playerName.Equals(session.SecondPlayer)) pieceList = ReverseBoard(pieceList);
+
+            foreach (Piece piece in pieceList)
             {
                 BoardDto boardItem = new BoardDto();
                 boardItem.PositionIndex = Position.GetIndexFromPosition(piece.Position) + 1;
