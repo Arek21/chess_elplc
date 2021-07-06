@@ -153,7 +153,7 @@ namespace Chess
         }
         public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-            foreach (Piece piece in pieces)
+            foreach (Piece piece in pieces.ToList())
             {
                 piece.Position = Position.GetPositionFromIndex(63 - Position.GetIndexFromPosition(piece.Position));
             }
