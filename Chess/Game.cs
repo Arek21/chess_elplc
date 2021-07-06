@@ -153,7 +153,9 @@ namespace Chess
         }
         public static List<Piece> ReverseBoard(List<Piece> pieces)
         {
-            List<Piece> piecesList = pieces.ToList();
+            // TWORZE KOPIE LISTY KUR*A
+            List<Piece> piecesList = new List<Piece>();
+            piecesList = pieces.ToList();
 
             foreach (Piece piece in piecesList)
             {
@@ -165,7 +167,11 @@ namespace Chess
         {
 
             List<BoardDto> board = new List<BoardDto>();
-            List<Piece> pieceList = pieces.ToList();
+
+            // TWORZE KOPIE LISTY KUR*A
+            List<Piece> pieceList = new List<Piece>();
+            pieceList = pieces.ToList();
+
 
             if (playerName.Equals(session.SecondPlayer)) pieceList = ReverseBoard(pieceList);
 
